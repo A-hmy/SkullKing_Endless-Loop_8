@@ -4,7 +4,6 @@ Player::Player()
 {
 
 }
-
 void Player::Edit(QString _Name,QString _Username,QString _PhoneNumber,QString _Email,QString _Password)
 {
   if(_Name!="")
@@ -18,3 +17,13 @@ void Player::Edit(QString _Name,QString _Username,QString _PhoneNumber,QString _
   if(_Password!="")
       Password=_Password;
 }
+QString Player::get_Name(){return Name;}
+QString Player::get_UserName(){return Username;}
+QString Player::get_Password(){return Password;}
+QString Player::get_Email(){return Email;}
+QString Player::get_PhoneNumber(){return PhoneNumber;}
+int Player::get_Coin(){return Coin;}
+int Player::get_Win(){return Win;}
+int Player::get_Lose(){return Lose;}
+QVector<GameOfPlayer>Player::get_GamePlayer(){return GamePlayer;}
+std::list<Card>Player::get_cards(){return Cards;}
