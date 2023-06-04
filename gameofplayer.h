@@ -18,5 +18,5 @@ private:
    int ScoreOpponent;
 
 };
-
+//check
 #endif // GAMEOFPLAYER_H
