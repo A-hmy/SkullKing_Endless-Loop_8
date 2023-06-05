@@ -4,6 +4,7 @@
 #include "ui_signup.h"
 #include "player.h"
 #include "mainwindow.h"
+// check kardan tekrari nabodan ramz ....
 Signup::Signup(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Signup)
@@ -23,16 +24,15 @@ void Signup::on_ok_clicked()
             ||ui->name->text().isEmpty()||ui->email->text().isEmpty()||
             ui->phonenumber->text().isEmpty())
     {
-               QMessageBox:: warning(this," Sign up"," !! Please complete all the lines !!");
+               QMessageBox:: warning(this,"❗❗❗","Please complete all the lines 🙄");
                ch=true;
     }
 else
     {
 
-    Player newuser(ui->name->text(), ui->username->text(), ui->phonenumber->text(), ui->email->text(), ui->password->text());
+    Player* newuser=new Player(ui->name->text(), ui->username->text(), ui->phonenumber->text(), ui->email->text(), ui->password->text());
     Players.push_back(newuser);
-    QMessageBox:: warning(this," Sign up","  Done :) ");
-    ui->ok->setEnabled(false);
+    QMessageBox::information(this," Sign up","  Done 🤩 ");
     if(ch==false){
         this->close();
     }

@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     card.cpp \
+    forgotpassword.cpp \
     gameofplayer.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     card.h \
+    forgotpassword.h \
     gameofplayer.h \
     mainwindow.h \
     player.h \
@@ -26,6 +28,7 @@ HEADERS += \
     signup.h
 
 FORMS += \
+    forgotpassword.ui \
     mainwindow.ui \
     sign.ui \
     signup.ui
