@@ -14,18 +14,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
-    sign.cpp
+    sign.cpp \
+    signup.cpp
 
 HEADERS += \
     card.h \
     gameofplayer.h \
     mainwindow.h \
     player.h \
-    sign.h
+    sign.h \
+    signup.h
 
 FORMS += \
     mainwindow.ui \
-    sign.ui
+    sign.ui \
+    signup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

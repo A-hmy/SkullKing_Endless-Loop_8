@@ -1,7 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
+#include "player.h"
+extern QVector <Player> Players;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

@@ -7,7 +7,7 @@
 class Player
 {
 public:
-    Player();
+    Player(QString,QString,QString,QString,QString);
     void Edit(QString ,QString ,QString,QString,QString);
     QString get_Name();
     QString get_UserName();
@@ -21,6 +21,7 @@ public:
     std::list<Card>get_cards();
     void set_GamePlayer(QVector<GameOfPlayer>);
     void set_Cards(std::list<Card>);
+
 
 private:
      QString Name;

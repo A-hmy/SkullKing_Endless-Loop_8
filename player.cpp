@@ -1,8 +1,12 @@
 #include "player.h"
 
-Player::Player()
+Player::Player(QString _Name,QString _Username,QString _PhoneNumber,QString _Email,QString _Password)
 {
-
+Name=_Name;
+Username=_Username;
+PhoneNumber=_PhoneNumber;
+Email=_Email;
+Password=_Password;
 }
 void Player::Edit(QString _Name,QString _Username,QString _PhoneNumber,QString _Email,QString _Password)
 {
