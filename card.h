@@ -16,5 +16,4 @@ private:
     bool Reserved;
     QPixmap Picture;
 };
-//check
 #endif // CARD_H

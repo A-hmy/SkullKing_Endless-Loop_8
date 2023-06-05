@@ -12,3 +12,15 @@ Sign::~Sign()
 {
     delete ui;
 }
+
+void Sign::on_ForgotPassword_clicked()
+{
+
+}
+
+
+void Sign::on_SignUp_clicked()
+{
+
+}
+

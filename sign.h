@@ -15,6 +15,11 @@ public:
     explicit Sign(QWidget *parent = nullptr);
     ~Sign();
 
+private slots:
+    void on_ForgotPassword_clicked();
+
+    void on_SignUp_clicked();
+
 private:
     Ui::Sign *ui;
 };
