@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Sign w;
-    w.show();
+    Sign s;
+    s.show();
     return a.exec();
 }

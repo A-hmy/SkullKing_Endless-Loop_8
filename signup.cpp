@@ -29,7 +29,14 @@ void Signup::on_ok_clicked()
     }
 else
     {
-
+        bool check= false;
+        for (auto x : Players){
+        if(ui->username->text()==x->get_UserName()){
+            check=true;
+            break;
+        }
+        }
+if(check==false){
     Player* newuser=new Player(ui->name->text(), ui->username->text(), ui->phonenumber->text(), ui->email->text(), ui->password->text());
     Players.push_back(newuser);
     QMessageBox::information(this," Sign up","  Done 🤩 ");
@@ -38,6 +45,9 @@ else
     }
     Sign *m=new Sign();
     m->show();
+}
+else
+    QMessageBox:: warning(this,"❗❗❗","This Username exist . Enter again Username ");
 
     }
 }
