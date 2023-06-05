@@ -1,5 +1,6 @@
 #include <QMessageBox>
 #include "signup.h"
+#include "sign.h"
 #include "ui_signup.h"
 #include "player.h"
 #include "mainwindow.h"
@@ -30,12 +31,12 @@ else
 
     Player newuser(ui->name->text(), ui->username->text(), ui->phonenumber->text(), ui->email->text(), ui->password->text());
     Players.push_back(newuser);
-    ui->ok->setText(" Done :)");
+    QMessageBox:: warning(this," Sign up","  Done :) ");
     ui->ok->setEnabled(false);
     if(ch==false){
         this->close();
     }
-    MainWindow *m=new MainWindow();
+    Sign *m=new Sign();
     m->show();
 
     }
@@ -44,7 +45,7 @@ else
 
 void Signup::on_cancle_clicked()
 {
-    MainWindow *m=new MainWindow();
+    Sign *m=new Sign();
     m->show();
     this->close();
 }
