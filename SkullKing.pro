@@ -10,26 +10,32 @@ CONFIG += c++17
 
 SOURCES += \
     card.cpp \
+    changeinformation.cpp \
     forgotpassword.cpp \
     gameofplayer.cpp \
     main.cpp \
     mainwindow.cpp \
+    menu.cpp \
     player.cpp \
     sign.cpp \
     signup.cpp
 
 HEADERS += \
     card.h \
+    changeinformation.h \
     forgotpassword.h \
     gameofplayer.h \
     mainwindow.h \
+    menu.h \
     player.h \
     sign.h \
     signup.h
 
 FORMS += \
+    changeinformation.ui \
     forgotpassword.ui \
     mainwindow.ui \
+    menu.ui \
     sign.ui \
     signup.ui
 

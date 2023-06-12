@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "ui_sign.h"
 #include "signup.h"
+#include "menu.h"
 #include "QMessageBox"
 #include "forgotpassword.h"
 Sign::Sign(QWidget *parent) :
@@ -47,6 +48,9 @@ void Sign::on_Login_clicked()
               player=x;
               flag=1;
               // bere safhe khod karbar
+              Menu *m=new Menu();
+              this->close();
+              m->show();
               break;
           }
       }
