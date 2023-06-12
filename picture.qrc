@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>D:/pic/map1.png</file>
+        <file>D:/pic/map2.png</file>
+        <file>D:/pic/map3.png</file>
+        <file>D:/pic/map4.png</file>
+        <file>D:/pic/map5.png</file>
+        <file>D:/pic/map6.png</file>
+        <file>D:/pic/map7.png</file>
+        <file>D:/pic/map8.png</file>
+        <file>D:/pic/parrot1.png</file>
+        <file>D:/pic/parrot2.png</file>
+        <file>D:/pic/parrot3.png</file>
+        <file>D:/pic/parrot4.png</file>
+        <file>D:/pic/parrot5.png</file>
+        <file>D:/pic/parrot6.png</file>
+        <file>D:/pic/parrot7.png</file>
+        <file>D:/pic/parrot8.png</file>
+        <file>D:/pic/PirateFlag1.png</file>
+        <file>D:/pic/PirateFlag2.png</file>
+        <file>D:/pic/PirateFlag3.png</file>
+        <file>D:/pic/PirateFlag4.png</file>
+        <file>D:/pic/PirateFlag5.png</file>
+        <file>D:/pic/PirateFlag6.png</file>
+        <file>D:/pic/PirateFlag7.png</file>
+        <file>D:/pic/PirateFlag8.png</file>
+        <file>D:/pic/treasure1.png</file>
+        <file>D:/pic/treasure2.png</file>
+        <file>D:/pic/treasure3.png</file>
+        <file>D:/pic/treasure4.png</file>
+        <file>D:/pic/treasure5.png</file>
+        <file>D:/pic/treasure6.png</file>
+        <file>D:/pic/treasure7.png</file>
+        <file>D:/pic/treasure8.png</file>
+    </qresource>
+</RCC>
