@@ -20,6 +20,8 @@ private slots:
 
     void on_Logout_2_clicked();
 
+    void on_Start_2_clicked();
+
 private:
     Ui::Menu *ui;
 };

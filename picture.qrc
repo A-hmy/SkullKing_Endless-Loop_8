@@ -32,5 +32,7 @@
         <file>Picture/treasure6.png</file>
         <file>Picture/treasure7.png</file>
         <file>Picture/treasure8.png</file>
+        <file>Picture/background.png</file>
+        <file>Picture/card pushputton.png</file>
     </qresource>
 </RCC>

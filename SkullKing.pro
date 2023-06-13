@@ -13,6 +13,7 @@ SOURCES += \
     changeinformation.cpp \
     forgotpassword.cpp \
     gameofplayer.cpp \
+    gameserver.cpp \
     main.cpp \
     mainwindow.cpp \
     menu.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     changeinformation.h \
     forgotpassword.h \
     gameofplayer.h \
+    gameserver.h \
     mainwindow.h \
     menu.h \
     player.h \
@@ -34,6 +36,7 @@ HEADERS += \
 FORMS += \
     changeinformation.ui \
     forgotpassword.ui \
+    gameserver.ui \
     mainwindow.ui \
     menu.ui \
     sign.ui \
