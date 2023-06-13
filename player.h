@@ -23,7 +23,7 @@ public:
     void set_GamePlayer(QVector<GameOfPlayer>);
     void set_Cards(Card);
     void set_Password(QString);
-
+    void clear_Cards();
 
 private:
      QString Name;

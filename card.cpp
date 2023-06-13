@@ -1,18 +1,14 @@
 #include "card.h"
 
-Card::Card()
+Card::Card(){}
+Card::Card(QString _Name, int _Number, int _Value)
 {
-
-}
-
-Card::Card(QString, int, int)
-{
-
+    Name = _Name;
+    Number = _Number;
+    Reserved = false;
+    Value = _Value;
 }
 QString Card::get_Name(){return Name;}
 int Card::get_Number(){return Number;}
 bool Card::get_Reserved(){return Reserved;}
-void Card::set_Reserved(bool _Reserved)
-{
-  Reserved=_Reserved;
-}
+void Card::set_Reserved(bool _Reserved){Reserved=_Reserved;}

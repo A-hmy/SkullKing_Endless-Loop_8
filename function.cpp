@@ -4,7 +4,7 @@
 void Dealing(int NumberOfGame)
 {
     QVector<Card*> CardsOfPlayerClient;
-    player->get_cards().clear();//check
+    player->clear_Cards();
     CardsOfPlayerClient.clear();
     // reserved=false
     for (int i = 0; i < _cards.size(); i++)
@@ -12,7 +12,7 @@ void Dealing(int NumberOfGame)
     // deal_server
     for (int i = 0; i < NumberOfGame * 2;) {
          srand(time(NULL));
-         int index = rand() % (_cards.size() - 0 + 1) + 0;
+         int index = rand() % (_cards.size()+ 1);
          if (_cards[index]->get_Reserved() != 1) {
              player->set_Cards(*_cards[index]);
              i++;
@@ -22,7 +22,7 @@ void Dealing(int NumberOfGame)
         //deal_client
         for (int i = 0; i < NumberOfGame * 2;) {
             srand(time(NULL));
-            int index = rand() % (_cards.size() - 0 + 1) + 0;
+            int index = rand() % (_cards.size()+ 1);
             if (_cards[index]->get_Reserved() != 1) {
                 CardsOfPlayerClient.push_back(_cards[index]);
                 i++;
