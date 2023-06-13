@@ -1,6 +1,35 @@
 #include "function.h"
 #include "mainwindow.h"
-
+void StartGame() {
+    for (int i = 1; i <= 8; i++) {
+        Card* c = new Card("Parrot", i, i + 10);
+        _cards.push_back(c);
+    }
+    for (int i = 1; i <= 8; i++) {
+        Card* c = new Card("Map", i, i + 10);
+        _cards.push_back(c);
+    }
+    for (int i = 1; i <= 8; i++) {
+        Card* c = new Card("Treasure", i, i + 10);
+        _cards.push_back(c);
+    }
+    for (int i = 1; i <= 8; i++) {
+        Card* c = new Card("Flag", i, i + 20);
+        _cards.push_back(c);
+    }
+    for (int i = 1; i <= 3; i++) {
+        Card* c = new Card("Queen", i, i + 30);
+        _cards.push_back(c);
+    }
+    for (int i = 1; i <= 3; i++) {
+        Card* c = new Card("King", i, i + 40);
+        _cards.push_back(c);
+    }
+    for (int i = 1; i <= 4; i++) {
+        Card* c = new Card("Pirate", i, i + 50);
+        _cards.push_back(c);
+    }
+}
 void Dealing(int NumberOfGame)
 {
     QVector<Card*> CardsOfPlayerClient;

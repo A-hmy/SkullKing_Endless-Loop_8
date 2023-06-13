@@ -34,5 +34,11 @@
         <file>Picture/treasure8.png</file>
         <file>Picture/background.png</file>
         <file>Picture/card pushputton.png</file>
+        <file>Picture/skull emblem.png</file>
+        <file>Picture/Pirate.png</file>
+        <file>Picture/king.png</file>
+        <file>Picture/Queen.png</file>
+        <file>Picture/icon.png</file>
+        <file>Picture/name.png</file>
     </qresource>
 </RCC>
