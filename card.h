@@ -10,6 +10,8 @@ public:
     QString get_Name();
     int get_Number();
     bool get_Reserved();
+    void set_Reserved(bool);
+
 private:
     QString Name;
     int Number;

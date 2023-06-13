@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include "player.h"
 extern QVector <Player*> Players;
+extern QVector<Card*>_cards;
 extern Player* player;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

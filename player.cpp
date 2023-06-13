@@ -9,7 +9,6 @@ Email=_Email;
 Password=_Password;
 Coin=1000;
 }
-
 Player::Player()
 {
 
@@ -38,7 +37,10 @@ int Player::get_Lose(){return Lose;}
 QVector<GameOfPlayer>Player::get_GamePlayer(){return GamePlayer;}
 std::list<Card>Player::get_cards(){return Cards;}
 
-
+void Player::set_Cards(Card _card)
+{
+    Cards.push_back(_card);
+}
 void Player::set_Password(QString _Password){
     Password=_Password;
 }

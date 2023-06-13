@@ -21,7 +21,7 @@ public:
     QVector<GameOfPlayer>get_GamePlayer();
     std::list<Card>get_cards();
     void set_GamePlayer(QVector<GameOfPlayer>);
-    void set_Cards(std::list<Card>);
+    void set_Cards(Card);
     void set_Password(QString);
 
 

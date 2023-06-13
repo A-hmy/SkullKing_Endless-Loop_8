@@ -12,6 +12,7 @@ SOURCES += \
     card.cpp \
     changeinformation.cpp \
     forgotpassword.cpp \
+    function.cpp \
     gameofplayer.cpp \
     gameserver.cpp \
     main.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     card.h \
     changeinformation.h \
     forgotpassword.h \
+    function.h \
     gameofplayer.h \
     gameserver.h \
     mainwindow.h \

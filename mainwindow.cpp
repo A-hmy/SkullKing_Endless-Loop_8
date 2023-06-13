@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 QVector <Player*> Players;
+QVector<Card*>_cards;
 Player* player;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
