@@ -20,6 +20,7 @@ SOURCES += \
     mainwindow.cpp \
     menu.cpp \
     player.cpp \
+    serverorclient.cpp \
     sign.cpp \
     signup.cpp
 
@@ -34,6 +35,7 @@ HEADERS += \
     mainwindow.h \
     menu.h \
     player.h \
+    serverorclient.h \
     sign.h \
     signup.h
 
@@ -43,6 +45,7 @@ FORMS += \
     gameserver.ui \
     mainwindow.ui \
     menu.ui \
+    serverorclient.ui \
     sign.ui \
     signup.ui
 

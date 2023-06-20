@@ -3,6 +3,7 @@
 #include "sign.h"
 #include "ui_menu.h"
 #include"gameserver.h"
+#include"serverorclient.h"
 Menu::Menu(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Menu)
@@ -33,10 +34,8 @@ void Menu::on_Logout_2_clicked()
 
 void Menu::on_Start_2_clicked()
 {
-    // server_client
-    //if(server)
+    ServerOrClient * s=new ServerOrClient;
     this->close();
-    GameServer*g=new GameServer;
-    g->show();
+    s->show();
 }
 
