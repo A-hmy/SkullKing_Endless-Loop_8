@@ -45,6 +45,8 @@ private slots:
     void on_card_13_clicked();
 
     void on_card_14_clicked();
+signals:
+    void SendToServer(QString str);
 
 private:
     Ui::GameServer *ui;

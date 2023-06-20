@@ -1,6 +1,7 @@
 #ifndef SERVERORCLIENT_H
 #define SERVERORCLIENT_H
-
+#include <QTcpServer>
+#include<QTcpSocket>
 #include <QMainWindow>
 
 namespace Ui {
@@ -21,8 +22,12 @@ private slots:
 
     void on_client_clicked();
 
+     void connecting();
+
 private:
     Ui::ServerOrClient *ui;
+    QTcpServer*MyQtServer;
+    QTcpSocket*MyServerSocket;
 };
 
 #endif // SERVERORCLIENT_H
