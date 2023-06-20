@@ -3,7 +3,7 @@
 #include <QTcpServer>
 #include<QTcpSocket>
 #include <QMainWindow>
-
+#include "board.h"
 namespace Ui {
 class ServerOrClient;
 }
@@ -23,6 +23,8 @@ private slots:
     void on_client_clicked();
 
      void connecting();
+
+
 
 private:
     Ui::ServerOrClient *ui;

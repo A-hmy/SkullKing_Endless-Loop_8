@@ -16,7 +16,6 @@ public:
     ~ForgotPassword();
 
 private slots:
-    //void on_PhoneNumber_editingFinished();
 
     void on_PhoneNumber_returnPressed();
 

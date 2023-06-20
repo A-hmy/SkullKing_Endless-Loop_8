@@ -19,8 +19,8 @@ void ServerOrClient::on_server_clicked()
 {
     MyQtServer=new QTcpServer;
     MyQtServer->listen(QHostAddress::Any,1234);
-    //صفحه نمایش انتظار
-    connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connect()));
+    //Displaying the waiting page
+    connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
 }
 
 
@@ -35,11 +35,8 @@ void ServerOrClient::connecting()
     GameServer * m=new GameServer;
     m->show();
     this->hide();
-    connect(MyServerSocket,SIGNAL(readyRead()),this,SLOT(received()));
-    //connect(m,&GameServer::SendToServer,this,&srverOrclient::ReceivedFromeGameaserver);
-    // ص گیم سرور برای این صفحه سیگنال ارسال میکند
-    //میاد ارسال میکنه چه کارتی و چه حرکاتی انجام شده است
-    // و از این صفحه اطلاعات برای کلاینت ارسال میشوند
-    // و اطلاعات در همین صفحه از کلاینت دریافت میشود
+    connect(MyServerSocket,SIGNAL(readyRead()),m,SLOT(Set()));
+    //The server needs to send the selected card to the client, so that the client can display it
+
 }
 

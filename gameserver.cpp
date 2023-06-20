@@ -13,13 +13,20 @@ GameServer::~GameServer()
     delete ui;
 }
 
+void GameServer::PlayingGame()
+{
+    //Game logic:
+    //Comparing the cards
+    //......
+}
+
 void GameServer::on_Ok_clicked()
 {
     if(ui->NumberOfPredict->text().isEmpty()){
       ui->NumberOfPredict->setPlaceholderText("❗❗❗❗");
         }
     else{
-       NumberOfServer=ui->NumberOfPredict->text();
+       NumberOfServer=ui->NumberOfPredict->text().toInt();
        // daryaft tedad bord client(NumberOfClient=ui.......)
        ui->NumberOfPredict->setVisible(false);
        ui->Ok->setVisible(false);
@@ -139,4 +146,16 @@ void GameServer::on_card_14_clicked()
 
     }
 }
+
+void GameServer::Set(Board _board)
+{
+    PlayerCard_C=_board.get_player2();
+    //PlayerCard_S=_board.get_player1();
+    NumberOfClient=_board.get_NumberOfset_C();//This variable should not be changed
+}
+
+
+
+
+
 

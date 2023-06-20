@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    board.cpp \
     card.cpp \
     card_inheritance.cpp \
     changeinformation.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     signup.cpp
 
 HEADERS += \
+    board.h \
     card.h \
     card_inheritance.h \
     changeinformation.h \

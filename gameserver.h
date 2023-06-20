@@ -1,8 +1,8 @@
 #ifndef GAMESERVER_H
 #define GAMESERVER_H
-
+#include"card.h"
 #include <QMainWindow>
-
+#include"board.h"
 namespace Ui {
 class GameServer;
 }
@@ -14,7 +14,7 @@ class GameServer : public QMainWindow
 public:
     explicit GameServer(QWidget *parent = nullptr);
     ~GameServer();
-
+    void PlayingGame();
 private slots:
     void on_Ok_clicked();
 
@@ -45,13 +45,15 @@ private slots:
     void on_card_13_clicked();
 
     void on_card_14_clicked();
-signals:
-    void SendToServer(QString str);
+
+    void Set(Board _board);//Receiving data from the client
 
 private:
     Ui::GameServer *ui;
-    QString NumberOfServer;
-    QString NumberOfClient;
+    int NumberOfServer;
+    int NumberOfClient;//Receiving from client
+    Card PlayerCard_S;
+    Card PlayerCard_C;//Receiving from client
 };
 
 #endif // GAMESERVER_H
