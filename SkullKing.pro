@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     card.cpp \
+    card_inheritance.cpp \
     changeinformation.cpp \
     forgotpassword.cpp \
     function.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     card.h \
+    card_inheritance.h \
     changeinformation.h \
     forgotpassword.h \
     function.h \

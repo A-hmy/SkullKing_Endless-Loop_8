@@ -35,16 +35,16 @@ int Player::get_Coin(){return Coin;}
 int Player::get_Win(){return Win;}
 int Player::get_Lose(){return Lose;}
 QVector<GameOfPlayer>Player::get_GamePlayer(){return GamePlayer;}
-std::list<Card>Player::get_cards(){return Cards;}
-void Player::set_Cards(Card _card)
+//std::list<Card>Player::get_cards(){return Cards;}
+/*void Player::set_Cards(Card _card)
 {
     Cards.push_back(_card);
-}
+}*/
 void Player::set_Password(QString _Password){
     Password=_Password;
 }
-//*
-void Player::clear_Cards()
+
+/*void Player::clear_Cards()
 {
    Cards.clear();
-}
+}*/

@@ -1,10 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-
+#include "card_inheritance.h"
 #include "gameofplayer.h"
 #include "card.h"
-class Player
+class Player:public Card_Inheritance
 {
 public:
     Player(QString,QString,QString,QString,QString);
@@ -19,11 +19,11 @@ public:
     int get_Win();
     int get_Lose();
     QVector<GameOfPlayer>get_GamePlayer();
-    std::list<Card>get_cards();
+    //std::list<Card>get_cards();
     void set_GamePlayer(QVector<GameOfPlayer>);
-    void set_Cards(Card);
+    //void set_Cards(Card);
     void set_Password(QString);
-    void clear_Cards();
+    //void clear_Cards();
 
 private:
      QString Name;
@@ -35,7 +35,7 @@ private:
      int Win;
      int Lose;
      QVector<GameOfPlayer> GamePlayer;
-     std::list<Card>Cards;
+     //std::list<Card>Cards;
 
 };
 

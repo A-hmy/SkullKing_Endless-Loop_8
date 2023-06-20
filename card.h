@@ -12,11 +12,14 @@ public:
     int get_Number();
     bool get_Reserved();
     void set_Reserved(bool);
+    int get_PushButton();
+    void set_PushButton(int);
 private:
     QString Name;
     int Number;
     bool Reserved;
     QPixmap Picture;
     int Value;
+    int PushButton;
 };
 #endif // CARD_H
