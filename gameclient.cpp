@@ -21,7 +21,9 @@ void GameClient::on_card_1_clicked()
 
 void GameClient::on_card_2_clicked()
 {
+    if(ui->NumberOfPredict->isVisible()){
 
+    }
 }
 
 
