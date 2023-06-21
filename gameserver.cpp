@@ -1,6 +1,6 @@
 #include "gameserver.h"
 #include "ui_gameserver.h"
-
+#include"function.h"
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
@@ -15,9 +15,12 @@ GameServer::~GameServer()
 
 void GameServer::PlayingGame()
 {
-    //Game logic:
-    //Comparing the cards
-    //......
+   for(int NumberOfRound=0;NumberOfRound!=7;NumberOfRound++){
+       //dealing
+       Dealing(NumberOfRound);
+
+   }
+
 }
 
 void GameServer::on_Ok_clicked()

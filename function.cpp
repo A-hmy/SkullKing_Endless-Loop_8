@@ -30,16 +30,15 @@ void StartGame() {
         _cards.push_back(c);
     }
 }
-void Dealing(int NumberOfGame)
+void Dealing(int NumberOfRound)
 {
-    QVector<Card*> CardsOfPlayerClient;
     player->clear_Cards();
     CardsOfPlayerClient.clear();
     // reserved=false
     for (int i = 0; i < _cards.size(); i++)
          _cards[i]->set_Reserved(false);
     // deal_server
-    for (int i = 0; i < NumberOfGame * 2;) {
+    for (int i = 0; i < NumberOfRound * 2;) {
          srand(time(NULL));
          int index = rand() % (_cards.size()+ 1);
          if (_cards[index]->get_Reserved() != 1) {
@@ -49,7 +48,7 @@ void Dealing(int NumberOfGame)
             }
         }
         //deal_client
-        for (int i = 0; i < NumberOfGame * 2;) {
+        for (int i = 0; i < NumberOfRound * 2;) {
             srand(time(NULL));
             int index = rand() % (_cards.size()+ 1);
             if (_cards[index]->get_Reserved() != 1) {

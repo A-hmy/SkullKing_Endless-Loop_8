@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include "player.h"
+extern QVector<Card*> CardsOfPlayerClient;
 extern QVector <Player*> Players;
 extern QVector<Card*>_cards;
 extern Player* player;

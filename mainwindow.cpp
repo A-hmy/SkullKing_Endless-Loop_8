@@ -3,6 +3,7 @@
 QVector <Player*> Players;
 QVector<Card*>_cards;
 Player* player;
+QVector<Card*> CardsOfPlayerClient;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
