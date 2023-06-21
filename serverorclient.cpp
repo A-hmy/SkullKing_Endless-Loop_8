@@ -3,13 +3,15 @@
 #include "gameserver.h"
 #include "gameclient.h"
 #include "ui_serverorclient.h"
-
+#include <QMovie>
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ServerOrClient)
 {
     ui->setupUi(this);
     ui->IpServer->setVisible(false);
+    ui->ShowIp->setVisible(false);
+    ui->Loading->setVisible(false);
 }
 
 ServerOrClient::~ServerOrClient()
@@ -20,8 +22,16 @@ ServerOrClient::~ServerOrClient()
 void ServerOrClient::on_server_clicked()
 {
     MyQtServer=new QTcpServer;
-    MyQtServer->listen(QHostAddress::Any,1234);
-    //Displaying the waiting page
+    MyQtServer->listen(QHostAddress::Any,8080);
+    ui->Loading->setVisible(true);
+    ui->ShowIp->setVisible(true);
+    QMovie *Loading=new QMovie("kamilla-loading.gif");
+    ui->Loading->setMovie(Loading);
+    ui->client->setVisible(false);
+    ui->server->setVisible(false);
+    ui->label->setVisible(false);
+    Loading->start();
+    //Displaying the waiting page and IP
     connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
 }
 
@@ -43,8 +53,6 @@ void ServerOrClient::connectedtoserver()
     GameClient *c=new GameClient;
     c->show();
     this->hide();
-
-
 }
 void ServerOrClient::connecting()
 {

@@ -16,126 +16,184 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>200</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>200</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe Print</family>
-        <pointsize>21</pointsize>
-        <italic>true</italic>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(85, 0, 127);</string>
-      </property>
+     <widget class="QLabel" name="Loading">
       <property name="text">
-       <string>Select server or client</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="server">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe Script</family>
-       </font>
-      </property>
-      <property name="text">
-       <string>Server</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="client">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe Script</family>
-       </font>
-      </property>
-      <property name="text">
-       <string>Client</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLineEdit" name="IpServer">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe Print</family>
-       </font>
-      </property>
-      <property name="placeholderText">
-       <string>Enter Server IP address</string>
+       <string/>
       </property>
      </widget>
     </item>
    </layout>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>40</y>
+      <width>400</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>200</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>200</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Print</family>
+      <pointsize>21</pointsize>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(85, 0, 127);</string>
+    </property>
+    <property name="text">
+     <string>Select server or client</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="server">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>260</y>
+      <width>400</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Server</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="client">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>320</y>
+      <width>400</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Client</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="IpServer">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>380</y>
+      <width>400</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Print</family>
+     </font>
+    </property>
+    <property name="placeholderText">
+     <string>Enter Server IP address</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="ShowIp">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>470</y>
+      <width>271</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Your ip:</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe Script</family>
+       <pointsize>10</pointsize>
+       <italic>true</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="background">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>85</red>
+        <green>0</green>
+        <blue>127</blue>
+       </color>
+      </brush>
+     </property>
+    </item>
+   </widget>
+   <zorder>label</zorder>
+   <zorder>server</zorder>
+   <zorder>client</zorder>
+   <zorder>IpServer</zorder>
+   <zorder>ShowIp</zorder>
+   <zorder>Loading</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
