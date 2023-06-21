@@ -14,20 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="Loading">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>40</y>
+      <y>10</y>
       <width>400</width>
       <height>200</height>
      </rect>
@@ -56,7 +47,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 127);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Select server or client</string>
@@ -69,7 +60,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>260</y>
+      <y>220</y>
       <width>400</width>
       <height>50</height>
      </rect>
@@ -90,6 +81,10 @@
      <font>
       <family>Segoe Script</family>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(155, 116, 70);
+border-radius:10px;</string>
     </property>
     <property name="text">
      <string>Server</string>
@@ -99,7 +94,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>320</y>
+      <y>280</y>
       <width>400</width>
       <height>50</height>
      </rect>
@@ -121,6 +116,10 @@
       <family>Segoe Script</family>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(155, 116, 70);
+border-radius:10px;</string>
+    </property>
     <property name="text">
      <string>Client</string>
     </property>
@@ -129,7 +128,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>380</y>
+      <y>340</y>
       <width>400</width>
       <height>50</height>
      </rect>
@@ -151,6 +150,10 @@
       <family>Segoe Print</family>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(155, 116, 70);
+border-radius:10px;</string>
+    </property>
     <property name="placeholderText">
      <string>Enter Server IP address</string>
     </property>
@@ -159,10 +162,14 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>470</y>
+      <y>400</y>
       <width>271</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(155, 116, 70);
+border-radius:10px;</string>
     </property>
     <item>
      <property name="text">
@@ -187,6 +194,36 @@
      </property>
     </item>
    </widget>
+   <widget class="QLabel" name="Loading">
+    <property name="geometry">
+     <rect>
+      <x>404</x>
+      <y>11</y>
+      <width>16</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>1</y>
+      <width>801</width>
+      <height>601</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/Picture/backgroundpage.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>label_2</zorder>
    <zorder>label</zorder>
    <zorder>server</zorder>
    <zorder>client</zorder>

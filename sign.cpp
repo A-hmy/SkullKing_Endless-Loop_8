@@ -10,6 +10,8 @@ Sign::Sign(QWidget *parent) :
     ui(new Ui::Sign)
 {
     ui->setupUi(this);
+    QLabel *mylabel=ui->background;
+    mylabel->lower();
 }
 
 Sign::~Sign()

@@ -40,5 +40,9 @@
         <file>Picture/Queen.png</file>
         <file>Picture/icon.png</file>
         <file>Picture/name.png</file>
+        <file>Picture/BackgroundSign.png</file>
+        <file>Picture/BacksignUp.jpg</file>
+        <file>Picture/backgroundpage.jpg</file>
+        <file>Picture/back.jpg</file>
     </qresource>
 </RCC>
