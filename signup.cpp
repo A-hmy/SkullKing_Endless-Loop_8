@@ -77,3 +77,10 @@ void Signup::on_cancle_clicked()
     this->close();
 }
 
+
+
+void Signup::on_email_textChanged(const QString &arg1)
+{
+    ui->email->setStyleSheet("color:black");
+}
+

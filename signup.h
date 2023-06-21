@@ -20,6 +20,8 @@ private slots:
 
     void on_cancle_clicked();
 
+    void on_email_textChanged(const QString &arg1);
+
 private:
     Ui::Signup *ui;
 };

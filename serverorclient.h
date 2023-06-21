@@ -30,6 +30,7 @@ private:
     Ui::ServerOrClient *ui;
     QTcpServer*MyQtServer;
     QTcpSocket*MyServerSocket;
+    QTcpSocket*MyClientSocket;
 };
 
 #endif // SERVERORCLIENT_H
