@@ -25,12 +25,12 @@ void ServerOrClient::on_server_clicked()
     MyQtServer->listen(QHostAddress::Any,8080);
     ui->Loading->setVisible(true);
     ui->ShowIp->setVisible(true);
-    QMovie *Loading=new QMovie("kamilla-loading.gif");
+    /*QMovie *Loading=new QMovie("Loading.gif");
     ui->Loading->setMovie(Loading);
     ui->client->setVisible(false);
     ui->server->setVisible(false);
     ui->label->setVisible(false);
-    Loading->start();
+    Loading->start();*/
     //Displaying the waiting page and IP
     connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
 }
