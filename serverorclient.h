@@ -19,12 +19,9 @@ public:
 private slots:
 
     void on_server_clicked();
-
     void on_client_clicked();
-
-     void connecting();
-
-
+    void connecting();
+    void connectedtoserver();
 
 private:
     Ui::ServerOrClient *ui;

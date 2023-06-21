@@ -1,6 +1,7 @@
 
 #include "serverorclient.h"
 #include "gameserver.h"
+#include "gameclient.h"
 #include "ui_serverorclient.h"
 
 ServerOrClient::ServerOrClient(QWidget *parent) :
@@ -8,6 +9,7 @@ ServerOrClient::ServerOrClient(QWidget *parent) :
     ui(new Ui::ServerOrClient)
 {
     ui->setupUi(this);
+    ui->IpServer->setVisible(false);
 }
 
 ServerOrClient::~ServerOrClient()
@@ -26,9 +28,20 @@ void ServerOrClient::on_server_clicked()
 
 void ServerOrClient::on_client_clicked()
 {
+    //Display server IP page
+    ui->IpServer->setVisible(true);
+    MyClientSocket=new QTcpSocket;
+    MyClientSocket->connectToHost("192.168.43.107",1234);
+    connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connectedtoserver()));
 
 }
+void ServerOrClient::connectedtoserver()
+{
+    GameClient *c=new GameClient;
+    c->show();
+    this->hide();
 
+}
 void ServerOrClient::connecting()
 {
     MyServerSocket=MyQtServer->nextPendingConnection();
