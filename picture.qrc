@@ -40,5 +40,6 @@
         <file>Picture/Queen.png</file>
         <file>Picture/icon.png</file>
         <file>Picture/name.png</file>
+        <file>Picture/kamilla-loading.gif</file>
     </qresource>
 </RCC>
