@@ -144,6 +144,9 @@
        <family>Segoe Script</family>
       </font>
      </property>
+     <property name="maxLength">
+      <number>11</number>
+     </property>
      <property name="placeholderText">
       <string>Phonenumber</string>
      </property>

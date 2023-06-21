@@ -19,17 +19,15 @@ public:
 private slots:
 
     void on_server_clicked();
-
     void on_client_clicked();
-
-     void connecting();
-
-
+    void connecting();
+    void connectedtoserver();
 
 private:
     Ui::ServerOrClient *ui;
     QTcpServer*MyQtServer;
     QTcpSocket*MyServerSocket;
+    QTcpSocket*MyClientSocket;
 };
 
 #endif // SERVERORCLIENT_H

@@ -20,20 +20,28 @@
       <property name="minimumSize">
        <size>
         <width>400</width>
-        <height>100</height>
+        <height>200</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>400</width>
-        <height>100</height>
+        <height>200</height>
        </size>
       </property>
       <property name="font">
        <font>
         <family>Segoe Print</family>
-        <pointsize>15</pointsize>
+        <pointsize>21</pointsize>
+        <italic>true</italic>
+        <bold>true</bold>
        </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(85, 0, 127);</string>
       </property>
       <property name="text">
        <string>Select server or client</string>
@@ -88,6 +96,30 @@
       </property>
       <property name="text">
        <string>Client</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLineEdit" name="IpServer">
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe Print</family>
+       </font>
+      </property>
+      <property name="placeholderText">
+       <string>Enter Server IP address</string>
       </property>
      </widget>
     </item>
