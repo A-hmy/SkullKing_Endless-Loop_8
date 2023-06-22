@@ -19,8 +19,8 @@
   <widget class="QPushButton" name="Start_2">
    <property name="geometry">
     <rect>
-     <x>137</x>
-     <y>61</y>
+     <x>140</x>
+     <y>50</y>
      <width>300</width>
      <height>30</height>
     </rect>
@@ -43,7 +43,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: qconicalgradient(cx:0.029, cy:1, angle:0, stop:0 rgba(169, 117, 87, 255), stop:1 rgba(255, 255, 255, 255));
+    <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
 border-radius:10px;</string>
    </property>
    <property name="text">
@@ -53,8 +53,8 @@ border-radius:10px;</string>
   <widget class="QPushButton" name="Changeinformation_2">
    <property name="geometry">
     <rect>
-     <x>137</x>
-     <y>148</y>
+     <x>140</x>
+     <y>120</y>
      <width>300</width>
      <height>30</height>
     </rect>
@@ -77,7 +77,7 @@ border-radius:10px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: qconicalgradient(cx:0.029, cy:1, angle:0, stop:0 rgba(169, 117, 87, 255), stop:1 rgba(255, 255, 255, 255));
+    <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
 border-radius:10px;</string>
    </property>
    <property name="text">
@@ -87,8 +87,8 @@ border-radius:10px;</string>
   <widget class="QPushButton" name="History_2">
    <property name="geometry">
     <rect>
-     <x>137</x>
-     <y>235</y>
+     <x>140</x>
+     <y>200</y>
      <width>300</width>
      <height>30</height>
     </rect>
@@ -111,7 +111,7 @@ border-radius:10px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: qconicalgradient(cx:0.029, cy:1, angle:0, stop:0 rgba(169, 117, 87, 255), stop:1 rgba(255, 255, 255, 255));
+    <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
 border-radius:10px;</string>
    </property>
    <property name="text">
@@ -121,8 +121,8 @@ border-radius:10px;</string>
   <widget class="QPushButton" name="Logout_2">
    <property name="geometry">
     <rect>
-     <x>137</x>
-     <y>322</y>
+     <x>140</x>
+     <y>280</y>
      <width>300</width>
      <height>30</height>
     </rect>
@@ -145,7 +145,7 @@ border-radius:10px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: qconicalgradient(cx:0.029, cy:1, angle:0, stop:0 rgba(169, 117, 87, 255), stop:1 rgba(255, 255, 255, 255));
+    <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
 border-radius:10px;</string>
    </property>
    <property name="text">
@@ -162,7 +162,7 @@ border-radius:10px;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/new/prefix1/Picture/back.jpg);</string>
+    <string notr="true">border-image: url(:/new/prefix1/Picture/backgroundpage.jpg);</string>
    </property>
    <property name="text">
     <string/>

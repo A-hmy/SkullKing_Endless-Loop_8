@@ -35,7 +35,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/new/prefix1/Picture/backgroundpage.jpg);</string>
+    <string notr="true">border-image: url(:/new/prefix1/Picture/BackgroundSign.png);</string>
    </property>
    <property name="text">
     <string/>

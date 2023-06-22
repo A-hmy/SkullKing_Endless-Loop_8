@@ -17,8 +17,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>30</y>
+      <x>210</x>
+      <y>190</y>
       <width>400</width>
       <height>200</height>
      </rect>
@@ -59,77 +59,7 @@
    <widget class="QPushButton" name="server">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>220</y>
-      <width>400</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>400</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>400</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-border-radius:10px;
-background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
-    </property>
-    <property name="text">
-     <string>Server</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="client">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>280</y>
-      <width>400</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>400</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>400</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-border-radius:10px;
-background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
-    </property>
-    <property name="text">
-     <string>Client</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="IpServer">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
+      <x>210</x>
       <y>340</y>
       <width>400</width>
       <height>50</height>
@@ -149,13 +79,83 @@ background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163,
     </property>
     <property name="font">
      <font>
-      <family>Segoe Print</family>
+      <family>Segoe Script</family>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
 border-radius:10px;
-background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
+</string>
+    </property>
+    <property name="text">
+     <string>Server</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="client">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>400</y>
+      <width>400</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
+</string>
+    </property>
+    <property name="text">
+     <string>Client</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="IpServer">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>460</y>
+      <width>400</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
+</string>
     </property>
     <property name="placeholderText">
      <string>Enter Server IP address</string>
@@ -164,16 +164,16 @@ background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163,
    <widget class="QListWidget" name="ShowIp">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>400</y>
+      <x>280</x>
+      <y>520</y>
       <width>271</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
 border-radius:10px;
-background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
+</string>
     </property>
     <item>
      <property name="text">
@@ -221,7 +221,7 @@ background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163,
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/BackgroundSign.png);</string>
+     <string notr="true">border-image: url(:/new/prefix1/Picture/back.jpg);</string>
     </property>
     <property name="text">
      <string/>
