@@ -40,7 +40,16 @@ void Sign::on_SignUp_clicked()
 void Sign::on_Login_clicked()
 {
   if(ui->Username->text().isEmpty()||ui->Password->text().isEmpty()){
-      QMessageBox::warning(this,"❗❗❗","Please complete all the lines 🙄");
+      QFont Font("Segoe Script",10);
+      QMessageBox* message=new QMessageBox;
+      message->setFont(Font);
+      message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
+      message->setText("Please complete all the lines 🙄");
+      QPixmap pixmap(":/new/prefix1/Picture/iconQMessageBox.png");
+      message->setIconPixmap(pixmap);
+      message->setWindowFlags(Qt::FramelessWindowHint);
+      message->show();
+      message->exec();
   }
   else{
       int flag=0;
@@ -57,7 +66,21 @@ void Sign::on_Login_clicked()
           }
       }
       if(flag==0){
-          QMessageBox::warning(this,"❗❗❗","Username or Password is wrong 🙁");
+              QFont Font("Segoe Script",10);
+              QMessageBox* message=new QMessageBox;
+              message->setFont(Font);
+              message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
+              message->setText("Username or Password is wrong 🙁");
+              QPixmap pixmap(":/new/prefix1/Picture/iconQMessageBox.png");
+              message->setIconPixmap(pixmap);
+              message->setWindowFlags(Qt::FramelessWindowHint);
+              message->show();
+              message->exec();
+              ui->Username->clear();
+              ui->Username->setPlaceholderText("Username");
+              ui->Username->setFocus();
+              ui->Password->clear();
+              ui->Password->setPlaceholderText("Password");
       }
   }
 }

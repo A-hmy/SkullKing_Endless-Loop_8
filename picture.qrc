@@ -45,5 +45,7 @@
         <file>Picture/backgroundpage.jpg</file>
         <file>Picture/back.jpg</file>
         <file>Picture/back3.jpg</file>
+        <file>Picture/iconQMessageBox.png</file>
+        <file>Picture/QMessageBox icon.png</file>
     </qresource>
 </RCC>

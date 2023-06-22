@@ -85,7 +85,16 @@ void ForgotPassword::on_Ok_clicked()
                break;
            }
         }
-        QMessageBox::information(this,"✅","Your password changed successfully");
+        QFont Font("Segoe Script",10);
+        QMessageBox* message=new QMessageBox;
+        message->setFont(Font);
+        message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
+        message->setText("Your password changed successfully :)");
+        QPixmap pixmap(":/new/prefix1/Picture/QMessageBox icon.png");
+        message->setIconPixmap(pixmap);
+        message->setWindowFlags(Qt::FramelessWindowHint);
+        message->show();
+        message->exec();
         this->close();
         Sign *m=new Sign;
         m->show();
