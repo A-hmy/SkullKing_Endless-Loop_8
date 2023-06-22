@@ -1,6 +1,6 @@
 #include "gameserver.h"
 #include "ui_gameserver.h"
-#include"function.h"
+#include "function.h"
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)

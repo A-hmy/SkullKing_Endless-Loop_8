@@ -8,6 +8,9 @@ ForgotPassword::ForgotPassword(QWidget *parent) :
     ui(new Ui::ForgotPassword)
 {
     ui->setupUi(this);
+    ui->Error->setVisible(false);
+    ui->New->setVisible(false);
+    ui->NewPassword->setVisible(false);
 }
 
 ForgotPassword::~ForgotPassword()
@@ -19,29 +22,37 @@ void ForgotPassword::on_PhoneNumber_returnPressed()
 {
     if(ui->Username->text().isEmpty()){
         ui->Error->clear();
+        ui->Error->setVisible(true);
         ui->Error->addItem("Enter your Username");
-        ui->Error->setStyleSheet("color:red");
+        ui->Error->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
     }
     else{
         int flag=0;
          ui->Error->clear();
          for(auto x:Players){
             if(ui->PhoneNumber->text()==x->get_PhoneNumber()&&ui->Username->text()==x->get_UserName()){
+                ui->Error->setVisible(true);
                 ui->Error->addItem("Enter new password");
-                ui->Error->setStyleSheet("color:green");
+                ui->Error->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:green;border-radius:10px");
+                ui->New->setVisible(true);
                 ui->New->clear();
                 ui->New->addItem("New password:");
-                ui->NewPassword->setStyleSheet("background-color:white");
+                ui->New->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:black;border-radius:10px");
+                ui->NewPassword->setVisible(true);
+                ui->NewPassword->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:black;border-radius:10px");
                 flag=1;
                 break;
              }
          }
          if(flag==0){
              ui->Error->clear();
+             ui->Error->setVisible(true);
              ui->Error->addItem("The phone number or username is incorrect");
-             ui->Error->setStyleSheet("color:red");
+             ui->Error->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
              ui->PhoneNumber->setPlaceholderText("Phone number");
              ui->Username->setPlaceholderText("Username");
+             ui->New->setVisible(false);
+             ui->NewPassword->setVisible(false);
              }
          }
 }
@@ -51,13 +62,15 @@ void ForgotPassword::on_Ok_clicked()
 {
     if(ui->PhoneNumber->text().isEmpty()||ui->Username->text().isEmpty()){
         ui->Error->clear();
+        ui->Error->setVisible(true);
         ui->Error->addItem("Enter Username and phone number");
-        ui->Error->setStyleSheet("color:red");
+        ui->Error->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
     }
     else if(ui->NewPassword->text().isEmpty()){
         ui->Error->clear();
+        ui->Error->setVisible(true);
         ui->Error->addItem("Enter new password");
-        ui->Error->setStyleSheet("color:red");
+        ui->Error->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
     }
     else{
         for(auto x:Players){

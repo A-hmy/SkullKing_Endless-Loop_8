@@ -61,6 +61,7 @@ void ServerOrClient::connecting()
     m->show();
     this->hide();
     connect(MyServerSocket,SIGNAL(readyRead()),m,SLOT(Set()));
+
     //The server needs to send the selected card to the client, so that the client can display it
 
 }

@@ -24,25 +24,23 @@ Signup::~Signup()
 
 void Signup::on_ok_clicked()
 {
+    bool ch=false;
+    if(ui->username->text().isEmpty()||ui->password->text().isEmpty()
+                     ||ui->name->text().isEmpty()||ui->email->text().isEmpty()||
+                     ui->phonenumber->text().isEmpty())
+             {
+                        QMessageBox:: warning(this,"❗❗❗","Please complete all the lines 🙄");
+                        ch=true;
+             }
 
-    QRegularExpression regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[com]{2,4}$");
-     QRegularExpressionMatch match = regex.match(ui->email->text());
-      if (!match.hasMatch()) {
-       ui->email->clear();
-       ui->email->setStyleSheet("color:red");
-       ui->email->setPlaceholderText("Email invalid input.");
-
-      }
       else{
-           ui->email->setStyleSheet("color:black");
-          bool ch=false;
-          if(ui->username->text().isEmpty()||ui->password->text().isEmpty()
-                  ||ui->name->text().isEmpty()||ui->email->text().isEmpty()||
-                  ui->phonenumber->text().isEmpty())
-          {
-                     QMessageBox:: warning(this,"❗❗❗","Please complete all the lines 🙄");
-                     ch=true;
-          }
+          QRegularExpression regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[com]{2,4}$");
+             QRegularExpressionMatch match = regex.match(ui->email->text());
+              if (!match.hasMatch()) {
+               ui->email->clear();
+                ui->email->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
+               ui->email->setPlaceholderText("Email invalid input.");
+              }
       else
           {
               bool check= false;
@@ -81,6 +79,6 @@ void Signup::on_cancle_clicked()
 
 void Signup::on_email_textChanged(const QString &arg1)
 {
-    ui->email->setStyleSheet("color:black");
+    ui->email->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:black;border-radius:10px");
 }
 
