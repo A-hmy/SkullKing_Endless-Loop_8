@@ -40,6 +40,7 @@ void Signup::on_ok_clicked()
                ui->email->clear();
                 ui->email->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
                ui->email->setPlaceholderText("Email invalid input.");
+               ui->email->setFocus();
               }
       else
           {
@@ -81,4 +82,30 @@ void Signup::on_email_textChanged(const QString &arg1)
 {
     ui->email->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:black;border-radius:10px");
 }
+
+
+void Signup::on_name_returnPressed()
+{
+    ui->username->setFocus();
+}
+
+
+void Signup::on_username_returnPressed()
+{
+    ui->password->setFocus();
+}
+
+
+void Signup::on_password_returnPressed()
+{
+    ui->phonenumber->setFocus();
+}
+
+
+void Signup::on_phonenumber_returnPressed()
+{
+    ui->email->setFocus();
+}
+
+
 

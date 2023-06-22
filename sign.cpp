@@ -62,3 +62,9 @@ void Sign::on_Login_clicked()
   }
 }
 
+
+void Sign::on_Username_returnPressed()
+{
+    ui->Password->setFocus();
+}
+

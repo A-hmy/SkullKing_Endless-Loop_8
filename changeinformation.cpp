@@ -14,6 +14,7 @@ ChangeInformation::ChangeInformation(QWidget *parent) :
     ui->phonenumber->setPlaceholderText(player->get_PhoneNumber());
     ui->email->setPlaceholderText(player->get_Email());
     ui->password->setPlaceholderText(player->get_Password());
+    ui->name->setFocus();
 }
 
 ChangeInformation::~ChangeInformation()
@@ -36,5 +37,29 @@ void ChangeInformation::on_cancle_clicked()
     this->close();
     Menu *m=new Menu;
     m->show();
+}
+
+
+void ChangeInformation::on_name_returnPressed()
+{
+    ui->username->setFocus();
+}
+
+
+void ChangeInformation::on_username_returnPressed()
+{
+    ui->phonenumber->setFocus();
+}
+
+
+void ChangeInformation::on_phonenumber_returnPressed()
+{
+    ui->email->setFocus();
+}
+
+
+void ChangeInformation::on_email_returnPressed()
+{
+    ui->password->setFocus();
 }
 

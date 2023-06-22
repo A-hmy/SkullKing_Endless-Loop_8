@@ -23,6 +23,8 @@ private slots:
 
     void on_Cancel_clicked();
 
+    void on_Username_returnPressed();
+
 private:
     Ui::ForgotPassword *ui;
 };

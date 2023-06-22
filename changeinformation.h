@@ -20,6 +20,14 @@ private slots:
 
     void on_cancle_clicked();
 
+    void on_name_returnPressed();
+
+    void on_username_returnPressed();
+
+    void on_phonenumber_returnPressed();
+
+    void on_email_returnPressed();
+
 private:
     Ui::ChangeInformation *ui;
 };

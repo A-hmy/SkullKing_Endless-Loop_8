@@ -22,6 +22,15 @@ private slots:
 
     void on_email_textChanged(const QString &arg1);
 
+    void on_name_returnPressed();
+
+    void on_username_returnPressed();
+
+    void on_password_returnPressed();
+
+    void on_phonenumber_returnPressed();
+
+
 private:
     Ui::Signup *ui;
 };

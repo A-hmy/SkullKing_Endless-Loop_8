@@ -39,6 +39,7 @@ void ForgotPassword::on_PhoneNumber_returnPressed()
                 ui->New->addItem("New password:");
                 ui->New->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:black;border-radius:10px");
                 ui->NewPassword->setVisible(true);
+                ui->NewPassword->setFocus();
                 ui->NewPassword->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:black;border-radius:10px");
                 flag=1;
                 break;
@@ -92,5 +93,11 @@ void ForgotPassword::on_Cancel_clicked()
     Sign *m=new Sign;
     m->show();
     this->close();
+}
+
+
+void ForgotPassword::on_Username_returnPressed()
+{
+    ui->PhoneNumber->setFocus();
 }
 
