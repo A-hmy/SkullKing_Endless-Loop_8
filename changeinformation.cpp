@@ -1,4 +1,5 @@
 #include "changeinformation.h"
+#include <QRegularExpressionValidator>
 #include "player.h"
 #include "mainwindow.h"
 #include "menu.h"
@@ -9,6 +10,9 @@ ChangeInformation::ChangeInformation(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    QString phoneRegex = ("^09[0-9]\\d{8}$");
+        QRegularExpressionValidator* validator = new QRegularExpressionValidator(QRegularExpression(phoneRegex), ui->phonenumber);
+        ui->phonenumber->setValidator(validator);
     ui->name->setPlaceholderText(player->get_Name());
     ui->username->setPlaceholderText(player->get_UserName());
     ui->phonenumber->setPlaceholderText(player->get_PhoneNumber());

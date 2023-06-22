@@ -1,4 +1,5 @@
 #include "forgotpassword.h"
+#include <QRegularExpressionValidator>
 #include "mainwindow.h"
 #include "sign.h"
 #include "ui_forgotpassword.h"
@@ -7,7 +8,11 @@ ForgotPassword::ForgotPassword(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ForgotPassword)
 {
+
     ui->setupUi(this);
+    QString phoneRegex = ("^09[0-9]\\d{8}$");
+    QRegularExpressionValidator* validator = new QRegularExpressionValidator(QRegularExpression(phoneRegex), ui->PhoneNumber);
+    ui->PhoneNumber->setValidator(validator);
     ui->Error->setVisible(false);
     ui->New->setVisible(false);
     ui->NewPassword->setVisible(false);

@@ -312,7 +312,7 @@ border-radius:10px;</string>
     <string notr="true">border-image: url(:/new/prefix1/Picture/BacksignUp.jpg);</string>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <zorder>label</zorder>

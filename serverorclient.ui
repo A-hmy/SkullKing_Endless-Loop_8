@@ -17,8 +17,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>10</y>
+      <x>190</x>
+      <y>30</y>
       <width>400</width>
       <height>200</height>
      </rect>
@@ -83,8 +83,9 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(155, 116, 70);
-border-radius:10px;</string>
+     <string notr="true">
+border-radius:10px;
+background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
     </property>
     <property name="text">
      <string>Server</string>
@@ -117,8 +118,9 @@ border-radius:10px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(155, 116, 70);
-border-radius:10px;</string>
+     <string notr="true">
+border-radius:10px;
+background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
     </property>
     <property name="text">
      <string>Client</string>
@@ -151,8 +153,9 @@ border-radius:10px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(155, 116, 70);
-border-radius:10px;</string>
+     <string notr="true">
+border-radius:10px;
+background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
     </property>
     <property name="placeholderText">
      <string>Enter Server IP address</string>
@@ -168,8 +171,9 @@ border-radius:10px;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(155, 116, 70);
-border-radius:10px;</string>
+     <string notr="true">
+border-radius:10px;
+background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(163, 118, 40, 255), stop:1 rgba(255, 255, 255, 255));</string>
     </property>
     <item>
      <property name="text">
@@ -217,7 +221,7 @@ border-radius:10px;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/backgroundpage.jpg);</string>
+     <string notr="true">border-image: url(:/new/prefix1/Picture/BackgroundSign.png);</string>
     </property>
     <property name="text">
      <string/>
