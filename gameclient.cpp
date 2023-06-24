@@ -6,6 +6,7 @@ GameClient::GameClient(QWidget *parent) :
     ui(new Ui::GameClient)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::FramelessWindowHint);
 }
 
 GameClient::~GameClient()

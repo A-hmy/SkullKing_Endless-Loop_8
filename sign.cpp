@@ -10,6 +10,7 @@ Sign::Sign(QWidget *parent) :
     ui(new Ui::Sign)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::FramelessWindowHint);
     QLabel *mylabel=ui->background;
     mylabel->lower();
 }

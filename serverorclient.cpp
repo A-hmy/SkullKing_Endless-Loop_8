@@ -9,6 +9,7 @@ ServerOrClient::ServerOrClient(QWidget *parent) :
     ui(new Ui::ServerOrClient)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::FramelessWindowHint);
     ui->IpServer->setVisible(false);
     ui->ShowIp->setVisible(false);
     ui->Loading->setVisible(false);
