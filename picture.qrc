@@ -48,5 +48,6 @@
         <file>Picture/iconQMessageBox.png</file>
         <file>Picture/QMessageBox icon.png</file>
         <file>Picture/load2.gif</file>
+        <file>Picture/back4.jpg</file>
     </qresource>
 </RCC>

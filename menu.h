@@ -22,6 +22,8 @@ private slots:
 
     void on_Start_2_clicked();
 
+    void on_History_2_clicked();
+
 private:
     Ui::Menu *ui;
 };

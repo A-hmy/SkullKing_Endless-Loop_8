@@ -40,3 +40,9 @@ void Menu::on_Start_2_clicked()
     s->show();
 }
 
+
+void Menu::on_History_2_clicked()
+{
+    History *m
+}
+
