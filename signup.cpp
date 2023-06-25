@@ -11,6 +11,7 @@ Signup::Signup(QWidget *parent) :
     ui(new Ui::Signup)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::FramelessWindowHint);
     QString phoneRegex = ("^09[0-9]\\d{8}$");
     QRegularExpressionValidator* validator = new QRegularExpressionValidator(QRegularExpression(phoneRegex), ui->phonenumber);
     ui->phonenumber->setValidator(validator);

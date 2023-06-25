@@ -10,6 +10,7 @@ ForgotPassword::ForgotPassword(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    setWindowFlags(Qt::FramelessWindowHint);
     QString phoneRegex = ("^09[0-9]\\d{8}$");
     QRegularExpressionValidator* validator = new QRegularExpressionValidator(QRegularExpression(phoneRegex), ui->PhoneNumber);
     ui->PhoneNumber->setValidator(validator);

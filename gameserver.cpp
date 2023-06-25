@@ -7,6 +7,7 @@ GameServer::GameServer(QWidget *parent) :
     ui(new Ui::GameServer)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::FramelessWindowHint);
 }
 
 GameServer::~GameServer()
