@@ -5,11 +5,14 @@
 #include "menu.h"
 #include "QMessageBox"
 #include "forgotpassword.h"
+#include"function.h"
 Sign::Sign(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Sign)
 {
     ui->setupUi(this);
+    QString FileName="Game";
+    File_Read(FileName);
     setWindowFlags(Qt::FramelessWindowHint);
     QLabel *mylabel=ui->background;
     mylabel->lower();

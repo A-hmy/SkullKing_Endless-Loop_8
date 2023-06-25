@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include"function.h"
 QVector <Player*> Players;
 QVector<Card*>_cards;
 Player* player;

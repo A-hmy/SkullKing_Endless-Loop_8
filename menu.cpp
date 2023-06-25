@@ -43,6 +43,6 @@ void Menu::on_Start_2_clicked()
 
 void Menu::on_History_2_clicked()
 {
-    History *m
+    //History *m
 }
 
