@@ -1,4 +1,5 @@
 #include "gameserver.h"
+#include "qtcpsocket.h"
 #include "ui_gameserver.h"
 #include "function.h"
 GameServer::GameServer(QWidget *parent) :
@@ -156,6 +157,8 @@ void GameServer::Set(Board _board)
     //PlayerCard_S=_board.get_player1();
     NumberOfClient=_board.get_NumberOfset_C();//This variable should not be changed
 }
+
+
 
 
 

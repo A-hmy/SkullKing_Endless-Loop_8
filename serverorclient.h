@@ -22,6 +22,10 @@ private slots:
     void on_client_clicked();
     void connecting();
     void connectedtoserver();
+    void reading_Error();
+    void on_IpServer_returnPressed();
+signals:
+    void send_error(QByteArray error);
 
 private:
     Ui::ServerOrClient *ui;

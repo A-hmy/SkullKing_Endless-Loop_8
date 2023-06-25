@@ -201,11 +201,23 @@ border-radius:10px;
    <widget class="QLabel" name="Loading">
     <property name="geometry">
      <rect>
-      <x>404</x>
-      <y>11</y>
-      <width>16</width>
-      <height>20</height>
+      <x>4</x>
+      <y>1</y>
+      <width>791</width>
+      <height>591</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>791</width>
+      <height>591</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>791</width>
+      <height>591</height>
+     </size>
     </property>
     <property name="text">
      <string/>

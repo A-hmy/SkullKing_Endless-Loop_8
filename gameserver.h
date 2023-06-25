@@ -3,6 +3,7 @@
 #include"card.h"
 #include <QMainWindow>
 #include"board.h"
+#include "qtcpsocket.h"
 namespace Ui {
 class GameServer;
 }
@@ -47,6 +48,7 @@ private slots:
     void on_card_14_clicked();
 
     void Set(Board _board);//Receiving data from the client
+
 
 private:
     Ui::GameServer *ui;
