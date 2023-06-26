@@ -4,6 +4,7 @@
 #include "ui_menu.h"
 #include"gameserver.h"
 #include"serverorclient.h"
+#include "history.h"
 Menu::Menu(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Menu)
@@ -43,6 +44,8 @@ void Menu::on_Start_2_clicked()
 
 void Menu::on_History_2_clicked()
 {
-    History *m
+    History *h=new History;
+    this->close();
+    h->show();
 }
 
