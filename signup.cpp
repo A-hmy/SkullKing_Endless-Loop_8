@@ -1,5 +1,6 @@
 #include <QMessageBox>
 #include <QRegularExpressionValidator>
+#include "function.h"
 #include "signup.h"
 #include "sign.h"
 #include "ui_signup.h"
@@ -61,8 +62,12 @@ void Signup::on_ok_clicked()
               }
               }
       if(check==false){
+          QString FileName="Game";
           Player* newuser=new Player(ui->name->text(), ui->username->text(), ui->phonenumber->text(), ui->email->text(), ui->password->text());
           Players.push_back(newuser);
+          for(auto it=Players.begin();it!=Players.end();it++){
+              File_WriteOnly(FileName,**it);
+          }
           QFont Font("Segoe Script",15);
           QMessageBox* message=new QMessageBox;
           message->setFont(Font);
