@@ -1,8 +1,10 @@
 
 #include "serverorclient.h"
 #include "gameserver.h"
+#include "mainwindow.h"
 #include "ui_serverorclient.h"
 #include <QMovie>
+#include"function.h"
 int numberOfclient=0;
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
@@ -19,28 +21,7 @@ ServerOrClient::~ServerOrClient()
 {
     delete ui;
 }
-//server
-void ServerOrClient::on_server_clicked()
-{
-    MyQtServer=new QTcpServer;
-    MyQtServer->setMaxPendingConnections(1);
-    MyQtServer->listen(QHostAddress::Any,8080);
-    ui->Loading->setVisible(true);
-    ui->ShowIp->setVisible(true);
-    ui->client->setVisible(false);
-    ui->server->setVisible(false);
-    ui->label->setVisible(false);
-    ui->label_2->setVisible(false);
-    QLabel *mylabel=ui->Loading;
-    mylabel->lower();
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
-    ui->Loading->setMovie(LoadingG);
-    ui->Loading->setScaledContents(true);
-    ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
-     ui->Loading->setStyleSheet("background-color: brown");
-    LoadingG->start();
-    connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
-}
+
 
 //client
 void ServerOrClient::on_client_clicked()
@@ -63,8 +44,13 @@ void ServerOrClient::on_IpServer_returnPressed()
     MyClientSocket=new QTcpSocket;
     MyClientSocket->connectToHost(IpServer,8080);
     connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connectedtoserver()));
-    connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(reading_Error()));
+    connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(recived()));
     }
+}
+//daryaft az s bazi
+void ServerOrClient::receivedCardFromBoard()
+{
+
 }
 //client
 void ServerOrClient::connectedtoserver()
@@ -74,15 +60,46 @@ void ServerOrClient::connectedtoserver()
     //c->show();
     //this->hide();
     }
-    //else connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(reading_Error()));
+    else connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(received()));
 }
 //client
-void ServerOrClient::reading_Error()
+void ServerOrClient::received()
+{
+
+}
+
+//client
+/*void ServerOrClient::reading_Error()
 {
     QByteArray data=MyClientSocket->readAll();
     ui->IpServer->clear();
     ui->IpServer->setReadOnly(true);
     ui->IpServer->setText(data);
+}*/
+
+
+
+//server
+void ServerOrClient::on_server_clicked()
+{
+    MyQtServer=new QTcpServer;
+    MyQtServer->setMaxPendingConnections(1);
+    MyQtServer->listen(QHostAddress::Any,8080);
+    ui->Loading->setVisible(true);
+    ui->ShowIp->setVisible(true);
+    ui->client->setVisible(false);
+    ui->server->setVisible(false);
+    ui->label->setVisible(false);
+    ui->label_2->setVisible(false);
+    QLabel *mylabel=ui->Loading;
+    mylabel->lower();
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
+    ui->Loading->setMovie(LoadingG);
+    ui->Loading->setScaledContents(true);
+    ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
+     ui->Loading->setStyleSheet("background-color: brown");
+    LoadingG->start();
+    connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
 }
 //server
 void ServerOrClient::connecting()
@@ -93,8 +110,7 @@ void ServerOrClient::connecting()
     GameServer * m=new GameServer;
     m->show();
     this->hide();
-    connect(MyServerSocket,SIGNAL(readyRead()),m,SLOT(Set()));//send cards
-    //connect(this,&ServerOrClient::SendSocket,m,&GameServer::)
+    //connect(MyServerSocket,SIGNAL(readyRead()),m,SLOT(Set()));//send cards
     //The server needs to send the selected card to the client, so that the client can display it
      }
      else {
@@ -107,5 +123,19 @@ void ServerOrClient::connecting()
 
 }
 
+//Game
+void ServerOrClient::PlayingGame()
+{
+   for(int NumberOfRound=0;NumberOfRound!=7;NumberOfRound++){
+   //dealing
+   Dealing(NumberOfRound);
+   QString ListCardClient="";
+   for(auto it:CardsOfPlayerClient){
+     ListCardClient+=(it->get_Name()+"&"+QString::number(it->get_Number())+"|||");
+   }
+   //send cards to client
+   MyServerSocket->write(ListCardClient.toUtf8());
+   }
+   //************************************************************************
 
-
+}

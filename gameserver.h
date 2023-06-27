@@ -49,7 +49,8 @@ private slots:
 
     void Set(Board _board);//Receiving data from the client
 
-
+signals:
+    void send(int numpush);//send number of the push_button to server
 private:
     Ui::GameServer *ui;
     int NumberOfServer;

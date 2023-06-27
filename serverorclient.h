@@ -14,6 +14,7 @@ class ServerOrClient : public QMainWindow
 
 public:
     explicit ServerOrClient(QWidget *parent = nullptr);
+    void PlayingGame();
     ~ServerOrClient();
 
 private slots:
@@ -22,8 +23,9 @@ private slots:
     void on_client_clicked();
     void connecting();
     void connectedtoserver();
-    void reading_Error();
+    void received();
     void on_IpServer_returnPressed();
+    void receivedCardFromBoard();
 signals:
     void send_error(QByteArray error);
 
@@ -32,6 +34,8 @@ private:
     QTcpServer*MyQtServer;
     QTcpSocket*MyServerSocket;
     QTcpSocket*MyClientSocket;
+    Card PlayerCard_S;
+    Card PlayerCard_C;//Receiving from client
 };
 
 #endif // SERVERORCLIENT_H

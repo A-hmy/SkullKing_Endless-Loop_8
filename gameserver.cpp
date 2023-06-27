@@ -45,7 +45,7 @@ void GameServer::on_Ok_clicked()
 void GameServer::on_card_1_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
-
+       emit send(1);
     }
 }
 
