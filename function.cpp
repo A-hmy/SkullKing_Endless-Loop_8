@@ -31,7 +31,7 @@ void StartGame() {
         _cards.push_back(c);
     }
 }
-void Dealing(int NumberOfRound)
+std::vector<Card> Dealing(int NumberOfRound)
 {
     player->clear_Cards();
     CardsOfPlayerClient.clear();

@@ -1,7 +1,6 @@
 
 #include "serverorclient.h"
 #include "gameserver.h"
-#include "gameclient.h"
 #include "ui_serverorclient.h"
 #include <QMovie>
 int numberOfclient=0;
@@ -43,7 +42,7 @@ void ServerOrClient::on_server_clicked()
     connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
 }
 
-
+//client
 void ServerOrClient::on_client_clicked()
 {
     //Display server IP page
@@ -71,9 +70,9 @@ void ServerOrClient::on_IpServer_returnPressed()
 void ServerOrClient::connectedtoserver()
 {
     if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
-    GameClient *c=new GameClient;
-    c->show();
-    this->hide();
+    //GameClient *c=new GameClient;
+    //c->show();
+    //this->hide();
     }
     //else connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(reading_Error()));
 }

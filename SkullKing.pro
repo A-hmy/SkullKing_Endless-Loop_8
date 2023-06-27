@@ -15,7 +15,6 @@ SOURCES += \
     changeinformation.cpp \
     forgotpassword.cpp \
     function.cpp \
-    gameclient.cpp \
     gameofplayer.cpp \
     gameserver.cpp \
     history.cpp \
@@ -35,7 +34,6 @@ HEADERS += \
     changeinformation.h \
     forgotpassword.h \
     function.h \
-    gameclient.h \
     gameofplayer.h \
     gameserver.h \
     history.h \
@@ -50,7 +48,6 @@ HEADERS += \
 FORMS += \
     changeinformation.ui \
     forgotpassword.ui \
-    gameclient.ui \
     gameserver.ui \
     history.ui \
     mainhistory.ui \
