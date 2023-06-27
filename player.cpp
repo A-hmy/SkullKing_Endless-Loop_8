@@ -34,7 +34,7 @@ QString Player::get_PhoneNumber(){return PhoneNumber;}
 int Player::get_Coin(){return Coin;}
 int Player::get_Win(){return Win;}
 int Player::get_Lose(){return Lose;}
-QVector<GameOfPlayer>Player::get_GamePlayer(){return GamePlayer;}
+//QVector<GameOfPlayer>Player::get_GamePlayer(){return GamePlayer;}
 //std::list<Card>Player::get_cards(){return Cards;}
 /*void Player::set_Cards(Card _card)
 {
@@ -42,6 +42,9 @@ QVector<GameOfPlayer>Player::get_GamePlayer(){return GamePlayer;}
 }*/
 void Player::set_Password(QString _Password){
     Password=_Password;
+}
+GameOfPlayer Player::get_GamePlayer(){
+    return GamePlayer;
 }
 
 /*void Player::clear_Cards()

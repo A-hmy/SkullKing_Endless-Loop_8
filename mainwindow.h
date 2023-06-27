@@ -5,7 +5,7 @@
 extern QVector<Card*> CardsOfPlayerClient;
 extern QVector <Player*> Players;
 extern QVector<Card*>_cards;
-extern Player* player;
+extern Player* player ;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

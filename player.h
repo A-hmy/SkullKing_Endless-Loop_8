@@ -18,8 +18,9 @@ public:
     int get_Coin();
     int get_Win();
     int get_Lose();
-    QVector<GameOfPlayer>get_GamePlayer();
+    //QVector<GameOfPlayer>get_GamePlayer();
     //std::list<Card>get_cards();
+    GameOfPlayer get_GamePlayer();
     void set_GamePlayer(QVector<GameOfPlayer>);
     //void set_Cards(Card);
     void set_Password(QString);
@@ -34,7 +35,8 @@ private:
      int Coin;
      int Win;
      int Lose;
-     QVector<GameOfPlayer> GamePlayer;
+     //QVector<GameOfPlayer> GamePlayer;
+     GameOfPlayer GamePlayer;
      //std::list<Card>Cards;
 
 };
