@@ -5,6 +5,7 @@
 #include "ui_serverorclient.h"
 #include <QMovie>
 #include"function.h"
+#include<QMessageBox>
 int numberOfclient=0;
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
@@ -21,70 +22,13 @@ ServerOrClient::~ServerOrClient()
 {
     delete ui;
 }
-
-
-//client
-void ServerOrClient::on_client_clicked()
-{
-    //Display server IP page
-    ui->IpServer->setVisible(true);
-    /*if(!ui->IpServer->text().isEmpty()){
-    QString IpServer=ui->IpServer->text();
-    MyClientSocket=new QTcpSocket;
-    MyClientSocket->connectToHost(IpServer,8080);
-    connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connectedtoserver()));
-    }*/
-
-}
-//client
-void ServerOrClient::on_IpServer_returnPressed()
-{
-    if(!ui->IpServer->text().isEmpty()){
-    QString IpServer=ui->IpServer->text();
-    MyClientSocket=new QTcpSocket;
-    MyClientSocket->connectToHost(IpServer,8080);
-    connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connectedtoserver()));
-    connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(recived()));
-    }
-}
-//daryaft az s bazi
-void ServerOrClient::receivedCardFromBoard()
-{
-
-}
-//client
-void ServerOrClient::connectedtoserver()
-{
-    if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
-    //GameClient *c=new GameClient;
-    //c->show();
-    //this->hide();
-    }
-    else connect(MyClientSocket,SIGNAL(readyRead()),this,SLOT(received()));
-}
-//client
-void ServerOrClient::received()
-{
-
-}
-
-//client
-/*void ServerOrClient::reading_Error()
-{
-    QByteArray data=MyClientSocket->readAll();
-    ui->IpServer->clear();
-    ui->IpServer->setReadOnly(true);
-    ui->IpServer->setText(data);
-}*/
-
-
-
 //server
 void ServerOrClient::on_server_clicked()
 {
     MyQtServer=new QTcpServer;
-    MyQtServer->setMaxPendingConnections(1);
-    MyQtServer->listen(QHostAddress::Any,8080);
+    MyQtServer->setMaxPendingConnections(2);
+    MyQtServer->listen(QHostAddress::Any,1205);
+    if(MyQtServer->isListening()){
     ui->Loading->setVisible(true);
     ui->ShowIp->setVisible(true);
     ui->client->setVisible(false);
@@ -100,42 +44,146 @@ void ServerOrClient::on_server_clicked()
      ui->Loading->setStyleSheet("background-color: brown");
     LoadingG->start();
     connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
+    }
+    // if can not listen*********
+    else {
+        QFont Font("Segoe Script",10);
+        QMessageBox* message=new QMessageBox;
+        message->setFont(Font);
+        message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
+        message->setText("Not listening");
+        QPixmap pixmap(":/new/prefix1/Picture/iconQMessageBox.png");
+        message->setIconPixmap(pixmap);
+        message->setWindowFlags(Qt::FramelessWindowHint);
+        message->show();
+        message->exec();
+    }
 }
 //server
 void ServerOrClient::connecting()
 {
-     if(numberOfclient == 0){
-    MyServerSocket=MyQtServer->nextPendingConnection();
-     numberOfclient++;
-    GameServer * m=new GameServer;
-    m->show();
+    if(MyQtServer->hasPendingConnections()){
+    if(numberOfclient <2){
+    QTcpSocket *socket=MyQtServer->nextPendingConnection();
+    MyServerSocket.insert(MyQtServer->nextPendingConnection());
+    connect(socket, &QTcpSocket::readyRead, this, &ServerOrClient::readSocket);
+    connect(socket, &QTcpSocket::disconnected, this, &ServerOrClient::discardSocket);
+    connect(socket, &QAbstractSocket::errorOccurred, this, &ServerOrClient::displayError);
+    numberOfclient++;
     this->hide();
-    //connect(MyServerSocket,SIGNAL(readyRead()),m,SLOT(Set()));//send cards
-    //The server needs to send the selected card to the client, so that the client can display it
+    }
      }
-     else {
+    else {
              QTcpSocket* socket = MyQtServer->nextPendingConnection();
              QString message = "Server is busy";
              socket->write(message.toUtf8());
              socket->waitForBytesWritten();
              socket->close();
-         }
+      }
 
 }
-
-//Game
-void ServerOrClient::PlayingGame()
+//server
+void ServerOrClient::readSocket()
 {
-   for(int NumberOfRound=0;NumberOfRound!=7;NumberOfRound++){
-   //dealing
-   Dealing(NumberOfRound);
-   QString ListCardClient="";
-   for(auto it:CardsOfPlayerClient){
-     ListCardClient+=(it->get_Name()+"&"+QString::number(it->get_Number())+"|||");
-   }
-   //send cards to client
-   MyServerSocket->write(ListCardClient.toUtf8());
-   }
-   //************************************************************************
+    QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
+    QByteArray buffer;
+    QDataStream socketStream(socket);
+    socketStream.setVersion(QDataStream::Qt_5_15);
+    socketStream.startTransaction();
+    socketStream >> buffer;
+//    if(!socketStream.commitTransaction())
+//    {
+//        QString message = QString("%1 :: Waiting for more data to come..").arg(socket->socketDescriptor());
+//        emit newMessage(message);
+//        return;
+//    }
 
+    QString header = buffer.mid(0,128);
+    QString fileType = header.split(",")[0].split(":")[1];
+
+    buffer = buffer.mid(128);
+
+    /*if(fileType=="attachment"){
+        QString fileName = header.split(",")[1].split(":")[1];
+        QString ext = fileName.split(".")[1];
+        QString size = header.split(",")[2].split(":")[1].split(";")[0];
+
+        if (QMessageBox::Yes == QMessageBox::question(this, "QTCPServer", QString("You are receiving an attachment from sd:%1 of size: %2 bytes, called %3. Do you want to accept it?").arg(socket->socketDescriptor()).arg(size).arg(fileName)))
+        {
+            QString filePath = QFileDialog::getSaveFileName(this, tr("Save File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/"+fileName, QString("File (*.%1)").arg(ext));
+
+            QFile file(filePath);
+            if(file.open(QIODevice::WriteOnly)){
+                file.write(buffer);
+                QString message = QString("INFO :: Attachment from sd:%1 successfully stored on disk under the path %2").arg(socket->socketDescriptor()).arg(QString(filePath));
+                emit newMessage(message);
+            }else
+                QMessageBox::critical(this,"QTCPServer", "An error occurred while trying to write the attachment.");
+        }else{
+            QString message = QString("INFO :: Attachment from sd:%1 discarded").arg(socket->socketDescriptor());
+            emit newMessage(message);
+        }*/
+    //}else
+    if(fileType=="message"){
+        //QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
+        //emit newMessage(message);
+    }
 }
+//server
+void ServerOrClient::discardSocket()
+{
+    QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
+    QSet<QTcpSocket*>::iterator it = MyServerSocket.find(socket);
+    if (it != MyServerSocket.end()){
+        MyServerSocket.remove(*it);
+    }
+    socket->deleteLater();
+}
+//server change QMessageBox?!!!!!!!!!!!!!!!!!!
+void ServerOrClient::displayError(QAbstractSocket::SocketError socketError)
+{
+    switch (socketError) {
+        case QAbstractSocket::RemoteHostClosedError:
+        break;
+        case QAbstractSocket::HostNotFoundError:
+            QMessageBox::information(this, "QTCPServer", "The host was not found. Please check the host name and port settings.");
+        break;
+        case QAbstractSocket::ConnectionRefusedError:
+            QMessageBox::information(this, "QTCPServer", "The connection was refused by the peer. Make sure QTCPServer is running, and check that the host name and port settings are correct.");
+        break;
+        default:
+            QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+            QMessageBox::information(this, "QTCPServer", QString("The following error occurred: %1.").arg(socket->errorString()));
+        break;
+    }
+}
+//server when clicked pushbutton
+// this function is called in read all
+void ServerOrClient::sendMessage(QTcpSocket *socket)
+{
+    if(socket)
+    {
+        if(socket->isOpen())
+        {
+            //QString str = ui->lineEdit_message->text();
+
+//            QDataStream socketStream(socket);
+//            socketStream.setVersion(QDataStream::Qt_5_15);
+
+//            QByteArray header;
+//            header.prepend(QString("fileType:message,fileName:null,fileSize:%1;").arg(str.size()).toUtf8());
+//            header.resize(128);
+
+//            //QByteArray byteArray = str.toUtf8();
+//            byteArray.prepend(header);
+
+//            socketStream.setVersion(QDataStream::Qt_5_15);
+//            socketStream << byteArray;
+        }
+        else
+            QMessageBox::critical(this,"QTCPServer","Socket doesn't seem to be opened");
+    }
+    else
+        QMessageBox::critical(this,"QTCPServer","Not connected");
+}
+

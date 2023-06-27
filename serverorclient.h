@@ -20,22 +20,27 @@ public:
 private slots:
 
     void on_server_clicked();
-    void on_client_clicked();
+    //void on_client_clicked();
     void connecting();
-    void connectedtoserver();
-    void received();
-    void on_IpServer_returnPressed();
-    void receivedCardFromBoard();
+    //void connectedtoserver();
+    //void received();
+    //void on_IpServer_returnPressed();
+    //void receivedCardFromBoard();
+    void readSocket();
+    void discardSocket();
+    void displayError(QAbstractSocket::SocketError socketError);
+    void sendMessage(QTcpSocket* socket);
 signals:
     void send_error(QByteArray error);
 
 private:
     Ui::ServerOrClient *ui;
     QTcpServer*MyQtServer;
-    QTcpSocket*MyServerSocket;
-    QTcpSocket*MyClientSocket;
-    Card PlayerCard_S;
-    Card PlayerCard_C;//Receiving from client
+    //QTcpSocket*MyServerSocket;
+    //QTcpSocket*MyClientSocket;
+     QSet<QTcpSocket*> MyServerSocket;
+    //Card PlayerCard_S;
+    //Card PlayerCard_C;//Receiving from client
 };
 
 #endif // SERVERORCLIENT_H
