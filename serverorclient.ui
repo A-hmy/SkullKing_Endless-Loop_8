@@ -131,19 +131,19 @@ border-radius:10px;
      <rect>
       <x>210</x>
       <y>460</y>
-      <width>400</width>
+      <width>300</width>
       <height>50</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>400</width>
+      <width>300</width>
       <height>50</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>400</width>
+      <width>300</width>
       <height>50</height>
      </size>
     </property>
@@ -239,6 +239,40 @@ border-radius:10px;
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="Ok">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>460</y>
+      <width>90</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string>Ok</string>
+    </property>
+   </widget>
    <zorder>label_2</zorder>
    <zorder>label</zorder>
    <zorder>server</zorder>
@@ -246,6 +280,7 @@ border-radius:10px;
    <zorder>IpServer</zorder>
    <zorder>ShowIp</zorder>
    <zorder>Loading</zorder>
+   <zorder>Ok</zorder>
   </widget>
  </widget>
  <resources/>

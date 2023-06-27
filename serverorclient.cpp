@@ -16,6 +16,7 @@ ServerOrClient::ServerOrClient(QWidget *parent) :
     ui->IpServer->setVisible(false);
     ui->ShowIp->setVisible(false);
     ui->Loading->setVisible(false);
+    ui->Ok->setVisible(false);
 }
 
 ServerOrClient::~ServerOrClient()
@@ -41,7 +42,7 @@ void ServerOrClient::on_server_clicked()
     ui->Loading->setMovie(LoadingG);
     ui->Loading->setScaledContents(true);
     ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
-     ui->Loading->setStyleSheet("background-color: brown");
+    ui->Loading->setStyleSheet("background-color: brown");
     LoadingG->start();
     connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
     }
@@ -82,7 +83,7 @@ void ServerOrClient::connecting()
       }
 
 }
-//server
+//server (read)
 void ServerOrClient::readSocket()
 {
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
@@ -129,7 +130,7 @@ void ServerOrClient::readSocket()
         //emit newMessage(message);
     }
 }
-//server
+//server(disconnect)
 void ServerOrClient::discardSocket()
 {
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
@@ -185,5 +186,33 @@ void ServerOrClient::sendMessage(QTcpSocket *socket)
     }
     else
         QMessageBox::critical(this,"QTCPServer","Not connected");
+}
+
+
+void ServerOrClient::on_client_clicked()
+{
+    ui->IpServer->setVisible(true);
+    ui->Ok->setVisible(true);
+    if(ui->IpServer->text().isEmpty()){
+        ui->IpServer->setPlaceholderText("Enter IP server");
+        //ui->IpServer->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
+    }
+}
+
+
+void ServerOrClient::on_IpServer_returnPressed()
+{
+    if(!ui->IpServer->text().isEmpty()){
+        //emit send_ip(ui->IpServer->text());
+        Ipserver=ui->IpServer->text();
+    }
+}
+
+
+void ServerOrClient::on_Ok_clicked()
+{
+    if(!ui->IpServer->text().isEmpty()){
+       // emit send_ip(ui->IpServer->text());
+    }
 }
 

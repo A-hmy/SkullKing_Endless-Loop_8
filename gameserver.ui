@@ -14,7 +14,7 @@
    <string>Skull King</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border-image: url(:/new/prefix1/Picture/background.png);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -37,6 +37,9 @@
       <width>160</width>
       <height>200</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
      <string/>
@@ -62,6 +65,10 @@
       <width>160</width>
       <height>200</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
      <string/>
@@ -595,6 +602,58 @@ font: 9pt &quot;Segoe Script&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="background">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>1031</width>
+      <height>691</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/Picture/background.png);</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Loading">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>1031</width>
+      <height>691</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>background</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>card_1</zorder>
+   <zorder>card_2</zorder>
+   <zorder>card_3</zorder>
+   <zorder>card_4</zorder>
+   <zorder>card_5</zorder>
+   <zorder>card_6</zorder>
+   <zorder>card_7</zorder>
+   <zorder>card_8</zorder>
+   <zorder>card_9</zorder>
+   <zorder>card_10</zorder>
+   <zorder>card_11</zorder>
+   <zorder>card_12</zorder>
+   <zorder>card_13</zorder>
+   <zorder>card_14</zorder>
+   <zorder>NumberOfPredict</zorder>
+   <zorder>lablePredict</zorder>
+   <zorder>Ok</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>Loading</zorder>
   </widget>
  </widget>
  <resources/>

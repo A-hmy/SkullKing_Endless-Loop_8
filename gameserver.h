@@ -16,10 +16,11 @@ public:
     explicit GameServer(QWidget *parent = nullptr);
     ~GameServer();
     void PlayingGame();
+
 private slots:
     void on_Ok_clicked();
 
-    void on_card_1_clicked();
+   void on_card_1_clicked();
 
     void on_card_2_clicked();
 
@@ -49,10 +50,14 @@ private slots:
 
     void Set(Board _board);//Receiving data from the client
 
+    void connect();
+
+    void discardSocket();
 signals:
     void send(int numpush);//send number of the push_button to server
 private:
     Ui::GameServer *ui;
+    QTcpSocket* MyClientSocket;
     int NumberOfServer;
     int NumberOfClient;//Receiving from client
     Card PlayerCard_S;
