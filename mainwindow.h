@@ -2,12 +2,6 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include "player.h"
-extern int s_or_c;
-extern QVector<Card*> CardsOfPlayerClient;//card client
-extern QVector <Player*> Players;// All user
-extern QVector<Card*>_cards;//All cards
-extern Player* player;
-extern int numberOfclient;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

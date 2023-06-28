@@ -2,7 +2,6 @@
 #define CHANGEINFORMATION_H
 
 #include <QWidget>
-
 namespace Ui {
 class ChangeInformation;
 }

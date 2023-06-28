@@ -1,5 +1,6 @@
 #include "changeinformation.h"
 #include <QRegularExpressionValidator>
+#include "global.h"
 #include "player.h"
 #include "mainwindow.h"
 #include "menu.h"

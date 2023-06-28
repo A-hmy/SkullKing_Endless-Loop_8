@@ -6,6 +6,7 @@
 #include "ui_signup.h"
 #include "player.h"
 #include "mainwindow.h"
+#include "global.h"
 // check kardan tekrari nabodan ramz ....
 Signup::Signup(QWidget *parent) :
     QWidget(parent),

@@ -6,6 +6,8 @@
 #include "QMessageBox"
 #include "forgotpassword.h"
 #include"function.h"
+#include"global.h"
+
 Sign::Sign(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Sign)

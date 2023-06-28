@@ -1,10 +1,12 @@
 #include "function.h"
 #include "mainwindow.h"
 #include<QFile>
+#include"global.h"
 void StartGame() {
     for (int i = 1; i <= 8; i++) {
         Card* c = new Card("Parrot", i, i + 10);
         _cards.push_back(c);
+        Parrot.push_back(c);
     }
     for (int i = 1; i <= 8; i++) {
         Card* c = new Card("Map", i, i + 10);

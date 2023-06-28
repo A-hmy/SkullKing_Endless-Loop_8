@@ -2,6 +2,7 @@
 #include "ui_history.h"
 #include "player.h"
 #include "mainwindow.h"
+#include "global.h"
 History::History(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::History)

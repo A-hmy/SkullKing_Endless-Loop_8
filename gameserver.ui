@@ -17,7 +17,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="You">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -46,7 +46,7 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="Opponent">
     <property name="geometry">
      <rect>
       <x>690</x>
@@ -634,7 +634,7 @@ font: 9pt &quot;Segoe Script&quot;;</string>
       <x>0</x>
       <y>0</y>
       <width>1061</width>
-      <height>701</height>
+      <height>711</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -650,7 +650,7 @@ font: 9pt &quot;Segoe Script&quot;;</string>
       <x>0</x>
       <y>0</y>
       <width>1061</width>
-      <height>701</height>
+      <height>711</height>
      </rect>
     </property>
     <property name="text">
@@ -767,8 +767,8 @@ border-radius:10px;
     </item>
    </widget>
    <zorder>background</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
+   <zorder>You</zorder>
+   <zorder>Opponent</zorder>
    <zorder>card_1</zorder>
    <zorder>card_8</zorder>
    <zorder>card_9</zorder>

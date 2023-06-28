@@ -17,6 +17,7 @@ SOURCES += \
     function.cpp \
     gameofplayer.cpp \
     gameserver.cpp \
+    global.cpp \
     history.cpp \
     main.cpp \
     mainhistory.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     function.h \
     gameofplayer.h \
     gameserver.h \
+    global.h \
     history.h \
     mainhistory.h \
     mainwindow.h \

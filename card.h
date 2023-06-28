@@ -1,6 +1,5 @@
 #ifndef CARD_H
 #define CARD_H
-
 #include<QString>
 #include<QPixmap>
 class Card

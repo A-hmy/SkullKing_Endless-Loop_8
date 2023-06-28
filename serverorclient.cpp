@@ -7,6 +7,7 @@
 #include<QMessageBox>
 #include"gameserver.h"
 #include<QDebug>
+#include"global.h"
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ServerOrClient)

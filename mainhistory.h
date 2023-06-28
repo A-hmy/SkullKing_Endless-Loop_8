@@ -2,7 +2,6 @@
 #define MAINHISTORY_H
 
 #include <QMainWindow>
-
 namespace Ui {
 class MainHistory;
 }

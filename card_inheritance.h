@@ -1,6 +1,7 @@
 #ifndef CARD_INHERITANCE_H
 #define CARD_INHERITANCE_H
 #include "card.h"
+
 class Card_Inheritance
 {
 public:

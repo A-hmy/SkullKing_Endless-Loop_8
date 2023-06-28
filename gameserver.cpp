@@ -9,6 +9,7 @@
 #include<QHostInfo>
 #include<serverorclient.h>
 #include<QMessageBox>
+#include "global.h"
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
@@ -68,13 +69,12 @@ void GameServer::connectt()
 {
     if(s_or_c==0){
         if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
-            //hide loading**********
             ui->Loading->hide();
             ui->OKip->setVisible(false);
             ui->IpServer->setVisible(false);
+            //MyClientSocket->write("Client connected");
+            //MyClientSocket->waitForBytesWritten(-1);
             sendMessage("Client connected");
-           // MyClientSocket->write("Client connected");
-           // MyClientSocket->waitForBytesWritten(-1);
     }
     }
 }
@@ -105,6 +105,7 @@ void GameServer::readSocket()
           if(message=="Client connected"){
               ui->YourIp->hide();
               ui->Loading->hide();
+              // function Game**************************************************************
           }
    }
 
@@ -222,7 +223,6 @@ void GameServer::on_card_14_clicked()
 
     }
 }
-
 
 void GameServer::on_OKip_clicked()
 {
