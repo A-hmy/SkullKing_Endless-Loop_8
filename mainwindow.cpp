@@ -5,7 +5,7 @@ QVector <Player*> Players;
 QVector<Card*>_cards;
 Player* player;
 QVector<Card*> CardsOfPlayerClient;
-QString Ipserver;
+int s_or_c;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

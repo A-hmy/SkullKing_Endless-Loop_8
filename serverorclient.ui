@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>190</y>
+      <y>200</y>
       <width>400</width>
       <height>200</height>
      </rect>
@@ -60,7 +60,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>340</y>
+      <y>390</y>
       <width>400</width>
       <height>50</height>
      </rect>
@@ -95,7 +95,7 @@ border-radius:10px;
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>400</y>
+      <y>470</y>
       <width>400</width>
       <height>50</height>
      </rect>
@@ -126,103 +126,6 @@ border-radius:10px;
      <string>Client</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="IpServer">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>460</y>
-      <width>300</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>300</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>300</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;
-</string>
-    </property>
-    <property name="placeholderText">
-     <string>Enter Server IP address</string>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="ShowIp">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>520</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;
-</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>Your ip:</string>
-     </property>
-     <property name="font">
-      <font>
-       <family>Segoe Script</family>
-       <pointsize>10</pointsize>
-       <italic>true</italic>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="background">
-      <brush brushstyle="NoBrush">
-       <color alpha="255">
-        <red>85</red>
-        <green>0</green>
-        <blue>127</blue>
-       </color>
-      </brush>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="Loading">
-    <property name="geometry">
-     <rect>
-      <x>4</x>
-      <y>1</y>
-      <width>791</width>
-      <height>591</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>791</width>
-      <height>591</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>791</width>
-      <height>591</height>
-     </size>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -239,48 +142,10 @@ border-radius:10px;
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="Ok">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>460</y>
-      <width>90</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>90</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>90</width>
-      <height>50</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>Ok</string>
-    </property>
-   </widget>
    <zorder>label_2</zorder>
    <zorder>label</zorder>
    <zorder>server</zorder>
    <zorder>client</zorder>
-   <zorder>IpServer</zorder>
-   <zorder>ShowIp</zorder>
-   <zorder>Loading</zorder>
-   <zorder>Ok</zorder>
   </widget>
  </widget>
  <resources/>

@@ -605,31 +605,140 @@ font: 9pt &quot;Segoe Script&quot;;</string>
    <widget class="QLabel" name="background">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1031</width>
-      <height>691</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1061</width>
+      <height>701</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/background.png);</string>
+     <string notr="true">border-image: url(:/new/prefix1/Picture/backgame.jpg);</string>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="Loading">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1031</width>
-      <height>691</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1061</width>
+      <height>701</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
+   </widget>
+   <widget class="QPushButton" name="Ok_2">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>530</y>
+      <width>90</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string>Ok</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="IpServer">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>530</y>
+      <width>300</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>300</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>300</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
+</string>
+    </property>
+    <property name="placeholderText">
+     <string>Enter Server IP address</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="YourIp">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>590</y>
+      <width>400</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255));
+font: 15pt &quot;Segoe UI&quot;;
+font: 9pt &quot;Segoe Script&quot;;
+border-radius:10px;
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Your Ip:</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe Script</family>
+       <pointsize>13</pointsize>
+      </font>
+     </property>
+    </item>
    </widget>
    <zorder>background</zorder>
    <zorder>label</zorder>
@@ -654,6 +763,9 @@ font: 9pt &quot;Segoe Script&quot;;</string>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
    <zorder>Loading</zorder>
+   <zorder>Ok_2</zorder>
+   <zorder>IpServer</zorder>
+   <zorder>YourIp</zorder>
   </widget>
  </widget>
  <resources/>
