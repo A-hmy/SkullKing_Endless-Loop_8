@@ -82,7 +82,7 @@ void GameServer::discardSocket()
     //loading gif**************
     //MyClientSocket->deleteLater();
     //MyClientSocket=nullptr;
-    MyClientSocket->connectToHost(Ipserver,1204);
+    MyClientSocket->connectToHost(Ipserver,1205);
     QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
 }
 
@@ -218,7 +218,7 @@ void GameServer::on_card_14_clicked()
 }
 void GameServer::on_Ok_2_clicked()
 {
-   MyClientSocket->connectToHost(Ipserver,1204);
+   MyClientSocket->connectToHost(Ipserver,1205);
    while(MyClientSocket->waitForConnected()){
        if(s_or_c==0){
        if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
@@ -234,7 +234,7 @@ void GameServer::on_OKip_clicked()
 {
     if(!ui->IpServer->text().isEmpty()){
         Ipserver=ui->IpServer->text();
-        MyClientSocket->connectToHost(Ipserver,8080);
+        MyClientSocket->connectToHost(Ipserver,1205);
         //connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connectt()));
     }
     else
