@@ -6,6 +6,7 @@
 #include"function.h"
 #include<QMessageBox>
 #include"gameserver.h"
+#include<QDebug>
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ServerOrClient)
@@ -51,7 +52,7 @@ void ServerOrClient::connecting()
     if(MyQtServer->hasPendingConnections()){
     if(numberOfclient <2){
     QTcpSocket *socket=MyQtServer->nextPendingConnection();
-    MyServerSocket.insert(MyQtServer->nextPendingConnection());
+    MyServerSocket.insert(socket);
     connect(socket, &QTcpSocket::readyRead, this, &ServerOrClient::readSocket);
     connect(socket, &QTcpSocket::disconnected, this, &ServerOrClient::discardSocket);
     connect(socket, &QAbstractSocket::errorOccurred, this, &ServerOrClient::displayError);
@@ -85,7 +86,7 @@ void ServerOrClient::readSocket()
         foreach(QTcpSocket * socket2,MyServerSocket){
             if(socket->socketDescriptor()!=socket2->socketDescriptor()){
                 sendMessage(socket2,message);
-                //break;
+                break;
             }
         }
         }
@@ -149,8 +150,8 @@ void ServerOrClient::sendMessage(QTcpSocket *socket,QString message)
 }
 void ServerOrClient::on_client_clicked()
 {
-    GameServer * Game=new GameServer;
     s_or_c=0;//client=0
+    GameServer * Game=new GameServer;
     Game->show();
     this->hide();
 }
