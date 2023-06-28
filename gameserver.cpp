@@ -23,7 +23,7 @@ GameServer::GameServer(QWidget *parent) :
     QAbstractSocket::connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
     QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
     //Loading Gif
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/gifloading.gif");
     ui->Loading->setMovie(LoadingG);
     ui->Loading->setScaledContents(true);
     ui->Loading->setAttribute(Qt::WA_StyledBackground, true);

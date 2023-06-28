@@ -605,30 +605,30 @@ font: 9pt &quot;Segoe Script&quot;;</string>
    <widget class="QLabel" name="background">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1031</width>
-      <height>691</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1061</width>
+      <height>701</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/background.png);</string>
+     <string notr="true">border-image: url(:/new/prefix1/Picture/backgame.jpg);</string>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="Loading">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1031</width>
-      <height>691</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1061</width>
+      <height>701</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="Ok_2">
