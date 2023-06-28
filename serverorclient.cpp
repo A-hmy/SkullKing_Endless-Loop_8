@@ -74,7 +74,6 @@ void ServerOrClient::connecting()
              socket->waitForBytesWritten();
              socket->close();
       }
-
 }
 //server (read)
 void ServerOrClient::readSocket()
@@ -183,8 +182,8 @@ void ServerOrClient::sendMessage(QTcpSocket *socket)
 void ServerOrClient::on_client_clicked()
 {
     GameServer * Game=new GameServer;
+    s_or_c=0;//client=0
     Game->show();
     this->hide();
-    s_or_c=0;//client=0
 }
 

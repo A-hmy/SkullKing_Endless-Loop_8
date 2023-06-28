@@ -20,8 +20,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>341</x>
-      <y>62</y>
+      <x>180</x>
+      <y>70</y>
       <width>160</width>
       <height>200</height>
      </rect>
@@ -39,7 +39,8 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 0, 0);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -48,8 +49,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>508</x>
-      <y>61</y>
+      <x>690</x>
+      <y>70</y>
       <width>160</width>
       <height>200</height>
      </rect>
@@ -67,8 +68,8 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-background-color: rgb(0, 0, 0);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -77,8 +78,8 @@ background-color: rgb(0, 0, 0);</string>
    <widget class="QPushButton" name="card_1">
     <property name="geometry">
      <rect>
-      <x>188</x>
-      <y>323</y>
+      <x>100</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -96,17 +97,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_2">
     <property name="geometry">
      <rect>
-      <x>285</x>
-      <y>323</y>
+      <x>780</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -124,17 +126,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_3">
     <property name="geometry">
      <rect>
-      <x>382</x>
-      <y>323</y>
+      <x>740</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -152,17 +155,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_4">
     <property name="geometry">
      <rect>
-      <x>479</x>
-      <y>323</y>
+      <x>690</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -180,17 +184,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_5">
     <property name="geometry">
      <rect>
-      <x>576</x>
-      <y>323</y>
+      <x>640</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -208,17 +213,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_6">
     <property name="geometry">
      <rect>
-      <x>673</x>
-      <y>323</y>
+      <x>590</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -236,17 +242,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_7">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>323</y>
+      <x>540</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -264,17 +271,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_8">
     <property name="geometry">
      <rect>
-      <x>188</x>
-      <y>450</y>
+      <x>150</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -292,17 +300,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_9">
     <property name="geometry">
      <rect>
-      <x>285</x>
-      <y>450</y>
+      <x>210</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -320,17 +329,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_10">
     <property name="geometry">
      <rect>
-      <x>382</x>
-      <y>450</y>
+      <x>270</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -348,17 +358,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_11">
     <property name="geometry">
      <rect>
-      <x>479</x>
-      <y>450</y>
+      <x>320</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -376,17 +387,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_12">
     <property name="geometry">
      <rect>
-      <x>576</x>
-      <y>450</y>
+      <x>380</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -404,17 +416,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_13">
     <property name="geometry">
      <rect>
-      <x>673</x>
-      <y>450</y>
+      <x>430</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -432,17 +445,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="card_14">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>450</y>
+      <x>490</x>
+      <y>510</y>
       <width>90</width>
       <height>120</height>
      </rect>
@@ -460,17 +474,18 @@ background-color: rgb(0, 0, 0);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="NumberOfPredict">
     <property name="geometry">
      <rect>
-      <x>605</x>
-      <y>581</y>
+      <x>590</x>
+      <y>640</y>
       <width>180</width>
       <height>50</height>
      </rect>
@@ -493,7 +508,8 @@ background-color: rgb(0, 0, 0);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(254, 201, 133, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -502,8 +518,8 @@ background-color: rgb(0, 0, 0);</string>
    <widget class="QLabel" name="lablePredict">
     <property name="geometry">
      <rect>
-      <x>206</x>
-      <y>581</y>
+      <x>190</x>
+      <y>640</y>
       <width>391</width>
       <height>50</height>
      </rect>
@@ -525,6 +541,10 @@ background-color: rgb(0, 0, 0);</string>
       <family>Segoe Script</family>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(254, 201, 133, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
+    </property>
     <property name="text">
      <string>   predict number of sets you are going to win:</string>
     </property>
@@ -532,8 +552,8 @@ background-color: rgb(0, 0, 0);</string>
    <widget class="QPushButton" name="Ok">
     <property name="geometry">
      <rect>
-      <x>792</x>
-      <y>581</y>
+      <x>780</x>
+      <y>640</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -558,6 +578,10 @@ background-color: rgb(0, 0, 0);</string>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(254, 201, 133, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;</string>
+    </property>
     <property name="text">
      <string>Ok</string>
     </property>
@@ -565,14 +589,15 @@ background-color: rgb(0, 0, 0);</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>341</x>
-      <y>269</y>
+      <x>180</x>
+      <y>280</y>
       <width>160</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
 font: 9pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="text">
@@ -585,14 +610,15 @@ font: 9pt &quot;Segoe Script&quot;;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>270</y>
+      <x>690</x>
+      <y>280</y>
       <width>160</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/prefix1/Picture/card pushputton.png);
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
 font: 9pt &quot;Segoe Script&quot;;</string>
     </property>
     <property name="text">
@@ -631,11 +657,11 @@ font: 9pt &quot;Segoe Script&quot;;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="Ok_2">
+   <widget class="QPushButton" name="OKip">
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>530</y>
+      <y>580</y>
       <width>90</width>
       <height>50</height>
      </rect>
@@ -669,7 +695,7 @@ border-radius:10px;</string>
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>530</y>
+      <y>580</y>
       <width>300</width>
       <height>50</height>
      </rect>
@@ -704,7 +730,7 @@ border-radius:10px;
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>590</y>
+      <y>640</y>
       <width>400</width>
       <height>40</height>
      </rect>
@@ -744,12 +770,6 @@ border-radius:10px;
    <zorder>label</zorder>
    <zorder>label_2</zorder>
    <zorder>card_1</zorder>
-   <zorder>card_2</zorder>
-   <zorder>card_3</zorder>
-   <zorder>card_4</zorder>
-   <zorder>card_5</zorder>
-   <zorder>card_6</zorder>
-   <zorder>card_7</zorder>
    <zorder>card_8</zorder>
    <zorder>card_9</zorder>
    <zorder>card_10</zorder>
@@ -762,10 +782,16 @@ border-radius:10px;
    <zorder>Ok</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
+   <zorder>card_7</zorder>
+   <zorder>card_6</zorder>
+   <zorder>card_5</zorder>
+   <zorder>card_4</zorder>
+   <zorder>card_3</zorder>
+   <zorder>card_2</zorder>
    <zorder>Loading</zorder>
-   <zorder>Ok_2</zorder>
-   <zorder>IpServer</zorder>
    <zorder>YourIp</zorder>
+   <zorder>OKip</zorder>
+   <zorder>IpServer</zorder>
   </widget>
  </widget>
  <resources/>

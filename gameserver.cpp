@@ -13,15 +13,15 @@ GameServer::GameServer(QWidget *parent) :
     ui(new Ui::GameServer)
 {
     ui->setupUi(this);
-    ui->Ok_2->setVisible(false);
+    ui->OKip->setVisible(false);
     ui->IpServer->setVisible(false);
     ui->YourIp->setVisible(false);
     setWindowFlags(Qt::FramelessWindowHint);
-    MyClientSocket = new QTcpSocket(this);
-    QAbstractSocket::connect(MyClientSocket, &QTcpSocket::readyRead, this, &GameServer::readSocket);
-    QAbstractSocket::connect(MyClientSocket, &QTcpSocket::disconnected, this, &GameServer::discardSocket);
-    QAbstractSocket::connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
-    QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
+    MyClientSocket = new QTcpSocket;
+    connect(MyClientSocket, &QTcpSocket::readyRead, this, &GameServer::readSocket);
+    connect(MyClientSocket, &QTcpSocket::disconnected, this, &GameServer::discardSocket);
+    connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
+    connect(MyClientSocket,&QTcpSocket::connected,this,&GameServer::connectt);
     //Loading Gif
     QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/gifloading.gif");
     ui->Loading->setMovie(LoadingG);
@@ -49,14 +49,9 @@ GameServer::GameServer(QWidget *parent) :
     //client
     else if(s_or_c==0) {
         ui->IpServer->setVisible(true);
-        ui->Ok_2->setVisible(true);
-        if(!ui->IpServer->text().isEmpty()){
-            Ipserver=ui->IpServer->text();
-        }
-        else
-            ui->IpServer->setText("Enter IP");
+        ui->OKip->setVisible(true);
     }
-    MyClientSocket->connectToHost(Ipserver,1204);
+    //MyClientSocket->connectToHost(Ipserver,1204);
 
 }
 
@@ -68,10 +63,15 @@ GameServer::~GameServer()
 }
 
 
-void GameServer::connect()
+void GameServer::connectt()
 {
-    if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
-        //hide loading**********
+    if(s_or_c==0){
+        if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
+            //hide loading**********
+            ui->Loading->hide();
+            ui->OKip->setVisible(false);
+            ui->IpServer->setVisible(false);
+    }
     }
 }
 
@@ -117,30 +117,6 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
         break;
     }*/
 }
-
-/*void GameServer::ShowServer()
-{
-    QLabel *mylabel=ui->Loading;
-    mylabel->lower();
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
-    ui->Loading->setMovie(LoadingG);
-    ui->Loading->setScaledContents(true);
-    ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
-    ui->Loading->setStyleSheet("background-color: brown");
-    LoadingG->start();
-    ui->Ok_2->setVisible(true);
-    ui->IpServer->setVisible(true);
-    foreach(const QHostAddress &address, QHostInfo::fromName(QHostInfo::localHostName()).addresses()) {
-        if(address.protocol() == QAbstractSocket::IPv4Protocol) {
-            Ipserver = address.toString();
-            break;
-        }
-    }
-    if(!Ipserver.isEmpty()) {
-      ui->IpServer->setText(Ipserver);
-    }
-
-}*/
 
 void GameServer::on_card_1_clicked()
 {
@@ -238,7 +214,28 @@ void GameServer::on_card_14_clicked()
 
     }
 }
+void GameServer::on_Ok_2_clicked()
+{
+   MyClientSocket->connectToHost(Ipserver,1204);
+   while(MyClientSocket->waitForConnected()){
+       if(s_or_c==0){
+       if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
+           //hide loading**********
+           ui->Loading->setVisible(false);
+       }
+       }
+   }
+}
 
 
-
+void GameServer::on_OKip_clicked()
+{
+    if(!ui->IpServer->text().isEmpty()){
+        Ipserver=ui->IpServer->text();
+        MyClientSocket->connectToHost(Ipserver,8080);
+        //connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connectt()));
+    }
+    else
+        ui->IpServer->setPlaceholderText("Enter IP");
+}
 

@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include"board.h"
 #include "qtcpsocket.h"
+#include<QStandardPaths>
+#include<QMetaType>
+#include<QAbstractSocket>
 namespace Ui {
 class GameServer;
 }
@@ -47,7 +50,7 @@ private slots:
 
     void on_card_14_clicked();
 
-    void connect();
+    void connectt();
 
     void discardSocket();
 
@@ -56,10 +59,15 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
 
 
+    void on_Ok_2_clicked();
+
+    void on_OKip_clicked();
+
 private:
     Ui::GameServer *ui;
     QTcpSocket* MyClientSocket;
     QString Ipserver;
+    //int NumberOfClient;
     //int NumberOfServer;
     //int NumberOfClient;//Receiving from client
     //Card PlayerCard_S;
