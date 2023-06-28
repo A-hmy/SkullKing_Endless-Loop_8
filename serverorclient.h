@@ -29,7 +29,7 @@ private slots:
     void readSocket();
     void discardSocket();
     void displayError(QAbstractSocket::SocketError socketError);
-    void sendMessage(QTcpSocket* socket);
+    void sendMessage(QTcpSocket *socket,QString message);
     //void on_client_clicked();
     void on_client_clicked();
 
