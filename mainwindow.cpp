@@ -6,6 +6,7 @@ QVector<Card*>_cards;
 Player* player;
 QVector<Card*> CardsOfPlayerClient;
 int s_or_c;
+int numberOfclient=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

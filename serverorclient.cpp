@@ -1,4 +1,3 @@
-
 #include "serverorclient.h"
 #include "gameserver.h"
 #include "mainwindow.h"
@@ -7,7 +6,6 @@
 #include"function.h"
 #include<QMessageBox>
 #include"gameserver.h"
-int numberOfclient=0;
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ServerOrClient)
@@ -27,12 +25,6 @@ void ServerOrClient::on_server_clicked()
     MyQtServer->setMaxPendingConnections(2);
     MyQtServer->listen(QHostAddress::Any,1205);
     if(MyQtServer->isListening()){
-    //ui->Loading->setVisible(true);
-    //ui->ShowIp->setVisible(true);
-    //ui->client->setVisible(false);
-    //ui->server->setVisible(false);
-    //ui->label->setVisible(false);
-    //ui->label_2->setVisible(false);
     s_or_c=1;//server=1
     GameServer * Game=new GameServer;
     Game->show();
@@ -79,44 +71,25 @@ void ServerOrClient::connecting()
 void ServerOrClient::readSocket()
 {
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
+    QTcpSocket* socket2;
     QByteArray buffer;
+    buffer=socket->readAll();
+    if(buffer=="Client connected"){
+       for(QSet<QTcpSocket*>::Iterator it=MyServerSocket.begin();it!=MyServerSocket.end();it++){
+           if(*it==socket){
+               socket2=*it+1;
+               if(socket2!= MyServerSocket.end()){
+               sendMessage((*it));}
+           }
+       }
+    }
     QDataStream socketStream(socket);
     socketStream.setVersion(QDataStream::Qt_5_15);
     socketStream.startTransaction();
     socketStream >> buffer;
-//    if(!socketStream.commitTransaction())
-//    {
-//        QString message = QString("%1 :: Waiting for more data to come..").arg(socket->socketDescriptor());
-//        emit newMessage(message);
-//        return;
-//    }
-
     QString header = buffer.mid(0,128);
     QString fileType = header.split(",")[0].split(":")[1];
-
     buffer = buffer.mid(128);
-
-    /*if(fileType=="attachment"){
-        QString fileName = header.split(",")[1].split(":")[1];
-        QString ext = fileName.split(".")[1];
-        QString size = header.split(",")[2].split(":")[1].split(";")[0];
-
-        if (QMessageBox::Yes == QMessageBox::question(this, "QTCPServer", QString("You are receiving an attachment from sd:%1 of size: %2 bytes, called %3. Do you want to accept it?").arg(socket->socketDescriptor()).arg(size).arg(fileName)))
-        {
-            QString filePath = QFileDialog::getSaveFileName(this, tr("Save File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/"+fileName, QString("File (*.%1)").arg(ext));
-
-            QFile file(filePath);
-            if(file.open(QIODevice::WriteOnly)){
-                file.write(buffer);
-                QString message = QString("INFO :: Attachment from sd:%1 successfully stored on disk under the path %2").arg(socket->socketDescriptor()).arg(QString(filePath));
-                emit newMessage(message);
-            }else
-                QMessageBox::critical(this,"QTCPServer", "An error occurred while trying to write the attachment.");
-        }else{
-            QString message = QString("INFO :: Attachment from sd:%1 discarded").arg(socket->socketDescriptor());
-            emit newMessage(message);
-        }*/
-    //}else
     if(fileType=="message"){
         //QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
         //emit newMessage(message);

@@ -45,15 +45,15 @@ GameServer::GameServer(QWidget *parent) :
           ui->YourIp->addItem(ip);
           ui->YourIp->setStyleSheet("background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255)); font: 15pt \"Segoe UI\"; font: 15pt \"Segoe Script\"; border-radius: 10px;");
         }
+        MyClientSocket->connectToHost("127.0.0.1",8080);
     }
     //client
     else if(s_or_c==0) {
         ui->IpServer->setVisible(true);
-        ui->OKip->setVisible(true);
+        ui->OKip->setVisible(true);}
     }
-    //MyClientSocket->connectToHost(Ipserver,1204);
 
-}
+
 
 GameServer::~GameServer()
 {
@@ -71,6 +71,8 @@ void GameServer::connectt()
             ui->Loading->hide();
             ui->OKip->setVisible(false);
             ui->IpServer->setVisible(false);
+            MyClientSocket->write("Client connected");
+            MyClientSocket->waitForBytesWritten(-1);
     }
     }
 }
