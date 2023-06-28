@@ -72,8 +72,9 @@ void GameServer::connectt()
             ui->Loading->hide();
             ui->OKip->setVisible(false);
             ui->IpServer->setVisible(false);
-            MyClientSocket->write("Client connected");
-            MyClientSocket->waitForBytesWritten(-1);
+            sendMessage("Client connected");
+           // MyClientSocket->write("Client connected");
+           // MyClientSocket->waitForBytesWritten(-1);
     }
     }
 }
@@ -221,22 +222,7 @@ void GameServer::on_card_14_clicked()
 
     }
 }
-<<<<<<< HEAD
-void GameServer::on_Ok_2_clicked()
-{
-   MyClientSocket->connectToHost(Ipserver,1205);
-   while(MyClientSocket->waitForConnected()){
-       if(s_or_c==0){
-       if(MyClientSocket->state() == QAbstractSocket::ConnectedState){
-           //hide loading**********
-           ui->Loading->setVisible(false);
-       }
-       }
-   }
-}
 
-=======
->>>>>>> e59c1c5a0b7d15450d656907bf2e5dc96301dc4a
 
 void GameServer::on_OKip_clicked()
 {

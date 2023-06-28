@@ -85,7 +85,7 @@ void ServerOrClient::readSocket()
         foreach(QTcpSocket * socket2,MyServerSocket){
             if(socket->socketDescriptor()!=socket2->socketDescriptor()){
                 sendMessage(socket2,message);
-                break;
+                //break;
             }
         }
         }
