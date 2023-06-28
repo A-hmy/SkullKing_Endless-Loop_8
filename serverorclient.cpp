@@ -22,7 +22,7 @@ ServerOrClient::~ServerOrClient()
 void ServerOrClient::on_server_clicked()
 {
     MyQtServer=new QTcpServer;
-    MyQtServer->setMaxPendingConnections(2);
+    //MyQtServer->setMaxPendingConnections(2);
     MyQtServer->listen(QHostAddress::Any,1205);
     if(MyQtServer->isListening()){
     s_or_c=1;//server=1
