@@ -4,19 +4,58 @@
 #include "function.h"
 #include"mainwindow.h"
 #include"QTcpSocket"
+#include<QMovie>
+#include<QHostAddress>
+#include<QHostInfo>
+#include<serverorclient.h>
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::FramelessWindowHint);//remove tool bar.
+    ui->Ok_2->setVisible(false);
+    ui->IpServer->setVisible(false);
+    ui->YourIp->setVisible(false);
+    setWindowFlags(Qt::FramelessWindowHint);
     MyClientSocket = new QTcpSocket(this);
-    //connect(this, &GameServer::newMessage, this, &GameServer::displayMessage);
-    //connect(MyClientSocket, &QTcpSocket::readyRead, this, &GameServer::readSocket);
+    QAbstractSocket::connect(MyClientSocket, &QTcpSocket::readyRead, this, &GameServer::readSocket);
     QAbstractSocket::connect(MyClientSocket, &QTcpSocket::disconnected, this, &GameServer::discardSocket);
-    //connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
+    QAbstractSocket::connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
     QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
-    //Loading Gif!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!??????????????????????????????????????
+    //Loading Gif
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
+    ui->Loading->setMovie(LoadingG);
+    ui->Loading->setScaledContents(true);
+    ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
+    ui->Loading->setStyleSheet("background-color: brown");
+    LoadingG->start();
+    //server
+    if(s_or_c==1){
+        Ipserver="127.0.0.1";
+        ui->YourIp->setVisible(true);
+        foreach(const QHostAddress &address, QHostInfo::fromName(QHostInfo::localHostName()).addresses()) {
+            if(address.protocol() == QAbstractSocket::IPv4Protocol) {
+                Ipserver = address.toString();
+                break;
+            }
+        }
+        if(!Ipserver.isEmpty()) {
+          ui->YourIp->clear();
+          QString ip="Your Ip : "+Ipserver;
+          ui->YourIp->addItem(ip);
+          ui->YourIp->setStyleSheet("background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255)); font: 15pt \"Segoe UI\"; font: 15pt \"Segoe Script\"; border-radius: 10px;");
+        }
+    }
+    //client
+    else if(s_or_c==0) {
+        ui->IpServer->setVisible(true);
+        ui->Ok_2->setVisible(true);
+        if(!ui->IpServer->text().isEmpty()){
+            Ipserver=ui->IpServer->text();
+        }
+        else
+            ui->IpServer->setText("Enter IP");
+    }
     MyClientSocket->connectToHost(Ipserver,1204);
 
 }
@@ -27,6 +66,7 @@ GameServer::~GameServer()
         MyClientSocket->close();
     delete ui;
 }
+
 
 void GameServer::connect()
 {
@@ -44,101 +84,67 @@ void GameServer::discardSocket()
     QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
 }
 
-
-/*void GameServer::readSocket()
+void GameServer::readSocket()
 {
     QByteArray buffer;
-
-    QDataStream socketStream(socket);
+    QDataStream socketStream(MyClientSocket);
     socketStream.setVersion(QDataStream::Qt_5_15);
 
     socketStream.startTransaction();
     socketStream >> buffer;
-
-    if(!socketStream.commitTransaction())
-    {
-        QString message = QString("%1 :: Waiting for more data to come..").arg(socket->socketDescriptor());
-        emit newMessage(message);
-        return;
-    }
-
     QString header = buffer.mid(0,128);
     QString fileType = header.split(",")[0].split(":")[1];
-
     buffer = buffer.mid(128);
-
-    if(fileType=="attachment"){
-        QString fileName = header.split(",")[1].split(":")[1];
-        QString ext = fileName.split(".")[1];
-        QString size = header.split(",")[2].split(":")[1].split(";")[0];
-
-        if (QMessageBox::Yes == QMessageBox::question(this, "QTCPServer", QString("You are receiving an attachment from sd:%1 of size: %2 bytes, called %3. Do you want to accept it?").arg(socket->socketDescriptor()).arg(size).arg(fileName)))
-        {
-            QString filePath = QFileDialog::getSaveFileName(this, tr("Save File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/"+fileName, QString("File (*.%1)").arg(ext));
-
-            QFile file(filePath);
-            if(file.open(QIODevice::WriteOnly)){
-                file.write(buffer);
-                QString message = QString("INFO :: Attachment from sd:%1 successfully stored on disk under the path %2").arg(socket->socketDescriptor()).arg(QString(filePath));
-                emit newMessage(message);
-            }else
-                QMessageBox::critical(this,"QTCPServer", "An error occurred while trying to write the attachment.");
-        }else{
-            QString message = QString("INFO :: Attachment from sd:%1 discarded").arg(socket->socketDescriptor());
-            emit newMessage(message);
-        }
-    }else if(fileType=="message"){
-        QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
-        emit newMessage(message);
+    if(fileType=="message"){
+          // QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
+           //emit newMessage(message);
     }
 }
-*/
-
-
-
-
-void GameServer::on_Ok_clicked()
+//change QMessageBox
+void GameServer::displayError(QAbstractSocket::SocketError socketError)
 {
-    if(ui->NumberOfPredict->text().isEmpty()){
-      ui->NumberOfPredict->setPlaceholderText("❗❗❗❗");
+    /*switch (socketError) {
+        case QAbstractSocket::RemoteHostClosedError:
+        break;
+        case QAbstractSocket::HostNotFoundError:
+            QMessageBox::information(this, "QTCPClient", "The host was not found. Please check the host name and port settings.");
+        break;
+        case QAbstractSocket::ConnectionRefusedError:
+            QMessageBox::information(this, "QTCPClient", "The connection was refused by the peer. Make sure QTCPServer is running, and check that the host name and port settings are correct.");
+        break;
+        default:
+            QMessageBox::information(this, "QTCPClient", QString("The following error occurred: %1.").arg(socket->errorString()));
+        break;
+    }*/
+}
+
+/*void GameServer::ShowServer()
+{
+    QLabel *mylabel=ui->Loading;
+    mylabel->lower();
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
+    ui->Loading->setMovie(LoadingG);
+    ui->Loading->setScaledContents(true);
+    ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
+    ui->Loading->setStyleSheet("background-color: brown");
+    LoadingG->start();
+    ui->Ok_2->setVisible(true);
+    ui->IpServer->setVisible(true);
+    foreach(const QHostAddress &address, QHostInfo::fromName(QHostInfo::localHostName()).addresses()) {
+        if(address.protocol() == QAbstractSocket::IPv4Protocol) {
+            Ipserver = address.toString();
+            break;
         }
-    else{
-       NumberOfServer=ui->NumberOfPredict->text().toInt();
-       // daryaft tedad bord client(NumberOfClient=ui.......)
-       ui->NumberOfPredict->setVisible(false);
-       ui->Ok->setVisible(false);
-       ui->lablePredict->setVisible(false);
-        }
+    }
+    if(!Ipserver.isEmpty()) {
+      ui->IpServer->setText(Ipserver);
+    }
 
-
-}
-
-
-void GameServer::Set(Board _board)
-{
-    PlayerCard_C=_board.get_player2();
-    //PlayerCard_S=_board.get_player1();
-    NumberOfClient=_board.get_NumberOfset_C();//This variable should not be changed
-}
-
-
-
-
-void GameServer::PlayingGame()
-{
-   for(int NumberOfRound=0;NumberOfRound!=7;NumberOfRound++){
-       //dealing
-       Dealing(NumberOfRound);
-
-   }
-
-}
-
+}*/
 
 void GameServer::on_card_1_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
-       emit send(1);
     }
 }
 
@@ -149,14 +155,12 @@ void GameServer::on_card_2_clicked()
     }
 }
 
-
 void GameServer::on_card_3_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
 
     }
 }
-
 
 void GameServer::on_card_4_clicked()
 {
@@ -165,14 +169,12 @@ void GameServer::on_card_4_clicked()
     }
 }
 
-
 void GameServer::on_card_5_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
 
     }
 }
-
 
 void GameServer::on_card_6_clicked()
 {
@@ -181,14 +183,12 @@ void GameServer::on_card_6_clicked()
     }
 }
 
-
 void GameServer::on_card_7_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
 
     }
 }
-
 
 void GameServer::on_card_8_clicked()
 {
@@ -197,14 +197,12 @@ void GameServer::on_card_8_clicked()
     }
 }
 
-
 void GameServer::on_card_9_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
 
     }
 }
-
 
 void GameServer::on_card_10_clicked()
 {
@@ -213,14 +211,12 @@ void GameServer::on_card_10_clicked()
     }
 }
 
-
 void GameServer::on_card_11_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
 
     }
 }
-
 
 void GameServer::on_card_12_clicked()
 {
@@ -229,7 +225,6 @@ void GameServer::on_card_12_clicked()
     }
 }
 
-
 void GameServer::on_card_13_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
@@ -237,15 +232,12 @@ void GameServer::on_card_13_clicked()
     }
 }
 
-
 void GameServer::on_card_14_clicked()
 {
     if(ui->NumberOfPredict->isVisible()){
 
     }
 }
-
-
 
 
 

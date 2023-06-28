@@ -30,15 +30,11 @@ private slots:
     void discardSocket();
     void displayError(QAbstractSocket::SocketError socketError);
     void sendMessage(QTcpSocket* socket);
+    //void on_client_clicked();
     void on_client_clicked();
-
-    void on_IpServer_returnPressed();
-
-    void on_Ok_clicked();
 
 signals:
     void send_error(QByteArray error);
-
 
 private:
     Ui::ServerOrClient *ui;

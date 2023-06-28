@@ -6,6 +6,7 @@
 #include <QMovie>
 #include"function.h"
 #include<QMessageBox>
+#include"gameserver.h"
 int numberOfclient=0;
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
@@ -13,10 +14,6 @@ ServerOrClient::ServerOrClient(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::FramelessWindowHint);
-    ui->IpServer->setVisible(false);
-    ui->ShowIp->setVisible(false);
-    ui->Loading->setVisible(false);
-    ui->Ok->setVisible(false);
 }
 
 ServerOrClient::~ServerOrClient()
@@ -30,20 +27,16 @@ void ServerOrClient::on_server_clicked()
     MyQtServer->setMaxPendingConnections(2);
     MyQtServer->listen(QHostAddress::Any,1205);
     if(MyQtServer->isListening()){
-    ui->Loading->setVisible(true);
-    ui->ShowIp->setVisible(true);
-    ui->client->setVisible(false);
-    ui->server->setVisible(false);
-    ui->label->setVisible(false);
-    ui->label_2->setVisible(false);
-    QLabel *mylabel=ui->Loading;
-    mylabel->lower();
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/load2.gif");
-    ui->Loading->setMovie(LoadingG);
-    ui->Loading->setScaledContents(true);
-    ui->Loading->setAttribute(Qt::WA_StyledBackground, true);
-    ui->Loading->setStyleSheet("background-color: brown");
-    LoadingG->start();
+    //ui->Loading->setVisible(true);
+    //ui->ShowIp->setVisible(true);
+    //ui->client->setVisible(false);
+    //ui->server->setVisible(false);
+    //ui->label->setVisible(false);
+    //ui->label_2->setVisible(false);
+    s_or_c=1;//server=1
+    GameServer * Game=new GameServer;
+    Game->show();
+    this->hide();
     connect(MyQtServer,SIGNAL(newConnection()),this,SLOT(connecting()));
     }
     // if can not listen*********
@@ -187,32 +180,11 @@ void ServerOrClient::sendMessage(QTcpSocket *socket)
     else
         QMessageBox::critical(this,"QTCPServer","Not connected");
 }
-
-
 void ServerOrClient::on_client_clicked()
 {
-    ui->IpServer->setVisible(true);
-    ui->Ok->setVisible(true);
-    if(ui->IpServer->text().isEmpty()){
-        ui->IpServer->setPlaceholderText("Enter IP server");
-        //ui->IpServer->setStyleSheet("background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(191, 152, 95, 255), stop:1 rgba(255, 255, 255, 255));color:red;border-radius:10px");
-    }
-}
-
-
-void ServerOrClient::on_IpServer_returnPressed()
-{
-    if(!ui->IpServer->text().isEmpty()){
-        //emit send_ip(ui->IpServer->text());
-        Ipserver=ui->IpServer->text();
-    }
-}
-
-
-void ServerOrClient::on_Ok_clicked()
-{
-    if(!ui->IpServer->text().isEmpty()){
-       // emit send_ip(ui->IpServer->text());
-    }
+    GameServer * Game=new GameServer;
+    Game->show();
+    this->hide();
+    s_or_c=0;//client=0
 }
 
