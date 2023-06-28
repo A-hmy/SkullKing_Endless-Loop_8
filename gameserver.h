@@ -58,10 +58,9 @@ private slots:
 
     void displayError(QAbstractSocket::SocketError socketError);
 
-
-    void on_Ok_2_clicked();
-
     void on_OKip_clicked();
+
+    void sendMessage(QString message);
 
 private:
     Ui::GameServer *ui;

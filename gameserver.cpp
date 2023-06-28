@@ -8,6 +8,7 @@
 #include<QHostAddress>
 #include<QHostInfo>
 #include<serverorclient.h>
+#include<QMessageBox>
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
@@ -45,7 +46,7 @@ GameServer::GameServer(QWidget *parent) :
           ui->YourIp->addItem(ip);
           ui->YourIp->setStyleSheet("background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(156, 105, 60, 255), stop:1 rgba(255, 255, 255, 255)); font: 15pt \"Segoe UI\"; font: 15pt \"Segoe Script\"; border-radius: 10px;");
         }
-        MyClientSocket->connectToHost("127.0.0.1",8080);
+        MyClientSocket->connectToHost("127.0.0.1",1205);
     }
     //client
     else if(s_or_c==0) {
@@ -92,16 +93,20 @@ void GameServer::readSocket()
     QDataStream socketStream(MyClientSocket);
     socketStream.setVersion(QDataStream::Qt_5_15);
 
-    socketStream.startTransaction();
-    socketStream >> buffer;
-    QString header = buffer.mid(0,128);
-    QString fileType = header.split(",")[0].split(":")[1];
-    buffer = buffer.mid(128);
-    if(fileType=="message"){
-          // QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
+   socketStream.startTransaction();
+   socketStream >> buffer;
+   //QString header = buffer.mid(0,128);
+    //QString fileType = header.split(",")[0].split(":")[1];
+    //buffer = buffer.mid(128);
+   //if(fileType=="message"){
+          QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
            //emit newMessage(message);
-    }
-}
+          if(message=="Client connected"){
+              ui->YourIp->hide();
+              ui->Loading->hide();
+          }
+   }
+
 //change QMessageBox
 void GameServer::displayError(QAbstractSocket::SocketError socketError)
 {
@@ -216,6 +221,7 @@ void GameServer::on_card_14_clicked()
 
     }
 }
+<<<<<<< HEAD
 void GameServer::on_Ok_2_clicked()
 {
    MyClientSocket->connectToHost(Ipserver,1205);
@@ -229,6 +235,8 @@ void GameServer::on_Ok_2_clicked()
    }
 }
 
+=======
+>>>>>>> e59c1c5a0b7d15450d656907bf2e5dc96301dc4a
 
 void GameServer::on_OKip_clicked()
 {
@@ -239,5 +247,34 @@ void GameServer::on_OKip_clicked()
     }
     else
         ui->IpServer->setPlaceholderText("Enter IP");
+}
+
+void GameServer::sendMessage(QString message)
+{
+    if(MyClientSocket)
+    {
+        if(MyClientSocket->isOpen())
+        {
+            //QString str = ui->lineEdit_message->text();
+
+            QDataStream socketStream(MyClientSocket);
+            socketStream.setVersion(QDataStream::Qt_5_15);
+
+            //QByteArray header;
+            //header.prepend(QString("fileType:message,fileName:null,fileSize:%1;").arg(str.size()).toUtf8());
+            //header.resize(128);
+
+            QByteArray byteArray = message.toUtf8();
+            //byteArray.prepend(header);
+
+            socketStream << byteArray;
+
+            //ui->lineEdit_message->clear();
+        }
+        else
+            QMessageBox::critical(this,"QTCPClient","Socket doesn't seem to be opened");
+    }
+    else
+        QMessageBox::critical(this,"QTCPClient","Not connected");
 }
 

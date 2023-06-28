@@ -72,26 +72,24 @@ void ServerOrClient::readSocket()
 {
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
     QByteArray buffer;
-    buffer=socket->readAll();
-    if(buffer=="Client connected"){
-        foreach(QTcpSocket* socket2,MyServerSocket){
-            if(socket2->socketDescriptor()!=socket->socketDescriptor()){
-                sendMessage(socket2);
+    QDataStream socketStream(socket);
+    socketStream.setVersion(QDataStream::Qt_5_15);
+    socketStream.startTransaction();
+    socketStream >> buffer;
+    //QString header = buffer.mid(0,128);
+    //QString fileType = header.split(",")[0].split(":")[1];
+    //if(fileType=="message"){
+        QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
+        //emit newMessage(message);
+        if(message=="Client connected"){
+        foreach(QTcpSocket * socket2,MyServerSocket){
+            if(socket->socketDescriptor()!=socket2->socketDescriptor()){
+                sendMessage(socket2,message);
                 break;
             }
         }
-    }
-//    QDataStream socketStream(socket);
-//    socketStream.setVersion(QDataStream::Qt_5_15);
-//    socketStream.startTransaction();
-//    socketStream >> buffer;
-//    QString header = buffer.mid(0,128);
-//    QString fileType = header.split(",")[0].split(":")[1];
-//    buffer = buffer.mid(128);
-//    if(fileType=="message"){
-//        //QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
-//        //emit newMessage(message);
-//    }
+        }
+    //}
 }
 //server(disconnect)
 void ServerOrClient::discardSocket()
@@ -123,28 +121,25 @@ void ServerOrClient::displayError(QAbstractSocket::SocketError socketError)
 }
 //server when clicked pushbutton
 // this function is called in read all
-void ServerOrClient::sendMessage(QTcpSocket *socket)
+void ServerOrClient::sendMessage(QTcpSocket *socket,QString message)
 {
     if(socket)
     {
         if(socket->isOpen())
         {
-            //QString str = ui->lineEdit_message->text();
+            QDataStream socketStream(socket);
+            socketStream.setVersion(QDataStream::Qt_5_15);
 
-//            QDataStream socketStream(socket);
-//            socketStream.setVersion(QDataStream::Qt_5_15);
+           // QByteArray header;
+            //header.prepend(QString("fileType:message,fileName:null,fileSize:%1;").arg(str.size()).toUtf8());
+            //header.resize(128);
 
-//            QByteArray header;
-//            header.prepend(QString("fileType:message,fileName:null,fileSize:%1;").arg(str.size()).toUtf8());
-//            header.resize(128);
+           // QByteArray byteArray = str.toUtf8();
+            QByteArray byteArray=message.toUtf8();
+            //byteArray.prepend(header);
 
-//            //QByteArray byteArray = str.toUtf8();
-//            byteArray.prepend(header);
-
-//            socketStream.setVersion(QDataStream::Qt_5_15);
-//            socketStream << byteArray;
-            socket->write("Client connected");
-            socket->waitForBytesWritten(-1);
+            socketStream.setVersion(QDataStream::Qt_5_15);
+            socketStream << byteArray;
         }
         else
             QMessageBox::critical(this,"QTCPServer","Socket doesn't seem to be opened");
