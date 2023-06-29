@@ -308,7 +308,8 @@ void GameServer::sendMessage(QString message)
 void GameServer::Game()
 {
     //for (int i=1;i<8;i++){
-       // Dealing(i);
+       //Dealing(i);
+       //first set*****************************
        // if (i==1){
             for(int j=0;j<Parrot.size();j++){
                 Parrot[j]->set_Reserved(false);
@@ -334,6 +335,5 @@ void GameServer::Game()
                sendMessage(card1+"||"+card2+"||"+player->get_UserName());
             //}
 }
-
-
+//}}
 

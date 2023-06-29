@@ -75,6 +75,7 @@ private:
     QString NameOfOpponent;
     Card SelectedCard_c;
     Card SelectedCard_s;
+    QString Turn;
     //int NumberOfClient;
     //int NumberOfServer;
     //int NumberOfClient;//Receiving from client
