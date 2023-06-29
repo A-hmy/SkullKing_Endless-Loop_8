@@ -318,12 +318,5 @@ void GameServer::Game()
             //}
         }
 
-<<<<<<< HEAD
-    //}
-//}
-=======
-    }
-}
 
 
->>>>>>> e1aac38c344cb1337acefbc56b0f05ecf3179b59
