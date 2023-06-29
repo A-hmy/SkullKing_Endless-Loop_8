@@ -73,17 +73,19 @@ void GameServer::Game()
             int index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient1 = *(Parrot[index]);//khodesh
+                ui->You->setPixmap(ParrotClient1.Picture);
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient2 = *(Parrot[index]);//on yeki
+                ui->Opponent->setPixmap(ParrotClient2.Picture);
                 Parrot[index]->set_Reserved(true);
             }
-            if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
+            //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
                QString card="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
                sendMessage(card);
-            }
+            //}
         }
 
     }
@@ -142,7 +144,7 @@ void GameServer::readSocket()
                       break;
                   }
               }
-             // ui.
+              ui->Opponent->setPixmap(SelectedCard.Picture);
           }
 
    }

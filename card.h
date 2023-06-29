@@ -13,11 +13,12 @@ public:
     void set_Reserved(bool);
     int get_PushButton();
     void set_PushButton(int);
+    void set_picture(QString);
+    QPixmap Picture;
 private:
     QString Name;
     int Number;
     bool Reserved;
-    QPixmap Picture;
     int Value;
     int PushButton;
 };

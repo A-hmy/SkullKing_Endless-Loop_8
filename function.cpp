@@ -5,31 +5,42 @@
 void StartGame() {
     for (int i = 1; i <= 8; i++) {
         Card* c = new Card("Parrot", i, i + 10);
+        QString p=":/new/prefix1/Picture/parrot"+QString::number(i)+".png";
+        c->set_picture(p);
         _cards.push_back(c);
         Parrot.push_back(c);
     }
     for (int i = 1; i <= 8; i++) {
+        QString p=":/new/prefix1/Picture/map"+QString::number(i)+".png";
         Card* c = new Card("Map", i, i + 10);
+        c->set_picture(p);
         _cards.push_back(c);
     }
     for (int i = 1; i <= 8; i++) {
         Card* c = new Card("Treasure", i, i + 10);
+        QString p=":/new/prefix1/Picture/treasure"+QString::number(i)+".png";
+        c->set_picture(p);
         _cards.push_back(c);
     }
     for (int i = 1; i <= 8; i++) {
         Card* c = new Card("Flag", i, i + 20);
+        QString p=":/new/prefix1/Picture/PirateFlag"+QString::number(i)+".png";
+        c->set_picture(p);
         _cards.push_back(c);
     }
     for (int i = 1; i <= 3; i++) {
         Card* c = new Card("Queen", i, i + 30);
+        c->set_picture(":/new/prefix1/Picture/Queen.png");
         _cards.push_back(c);
     }
     for (int i = 1; i <= 3; i++) {
         Card* c = new Card("King", i, i + 40);
+        c->set_picture(":/new/prefix1/Picture/king.png");
         _cards.push_back(c);
     }
     for (int i = 1; i <= 4; i++) {
         Card* c = new Card("Pirate", i, i + 50);
+        c->set_picture(":/new/prefix1/Picture/Pirate.png");
         _cards.push_back(c);
     }
 }
