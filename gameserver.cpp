@@ -100,7 +100,8 @@ void GameServer::readSocket()
           QString part1=message.split("^")[0];
           //server // client 2 omade
           if(part1=="1"){
-              sendMessage("3^"+player->get_UserName());
+
+              MyClientSocket->waitForBytesWritten(-1);
               QString part2=message.split("^")[1];
               //QString part3=message.split("^")[2];
               NameOfOpponent=part2;
@@ -109,6 +110,7 @@ void GameServer::readSocket()
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
               emit StArt();//call function Game
+              sendMessage("3^"+player->get_UserName());
           }
           // send parrot
           if(part1=="2"){
