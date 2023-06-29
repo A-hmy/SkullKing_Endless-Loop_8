@@ -25,7 +25,7 @@ GameServer::GameServer(QWidget *parent) :
     connect(MyClientSocket, &QTcpSocket::disconnected, this, &GameServer::discardSocket);
     connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
     connect(MyClientSocket,&QTcpSocket::connected,this,&GameServer::connectt);
-    connect(this,&GameServer::StArt,this,&GameServer::Game);
+    connect(this,SIGNAL(StArt()),this,SLOT(Game()));
     //Loading Gif
     QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/gifloading.gif");
     ui->Loading->setMovie(LoadingG);
@@ -300,15 +300,15 @@ void GameServer::Game()
             int index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient1 = *(Parrot[index]);//khodesh
-                //ui->You->setPixmap(ParrotClient1.Picture);
-                //ui->You->setScaledContents(true);
+                ui->You->setPixmap(ParrotClient1.Picture);
+                ui->You->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient2 = *(Parrot[index]);//on yeki
-                //ui->Opponent->setPixmap(ParrotClient2.Picture);
-                //ui->Opponent->setScaledContents(true);
+                ui->Opponent->setPixmap(ParrotClient2.Picture);
+                ui->Opponent->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
@@ -316,7 +316,7 @@ void GameServer::Game()
                QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
                sendMessage(card1+"||"+card2);
             //}
-        }
+}
 
 
 
