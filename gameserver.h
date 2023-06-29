@@ -19,7 +19,6 @@ public:
     explicit GameServer(QWidget *parent = nullptr);
     ~GameServer();
     void PlayingGame();
-    void Game();
 
 private slots:
 
@@ -62,6 +61,8 @@ private slots:
     void on_OKip_clicked();
 
     void sendMessage(QString message);
+
+    void Game();
 
 private:
     Ui::GameServer *ui;
