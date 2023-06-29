@@ -63,6 +63,8 @@ private slots:
     void sendMessage(QString message);
 
     void Game();
+signals:
+    void StArt();
 
 private:
     Ui::GameServer *ui;
@@ -71,7 +73,8 @@ private:
     Card ParrotClient1;
     Card ParrotClient2;
     QString NameOfOpponent;
-    Card SelectedCard;
+    Card SelectedCard_c;
+    Card SelectedCard_s;
     //int NumberOfClient;
     //int NumberOfServer;
     //int NumberOfClient;//Receiving from client

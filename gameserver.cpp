@@ -25,6 +25,7 @@ GameServer::GameServer(QWidget *parent) :
     connect(MyClientSocket, &QTcpSocket::disconnected, this, &GameServer::discardSocket);
     connect(MyClientSocket, &QAbstractSocket::errorOccurred, this, &GameServer::displayError);
     connect(MyClientSocket,&QTcpSocket::connected,this,&GameServer::connectt);
+    connect(this,&GameServer::StArt,this,&GameServer::Game);
     //Loading Gif
     QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/gifloading.gif");
     ui->Loading->setMovie(LoadingG);
@@ -97,26 +98,40 @@ void GameServer::readSocket()
    socketStream >> buffer;
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
           QString part1=message.split("^")[0];
-          QString part2=message.split("^")[1];
-          QString part3=message.split("^")[2];
           if(part1=="1"){
+              QString part2=message.split("^")[1];
+              //QString part3=message.split("^")[2];
               NameOfOpponent=part2;
               ui->YourIp->hide();
               ui->Loading->hide();
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
-              // function Game**************************************************************
+              emit StArt();//call function Game
           }
-           if(part1=="1")
-               Game();
+          // send parrot
           if(part1=="2"){
+              QString p1=message.split("||")[0];
+              QString p2=message.split("||")[1];
+              QString part2=p1.split("^")[1];
+              QString part3=p1.split("^")[2];
+              QString Part4=p2.split("^")[1];
+              QString Part5=p2.split("^")[2];
               for(auto x:_cards){
                   if(part2==x->get_Name()&&part3==QString::number(x->get_Number())){
-                      SelectedCard=*x;
+                      SelectedCard_c=*x;
                       break;
                   }
               }
-              ui->Opponent->setPixmap(SelectedCard.Picture);
+              for(auto x:_cards){
+                  if(Part4==x->get_Name()&&Part5==QString::number(x->get_Number())){
+                      SelectedCard_s=*x;
+                      break;
+                  }
+              }
+              ui->Opponent->setPixmap(SelectedCard_s.Picture);
+              ui->Opponent->setScaledContents(true);
+              ui->You->setPixmap(SelectedCard_c.Picture);
+              ui->You->setScaledContents(true);
           }
 
    }
@@ -275,30 +290,33 @@ void GameServer::sendMessage(QString message)
     else
         QMessageBox::critical(this,"QTCPClient","Not connected");
 }
-
+//server************************************
 void GameServer::Game()
 {
-    for (int i=1;i<8;i++){
-        Dealing(i);
-        if (i==1){
+    //for (int i=1;i<8;i++){
+       // Dealing(i);
+       // if (i==1){
             srand(time(NULL));
             int index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient1 = *(Parrot[index]);//khodesh
-                ui->You->setPixmap(ParrotClient1.Picture);
+                //ui->You->setPixmap(ParrotClient1.Picture);
+                //ui->You->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient2 = *(Parrot[index]);//on yeki
-                ui->Opponent->setPixmap(ParrotClient2.Picture);
+                //ui->Opponent->setPixmap(ParrotClient2.Picture);
+                //ui->Opponent->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
-               QString card="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
-               sendMessage(card);
+               QString card1="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
+               QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
+               sendMessage(card1+"||"+card2);
             //}
         }
 
-    }
-}
+    //}
+//}
