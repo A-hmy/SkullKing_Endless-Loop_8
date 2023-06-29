@@ -101,7 +101,6 @@ void GameServer::readSocket()
           //server // client 2 omade
           if(part1=="1"){
               sendMessage("3^"+player->get_UserName());
-              MyClientSocket->waitForBytesWritten(-1);
               QString part2=message.split("^")[1];
               //QString part3=message.split("^")[2];
               NameOfOpponent=part2;
