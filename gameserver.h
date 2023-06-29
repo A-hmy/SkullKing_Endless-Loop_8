@@ -69,8 +69,8 @@ private:
     QString Ipserver;
     Card ParrotClient1;
     Card ParrotClient2;
-    int turn;
     QString NameOfOpponent;
+    Card SelectedCard;
     //int NumberOfClient;
     //int NumberOfServer;
     //int NumberOfClient;//Receiving from client

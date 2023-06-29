@@ -72,16 +72,17 @@ void GameServer::Game()
             srand(time(NULL));
             int index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient1 = *(Parrot[index]);
+                ParrotClient1 = *(Parrot[index]);//khodesh
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size()+ 1);
             if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient2 = *(Parrot[index]);
+                ParrotClient2 = *(Parrot[index]);//on yeki
                 Parrot[index]->set_Reserved(true);
             }
             if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
-
+               QString card="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
+               sendMessage(card);
             }
         }
 
@@ -96,10 +97,8 @@ void GameServer::connectt()
             ui->Loading->hide();
             ui->OKip->setVisible(false);
             ui->IpServer->setVisible(false);
-            //MyClientSocket->write("Client connected");
-            //MyClientSocket->waitForBytesWritten(-1);
             QString Username=player->get_UserName();
-            sendMessage(Username+"^"+"Client connected");
+            sendMessage("1^"+Username+"^"+"Client connected");
 
 
     }
@@ -124,22 +123,28 @@ void GameServer::readSocket()
 
    socketStream.startTransaction();
    socketStream >> buffer;
-   //QString header = buffer.mid(0,128);
-    //QString fileType = header.split(",")[0].split(":")[1];
-    //buffer = buffer.mid(128);
-   //if(fileType=="message"){
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
-           //emit newMessage(message);
-          QString ClientConnect=message.split("^")[1];
-          if(ClientConnect=="Client connected"){
-              NameOfOpponent=message.split("^")[0];
+          QString part1=message.split("^")[0];
+          QString part2=message.split("^")[1];
+          QString part3=message.split("^")[2];
+          if(part1=="1"){
+              NameOfOpponent=part2;
               ui->YourIp->hide();
               ui->Loading->hide();
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
               // function Game**************************************************************
-
           }
+          if(part1=="2"){
+              for(auto x:_cards){
+                  if(part2==x->get_Name()&&part3==QString::number(x->get_Number())){
+                      SelectedCard=*x;
+                      break;
+                  }
+              }
+             // ui.
+          }
+
    }
 
 //change QMessageBox

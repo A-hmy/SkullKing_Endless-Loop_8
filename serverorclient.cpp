@@ -78,21 +78,17 @@ void ServerOrClient::readSocket()
     socketStream.setVersion(QDataStream::Qt_5_15);
     socketStream.startTransaction();
     socketStream >> buffer;
-    //QString header = buffer.mid(0,128);
-    //QString fileType = header.split(",")[0].split(":")[1];
-    //if(fileType=="message"){
         QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
-        //emit newMessage(message);
-        QString Clientconnect=message.split("^")[0];
-
-        if(Clientconnect=="Client connected"){
+        //QString Part2=message.split("^")[1];
+        //if(Part2=="Client connected"){
         foreach(QTcpSocket * socket2,MyServerSocket){
             if(socket->socketDescriptor()!=socket2->socketDescriptor()){
                 sendMessage(socket2,message);
                 break;
             }
         }
-        }
+        //}
+
     //}
 }
 //server(disconnect)
