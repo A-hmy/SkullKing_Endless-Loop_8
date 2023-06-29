@@ -10,6 +10,7 @@
 #include<serverorclient.h>
 #include<QMessageBox>
 #include "global.h"
+#include<QDebug>
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
@@ -99,11 +100,12 @@ void GameServer::readSocket()
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
           QString part1=message.split("^")[0];
           //server // client 2 omade
-
+        qDebug()<<part1;
           if(part1=="1"){
-
+              //sendMessage("3^"+player->get_UserName());
               MyClientSocket->waitForBytesWritten(-1);
               QString part2=message.split("^")[1];
+              qDebug()<<part2;
               //QString part3=message.split("^")[2];
               NameOfOpponent=part2;
               ui->YourIp->hide();
@@ -111,12 +113,12 @@ void GameServer::readSocket()
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
               emit StArt();//call function Game
-              sendMessage("3^"+player->get_UserName());
           }
           // send parrot
           if(part1=="2"){
               QString p1=message.split("||")[0];
               QString p2=message.split("||")[1];
+              QString p3=message.split("||")[2];
               QString part2=p1.split("^")[1];
               QString part3=p1.split("^")[2];
               QString Part4=p2.split("^")[1];
@@ -137,12 +139,14 @@ void GameServer::readSocket()
               ui->Opponent->setScaledContents(true);
               ui->You->setPixmap(SelectedCard_c.Picture);
               ui->You->setScaledContents(true);
+              ui->UsernameYou->setText(player->get_UserName());
+              ui->UsernameOpponent->setText(p3);
           }
-          if(part1=="3"){
+          /*if(part1=="3"){
               QString username_=message.split("^")[1];
               ui->UsernameYou->setText(player->get_UserName());
               ui->UsernameOpponent->setText(username_);
-          }
+          }*/
 
    }
 
@@ -327,7 +331,7 @@ void GameServer::Game()
             //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
                QString card1="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
                QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
-               sendMessage(card1+"||"+card2);
+               sendMessage(card1+"||"+card2+"||"+player->get_UserName());
             //}
 }
 
