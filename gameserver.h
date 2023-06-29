@@ -19,6 +19,7 @@ public:
     explicit GameServer(QWidget *parent = nullptr);
     ~GameServer();
     void PlayingGame();
+    void Game();
 
 private slots:
 
@@ -66,6 +67,10 @@ private:
     Ui::GameServer *ui;
     QTcpSocket* MyClientSocket;
     QString Ipserver;
+    Card ParrotClient1;
+    Card ParrotClient2;
+    int turn;
+    QString NameOfOpponent;
     //int NumberOfClient;
     //int NumberOfServer;
     //int NumberOfClient;//Receiving from client

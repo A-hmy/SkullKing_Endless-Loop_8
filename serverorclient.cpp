@@ -83,7 +83,9 @@ void ServerOrClient::readSocket()
     //if(fileType=="message"){
         QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
         //emit newMessage(message);
-        if(message=="Client connected"){
+        QString Clientconnect=message.split("^")[0];
+
+        if(Clientconnect=="Client connected"){
         foreach(QTcpSocket * socket2,MyServerSocket){
             if(socket->socketDescriptor()!=socket2->socketDescriptor()){
                 sendMessage(socket2,message);

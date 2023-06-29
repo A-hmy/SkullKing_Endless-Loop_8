@@ -64,6 +64,30 @@ GameServer::~GameServer()
     delete ui;
 }
 
+void GameServer::Game()
+{
+    for (int i=0;i<7;i++){
+        Dealing(i);
+        if (i==1){
+            srand(time(NULL));
+            int index = rand() % (Parrot.size()+ 1);
+            if (Parrot[index]->get_Reserved() != 1) {
+                ParrotClient1 = *(Parrot[index]);
+                Parrot[index]->set_Reserved(true);
+            }
+            index = rand() % (Parrot.size()+ 1);
+            if (Parrot[index]->get_Reserved() != 1) {
+                ParrotClient2 = *(Parrot[index]);
+                Parrot[index]->set_Reserved(true);
+            }
+            if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
+
+            }
+        }
+
+    }
+}
+
 
 void GameServer::connectt()
 {
@@ -74,7 +98,10 @@ void GameServer::connectt()
             ui->IpServer->setVisible(false);
             //MyClientSocket->write("Client connected");
             //MyClientSocket->waitForBytesWritten(-1);
-            sendMessage("Client connected");
+            QString Username=player->get_UserName();
+            sendMessage(Username+"^"+"Client connected");
+
+
     }
     }
 }
@@ -87,6 +114,7 @@ void GameServer::discardSocket()
     MyClientSocket->connectToHost(Ipserver,1205);
     QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
 }
+
 
 void GameServer::readSocket()
 {
@@ -102,10 +130,15 @@ void GameServer::readSocket()
    //if(fileType=="message"){
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
            //emit newMessage(message);
-          if(message=="Client connected"){
+          QString ClientConnect=message.split("^")[1];
+          if(ClientConnect=="Client connected"){
+              NameOfOpponent=message.split("^")[0];
               ui->YourIp->hide();
               ui->Loading->hide();
+              ui->UsernameOpponent->setText(NameOfOpponent);
+              ui->UsernameYou->setText(player->get_UserName());
               // function Game**************************************************************
+
           }
    }
 

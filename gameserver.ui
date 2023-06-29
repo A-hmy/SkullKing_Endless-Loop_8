@@ -766,6 +766,48 @@ border-radius:10px;
      </property>
     </item>
    </widget>
+   <widget class="QLabel" name="UsernameYou">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>40</y>
+      <width>160</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
+font: 9pt &quot;Segoe Script&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="UsernameOpponent">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>40</y>
+      <width>160</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));
+border-radius:10px;
+font: 9pt &quot;Segoe Script&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>background</zorder>
    <zorder>You</zorder>
    <zorder>Opponent</zorder>
@@ -792,6 +834,8 @@ border-radius:10px;
    <zorder>YourIp</zorder>
    <zorder>OKip</zorder>
    <zorder>IpServer</zorder>
+   <zorder>UsernameYou</zorder>
+   <zorder>UsernameOpponent</zorder>
   </widget>
  </widget>
  <resources/>
