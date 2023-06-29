@@ -99,6 +99,7 @@ void GameServer::readSocket()
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
           QString part1=message.split("^")[0];
           //server // client 2 omade
+
           if(part1=="1"){
               sendMessage("3^"+player->get_UserName());
               QString part2=message.split("^")[1];
@@ -303,15 +304,18 @@ void GameServer::Game()
     //for (int i=1;i<8;i++){
        // Dealing(i);
        // if (i==1){
+            for(int j=0;j<Parrot.size();j++){
+                Parrot[j]->set_Reserved(false);
+            }
             srand(time(NULL));
-            int index = rand() % (Parrot.size()+ 1);
+            int index = rand() % (Parrot.size());
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient1 = *(Parrot[index]);//khodesh
                 ui->You->setPixmap(ParrotClient1.Picture);
                 ui->You->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
-            index = rand() % (Parrot.size()+ 1);
+            index = rand() % (Parrot.size());
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient2 = *(Parrot[index]);//on yeki
                 ui->Opponent->setPixmap(ParrotClient2.Picture);
