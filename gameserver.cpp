@@ -98,7 +98,9 @@ void GameServer::readSocket()
    socketStream >> buffer;
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
           QString part1=message.split("^")[0];
+          //server
           if(part1=="1"){
+              sendMessage("3^"+player->get_UserName());
               QString part2=message.split("^")[1];
               //QString part3=message.split("^")[2];
               NameOfOpponent=part2;
@@ -132,6 +134,11 @@ void GameServer::readSocket()
               ui->Opponent->setScaledContents(true);
               ui->You->setPixmap(SelectedCard_c.Picture);
               ui->You->setScaledContents(true);
+          }
+          if(part1=="3"){
+              QString username_=message.split("^")[1];
+              ui->You->setText(username_);
+              ui->Opponent->setText(player->get_UserName());
           }
 
    }
