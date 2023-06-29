@@ -98,9 +98,10 @@ void GameServer::readSocket()
    socketStream >> buffer;
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
           QString part1=message.split("^")[0];
-          //server
+          //server // client 2 omade
           if(part1=="1"){
               sendMessage("3^"+player->get_UserName());
+              MyClientSocket->waitForBytesWritten(-1);
               QString part2=message.split("^")[1];
               //QString part3=message.split("^")[2];
               NameOfOpponent=part2;
@@ -137,8 +138,8 @@ void GameServer::readSocket()
           }
           if(part1=="3"){
               QString username_=message.split("^")[1];
-              ui->You->setText(username_);
-              ui->Opponent->setText(player->get_UserName());
+              ui->UsernameYou->setText(player->get_UserName());
+              ui->UsernameOpponent->setText(username_);
           }
 
    }
