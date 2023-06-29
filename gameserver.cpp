@@ -18,6 +18,7 @@ GameServer::GameServer(QWidget *parent) :
     ui->OKip->setVisible(false);
     ui->IpServer->setVisible(false);
     ui->YourIp->setVisible(false);
+    StartGame();
     setWindowFlags(Qt::FramelessWindowHint);
     MyClientSocket = new QTcpSocket;
     connect(MyClientSocket, &QTcpSocket::readyRead, this, &GameServer::readSocket);
@@ -64,34 +65,6 @@ GameServer::~GameServer()
     delete ui;
 }
 
-void GameServer::Game()
-{
-    for (int i=0;i<7;i++){
-        Dealing(i);
-        if (i==1){
-            srand(time(NULL));
-            int index = rand() % (Parrot.size()+ 1);
-            if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient1 = *(Parrot[index]);//khodesh
-                ui->You->setPixmap(ParrotClient1.Picture);
-                Parrot[index]->set_Reserved(true);
-            }
-            index = rand() % (Parrot.size()+ 1);
-            if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient2 = *(Parrot[index]);//on yeki
-                ui->Opponent->setPixmap(ParrotClient2.Picture);
-                Parrot[index]->set_Reserved(true);
-            }
-            //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
-               QString card="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
-               sendMessage(card);
-            //}
-        }
-
-    }
-}
-
-
 void GameServer::connectt()
 {
     if(s_or_c==0){
@@ -101,8 +74,6 @@ void GameServer::connectt()
             ui->IpServer->setVisible(false);
             QString Username=player->get_UserName();
             sendMessage("1^"+Username+"^"+"Client connected");
-
-
     }
     }
 }
@@ -115,7 +86,6 @@ void GameServer::discardSocket()
     MyClientSocket->connectToHost(Ipserver,1205);
     QAbstractSocket::connect(MyClientSocket,SIGNAL(connected()),this,SLOT(connect()));
 }
-
 
 void GameServer::readSocket()
 {
@@ -136,6 +106,7 @@ void GameServer::readSocket()
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
               // function Game**************************************************************
+              Game();
           }
           if(part1=="2"){
               for(auto x:_cards){
@@ -304,3 +275,29 @@ void GameServer::sendMessage(QString message)
         QMessageBox::critical(this,"QTCPClient","Not connected");
 }
 
+void GameServer::Game()
+{
+    for (int i=1;i<8;i++){
+        Dealing(i);
+        if (i==1){
+            srand(time(NULL));
+            int index = rand() % (Parrot.size()+ 1);
+            if (Parrot[index]->get_Reserved() != 1) {
+                ParrotClient1 = *(Parrot[index]);//khodesh
+                ui->You->setPixmap(ParrotClient1.Picture);
+                Parrot[index]->set_Reserved(true);
+            }
+            index = rand() % (Parrot.size()+ 1);
+            if (Parrot[index]->get_Reserved() != 1) {
+                ParrotClient2 = *(Parrot[index]);//on yeki
+                ui->Opponent->setPixmap(ParrotClient2.Picture);
+                Parrot[index]->set_Reserved(true);
+            }
+            //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
+               QString card="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
+               sendMessage(card);
+            //}
+        }
+
+    }
+}
