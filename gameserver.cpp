@@ -138,6 +138,21 @@ void GameServer::readSocket()
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
               // function Game**************************************************************
+<<<<<<< HEAD
+=======
+          }
+           if(part1=="1")
+               Game();
+          if(part1=="2"){
+              for(auto x:_cards){
+                  if(part2==x->get_Name()&&part3==QString::number(x->get_Number())){
+                      SelectedCard=*x;
+                      break;
+                  }
+              }
+              ui->Opponent->setPixmap(SelectedCard.Picture);
+          }
+>>>>>>> aee48ee448551460599fbb268bb961b75748ca5f
 
           }
    }
