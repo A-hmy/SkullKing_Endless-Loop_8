@@ -119,6 +119,11 @@ void GameServer::readSocket()
               QString p1=message.split("||")[0];
               QString p2=message.split("||")[1];
               QString p3=message.split("||")[2];
+              QString p4=message.split("||")[3];
+              Turn=p4;
+              if(Turn==player->get_UserName()){
+                  qDebug()<<"client turn";
+              }
               QString part2=p1.split("^")[1];
               QString part3=p1.split("^")[2];
               QString Part4=p2.split("^")[1];
@@ -142,11 +147,6 @@ void GameServer::readSocket()
               ui->UsernameYou->setText(player->get_UserName());
               ui->UsernameOpponent->setText(p3);
           }
-          /*if(part1=="3"){
-              QString username_=message.split("^")[1];
-              ui->UsernameYou->setText(player->get_UserName());
-              ui->UsernameOpponent->setText(username_);
-          }*/
 
    }
 
@@ -317,22 +317,32 @@ void GameServer::Game()
             srand(time(NULL));
             int index = rand() % (Parrot.size());
             if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient1 = *(Parrot[index]);//khodesh
+                ParrotClient1 = *(Parrot[index]);//khodesh(server)
                 ui->You->setPixmap(ParrotClient1.Picture);
                 ui->You->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size());
             if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient2 = *(Parrot[index]);//on yeki
+                ParrotClient2 = *(Parrot[index]);//on yeki(client)
                 ui->Opponent->setPixmap(ParrotClient2.Picture);
                 ui->Opponent->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
+            if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
+                //nobat server
+                Turn=player->get_UserName();
+            }
+            else{
+                Turn=NameOfOpponent;
+            }
+            if (Turn==player->get_UserName()){
+                qDebug()<<"server Turn";
+            }
             //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
                QString card1="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
                QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
-               sendMessage(card1+"||"+card2+"||"+player->get_UserName());
+               sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn);
             //}
 }
 //}}
