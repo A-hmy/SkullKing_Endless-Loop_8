@@ -54,7 +54,7 @@ void Dealing(int NumberOfRound)
     // deal_server
     for (int i = 0; i < NumberOfRound * 2;) {
          srand(time(NULL));
-         int index = rand() % (_cards.size()+ 1);
+         int index = rand() % (_cards.size());
          if (_cards[index]->get_Reserved() != 1) {
              player->set_Cards(*_cards[index]);
              i++;
@@ -64,7 +64,7 @@ void Dealing(int NumberOfRound)
         //deal_client
         for (int i = 0; i < NumberOfRound * 2;) {
             srand(time(NULL));
-            int index = rand() % (_cards.size()+ 1);
+            int index = rand() % (_cards.size());
             if (_cards[index]->get_Reserved() != 1) {
                 CardsOfPlayerClient.push_back(_cards[index]);
                 i++;

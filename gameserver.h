@@ -18,7 +18,7 @@ class GameServer : public QMainWindow
 public:
     explicit GameServer(QWidget *parent = nullptr);
     ~GameServer();
-    void PlayingGame();
+    void DisplayCards();
 
 private slots:
 

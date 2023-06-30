@@ -11,6 +11,7 @@
 #include<QMessageBox>
 #include "global.h"
 #include<QDebug>
+#include <QTimer>
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
@@ -67,6 +68,21 @@ GameServer::~GameServer()
     delete ui;
 }
 
+void GameServer::DisplayCards()
+{
+    int i=0;
+    QPushButton *buttons[player->get_cards().size()];
+    for(auto x:player->get_cards()){
+        QString PushButton="card_"+QString::number(i+1);//name of PushButton
+        buttons[i]= findChild<QPushButton*>(PushButton);//find PushButton
+        x.Picture=x.Picture.scaled(ui->card_7->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        buttons[i]->setIconSize(ui->card_7->size());
+        buttons[i]->setIcon(QIcon(x.Picture));
+        i++;
+    }
+}
+
+
 void GameServer::connectt()
 {
     if(s_or_c==0){
@@ -114,16 +130,14 @@ void GameServer::readSocket()
               ui->UsernameYou->setText(player->get_UserName());
               emit StArt();//call function Game
           }
-          // send parrot
+          //client // send parrot
           if(part1=="2"){
               QString p1=message.split("||")[0];
               QString p2=message.split("||")[1];
               QString p3=message.split("||")[2];
               QString p4=message.split("||")[3];
               Turn=p4;
-              if(Turn==player->get_UserName()){
-                  qDebug()<<"client turn";
-              }
+              ui->Turn->setText(Turn+"'s turn");
               QString part2=p1.split("^")[1];
               QString part3=p1.split("^")[2];
               QString Part4=p2.split("^")[1];
@@ -304,13 +318,14 @@ void GameServer::sendMessage(QString message)
     else
         QMessageBox::critical(this,"QTCPClient","Not connected");
 }
-//server************************************
+//server
 void GameServer::Game()
 {
+    int i=1;
     //for (int i=1;i<8;i++){
-       //Dealing(i);
+       Dealing(2);
        //first set*****************************
-       // if (i==1){
+        if (i==1){
             for(int j=0;j<Parrot.size();j++){
                 Parrot[j]->set_Reserved(false);
             }
@@ -339,11 +354,14 @@ void GameServer::Game()
             if (Turn==player->get_UserName()){
                 qDebug()<<"server Turn";
             }
-            //if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
-               QString card1="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
-               QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
-               sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn);
-            //}
-}
-//}}
+            ui->Turn->setText(Turn+"'s turn");
+            QString card1="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
+            QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
+            sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn);
+        }
+        //QEventLoop loop;
+        //QTimer::singleShot(10000, &loop, &QEventLoop::quit);
+        DisplayCards();
+    }
+//}
 
