@@ -856,6 +856,70 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="StopResume">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>8</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Exit">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LoadingStop">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>20</y>
+      <width>651</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Counter">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>40</y>
+      <width>651</width>
+      <height>591</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+      <pointsize>100</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(234, 197, 50);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>background</zorder>
    <zorder>You</zorder>
    <zorder>Opponent</zorder>
@@ -882,9 +946,13 @@ border-radius:10px;</string>
    <zorder>card_2</zorder>
    <zorder>card_1</zorder>
    <zorder>Loading</zorder>
-   <zorder>OKip</zorder>
-   <zorder>IpServer</zorder>
    <zorder>YourIp</zorder>
+   <zorder>StopResume</zorder>
+   <zorder>Exit</zorder>
+   <zorder>LoadingStop</zorder>
+   <zorder>Counter</zorder>
+   <zorder>IpServer</zorder>
+   <zorder>OKip</zorder>
   </widget>
  </widget>
  <resources/>

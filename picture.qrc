@@ -51,5 +51,8 @@
         <file>Picture/back4.jpg</file>
         <file>Picture/gifloading.gif</file>
         <file>Picture/backgame.jpg</file>
+        <file>Picture/stop.png</file>
+        <file>Picture/resume.png</file>
+        <file>Picture/loadingstop.gif</file>
     </qresource>
 </RCC>

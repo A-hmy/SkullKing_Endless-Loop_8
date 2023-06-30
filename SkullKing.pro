@@ -20,7 +20,6 @@ SOURCES += \
     global.cpp \
     history.cpp \
     main.cpp \
-    mainhistory.cpp \
     mainwindow.cpp \
     menu.cpp \
     player.cpp \
@@ -39,7 +38,6 @@ HEADERS += \
     gameserver.h \
     global.h \
     history.h \
-    mainhistory.h \
     mainwindow.h \
     menu.h \
     player.h \
@@ -52,7 +50,6 @@ FORMS += \
     forgotpassword.ui \
     gameserver.ui \
     history.ui \
-    mainhistory.ui \
     mainwindow.ui \
     menu.ui \
     serverorclient.ui \

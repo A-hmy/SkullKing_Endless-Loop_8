@@ -3,6 +3,7 @@
 #include "ui_gameserver.h"
 #include "function.h"
 #include"mainwindow.h"
+#include "menu.h"
 #include"QTcpSocket"
 #include<QMovie>
 #include<QHostAddress>
@@ -238,6 +239,24 @@ void GameServer::readSocket()
               Turn=message.split("^")[2];
               ui->Turn->setText(Turn+"'s turn");
           }
+
+          if(part1=="5"){
+              QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
+              ui->LoadingStop->setMovie(LoadingG);
+              ui->LoadingStop->show();
+              ui->LoadingStop->setScaledContents(true);
+            //  ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
+             // ui->Loading->setStyleSheet("background-color: brown");
+
+
+              timerresume = new QTimer(this);
+              connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
+              timerresume->start(1000);
+              count = 20;
+              ui->Counter->show();
+              LoadingG->start();
+
+          }
    }
 
 //change QMessageBox
@@ -388,5 +407,51 @@ void GameServer::on_Ok_clicked()
         ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
     }
 
+}
+
+
+void GameServer::on_StopResume_clicked()
+{
+    //if background be a stop
+    //if()
+    //for another player stop
+
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif"); 
+    ui->LoadingStop->setMovie(LoadingG);
+    ui->LoadingStop->show();
+    ui->LoadingStop->setScaledContents(true);
+   // ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
+   // ui->Loading->setStyleSheet("background-color: brown");
+    LoadingG->start();
+
+
+    timerresume = new QTimer(this);
+    connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
+    timerresume->start(1000);
+    count = 20; 
+    ui->Counter->show();
+
+    sendMessage("5^Stop20Secounds");
+}
+
+void GameServer::countdown()
+{
+    count--;
+    ui->Counter->setText(QString::number(count));
+
+    if (count == 0) {
+        timer->stop();
+        //game page start again
+        //hide lable counter
+        ui->Counter->hide();
+        ui->LoadingStop->hide();
+    }
+
+}
+void GameServer::on_Exit_clicked()
+{
+   Menu*m=new Menu;
+   this->close();
+   m->show();
 }
 

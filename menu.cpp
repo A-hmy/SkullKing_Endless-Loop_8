@@ -4,7 +4,6 @@
 #include "ui_menu.h"
 #include"gameserver.h"
 #include"serverorclient.h"
-#include "mainhistory.h"
 #include "history.h"
 Menu::Menu(QWidget *parent) :
     QWidget(parent),

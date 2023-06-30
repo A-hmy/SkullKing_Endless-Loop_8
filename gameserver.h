@@ -7,6 +7,7 @@
 #include<QStandardPaths>
 #include<QMetaType>
 #include<QAbstractSocket>
+#include <QTimer>
 namespace Ui {
 class GameServer;
 }
@@ -41,6 +42,12 @@ private slots:
     void hideImage();
     void on_Ok_clicked();
 
+    void on_StopResume_clicked();
+
+    void on_Exit_clicked();
+
+    void countdown();
+
 signals:
     void StArt();
 
@@ -57,6 +64,8 @@ private:
     QString Turn;
     int NumberOfPredictClient;
     int NumberOfPredictServer;
+    QTimer *timerresume;
+    int count;
     //Card PlayerCard_S;
     //Card PlayerCard_C;//Receiving from client
 };
