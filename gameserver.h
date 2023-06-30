@@ -19,36 +19,10 @@ public:
     explicit GameServer(QWidget *parent = nullptr);
     ~GameServer();
     void DisplayCards();
-
+    void DisplayingACard_you(QString card);
+    void DisplayingACard_opponent(QString card);
 private slots:
-
-    void on_card_1_clicked();
-
-    void on_card_2_clicked();
-
-    void on_card_3_clicked();
-
-    void on_card_4_clicked();
-
-    void on_card_5_clicked();
-
-    void on_card_6_clicked();
-
-    void on_card_7_clicked();
-
-    void on_card_8_clicked();
-
-    void on_card_9_clicked();
-
-    void on_card_10_clicked();
-
-    void on_card_11_clicked();
-
-    void on_card_12_clicked();
-
-    void on_card_13_clicked();
-
-    void on_card_14_clicked();
+    void onButtonClicked();
 
     void connectt();
 
@@ -63,22 +37,26 @@ private slots:
     void sendMessage(QString message);
 
     void Game();
+
+    void hideImage();
+    void on_Ok_clicked();
+
 signals:
     void StArt();
 
 private:
     Ui::GameServer *ui;
+     QTimer *timer;
     QTcpSocket* MyClientSocket;
     QString Ipserver;
     Card ParrotClient1;
     Card ParrotClient2;
     QString NameOfOpponent;
-    Card SelectedCard_c;
-    Card SelectedCard_s;
+    Card SelectedCard_you;
+    Card SelectedCard_opponent;
     QString Turn;
-    //int NumberOfClient;
-    //int NumberOfServer;
-    //int NumberOfClient;//Receiving from client
+    int NumberOfPredictClient;
+    int NumberOfPredictServer;
     //Card PlayerCard_S;
     //Card PlayerCard_C;//Receiving from client
 };

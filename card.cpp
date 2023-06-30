@@ -16,5 +16,10 @@ int Card::get_PushButton(){return PushButton;}
 void Card::set_PushButton(int _PushButton){PushButton=_PushButton;}
 void Card::set_picture(QString _Picture)
 {
-   Picture.load(_Picture);
+    Picture=_Picture;
+}
+
+QString Card::get_Picture()
+{
+   return Picture;
 }

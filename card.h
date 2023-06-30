@@ -14,12 +14,13 @@ public:
     int get_PushButton();
     void set_PushButton(int);
     void set_picture(QString);
-    QPixmap Picture;
+    QString get_Picture();
 private:
     QString Name;
     int Number;
     bool Reserved;
     int Value;
     int PushButton;
+    QString Picture;
 };
 #endif // CARD_H

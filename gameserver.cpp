@@ -12,14 +12,31 @@
 #include "global.h"
 #include<QDebug>
 #include <QTimer>
+#include<thread>
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
 {
     ui->setupUi(this);
+    connect(ui->card_1, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_2, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_3, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_4, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_5, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_6, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_7, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_8, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_9, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_10, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_11, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_12, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_13, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(ui->card_14, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     ui->OKip->setVisible(false);
     ui->IpServer->setVisible(false);
     ui->YourIp->setVisible(false);
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
     StartGame();
     setWindowFlags(Qt::FramelessWindowHint);
     MyClientSocket = new QTcpSocket;
@@ -71,17 +88,51 @@ GameServer::~GameServer()
 void GameServer::DisplayCards()
 {
     int i=0;
-    QPushButton *buttons[player->get_cards().size()];
+    QPushButton *buttons[14];
     for(auto x:player->get_cards()){
         QString PushButton="card_"+QString::number(i+1);//name of PushButton
         buttons[i]= findChild<QPushButton*>(PushButton);//find PushButton
-        x.Picture=x.Picture.scaled(ui->card_7->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        buttons[i]->setIconSize(ui->card_7->size());
-        buttons[i]->setIcon(QIcon(x.Picture));
+        QString image="border-image: url("+x.get_Picture()+");"+"font: 1pt";
+        buttons[i]->setStyleSheet(image);
+        QString text=x.get_Name()+"*"+QString::number(x.get_Number());
+        buttons[i]->setText(text);
+        //buttons[i]->setStyleSheet("font: 1pt");
         i++;
+    }
+    for(;i<14;i++){
+        QString PushButton="card_"+QString::number(i+1);//name of PushButton
+        buttons[i]= findChild<QPushButton*>(PushButton);//find PushButton
+        buttons[i]->setVisible(false);
     }
 }
 
+void GameServer::DisplayingACard_you(QString card)
+{
+    QString name=card.split("*")[0];
+    QString num=card.split("*")[1];
+    for(auto x:_cards){
+        if(name==x->get_Name()&&num==QString::number(x->get_Number())){
+            SelectedCard_you=*x;
+            break;
+        }
+    }
+    QString image="border-image: url("+SelectedCard_you.get_Picture()+");";
+    ui->You->setStyleSheet(image);
+}
+
+void GameServer::DisplayingACard_opponent(QString card)
+{
+    QString name=card.split("*")[0];
+    QString num=card.split("*")[1];
+    for(auto x:_cards){
+        if(name==x->get_Name()&&num==QString::number(x->get_Number())){
+            SelectedCard_opponent=*x;
+            break;
+        }
+    }
+    QString image="border-image: url("+SelectedCard_opponent.get_Picture()+");";
+    ui->Opponent->setStyleSheet(image);
+}
 
 void GameServer::connectt()
 {
@@ -132,36 +183,61 @@ void GameServer::readSocket()
           }
           //client // send parrot
           if(part1=="2"){
-              QString p1=message.split("||")[0];
-              QString p2=message.split("||")[1];
-              QString p3=message.split("||")[2];
-              QString p4=message.split("||")[3];
+              QString p1=message.split("||")[0];//card1
+              QString p2=message.split("||")[1];//card2
+              QString p3=message.split("||")[2];//name server
+              QString p4=message.split("||")[3];//turn
+              QString p5=message.split("||")[4];//cards_1
+              QString p6=message.split("||")[5];//cards_2
               Turn=p4;
+              NameOfOpponent=p3;
               ui->Turn->setText(Turn+"'s turn");
               QString part2=p1.split("^")[1];
               QString part3=p1.split("^")[2];
               QString Part4=p2.split("^")[1];
               QString Part5=p2.split("^")[2];
+              QString Part6=p5.split("*")[0];//name of card
+              QString Part7=p5.split("*")[1];//number of card
+              QString Part8=p6.split("*")[0];//name of card
+              QString Part9=p6.split("*")[1];//number of card
+              for(auto x:_cards){
+                  if(Part6==x->get_Name()&&Part7==QString::number(x->get_Number())){
+                      player->set_Cards(*x);
+                      break;
+                  }
+              }
+              for(auto x:_cards){
+                  if(Part8==x->get_Name()&&Part9==QString::number(x->get_Number())){
+                      player->set_Cards(*x);
+                      break;
+                  }
+              }
               for(auto x:_cards){
                   if(part2==x->get_Name()&&part3==QString::number(x->get_Number())){
-                      SelectedCard_c=*x;
+                      SelectedCard_you=*x;
                       break;
                   }
               }
               for(auto x:_cards){
                   if(Part4==x->get_Name()&&Part5==QString::number(x->get_Number())){
-                      SelectedCard_s=*x;
+                      SelectedCard_opponent=*x;
                       break;
                   }
               }
-              ui->Opponent->setPixmap(SelectedCard_s.Picture);
-              ui->Opponent->setScaledContents(true);
-              ui->You->setPixmap(SelectedCard_c.Picture);
-              ui->You->setScaledContents(true);
+              QString image="border-image: url("+SelectedCard_opponent.get_Picture()+");";
+              ui->Opponent->setStyleSheet(image);
+              image="border-image: url("+SelectedCard_you.get_Picture()+");";
+              ui->You->setStyleSheet(image);
               ui->UsernameYou->setText(player->get_UserName());
               ui->UsernameOpponent->setText(p3);
+              //timer->start(3000);
+              DisplayCards();
           }
-
+          if(part1=="3"){
+              DisplayingACard_opponent(message.split("^")[1]);
+              Turn=message.split("^")[2];
+              ui->Turn->setText(Turn+"'s turn");
+          }
    }
 
 //change QMessageBox
@@ -182,102 +258,26 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
     }*/
 }
 
-void GameServer::on_card_1_clicked()
+void GameServer::onButtonClicked()
 {
-    if(ui->NumberOfPredict->isVisible()){
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    QString NameButton=button->objectName();
+    QPushButton *Pushbutton =findChild<QPushButton*>(NameButton);
+    if(!ui->NumberOfPredict->isVisible()){
+        if(Turn==player->get_UserName()){
+           QString card=Pushbutton->text();
+           DisplayingACard_you(card);
+           Turn=NameOfOpponent;
+           sendMessage("3^"+card+"^"+Turn);
+           ui->Turn->setText(Turn+"'s turn");
+           Pushbutton->setVisible(false);
+        }
+    }
+    else{
+         ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
     }
 }
 
-void GameServer::on_card_2_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_3_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_4_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_5_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_6_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_7_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_8_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_9_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_10_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_11_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_12_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_13_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
-
-void GameServer::on_card_14_clicked()
-{
-    if(ui->NumberOfPredict->isVisible()){
-
-    }
-}
 
 void GameServer::on_OKip_clicked()
 {
@@ -323,7 +323,7 @@ void GameServer::Game()
 {
     int i=1;
     //for (int i=1;i<8;i++){
-       Dealing(2);
+    Dealing(i);
        //first set*****************************
         if (i==1){
             for(int j=0;j<Parrot.size();j++){
@@ -333,15 +333,17 @@ void GameServer::Game()
             int index = rand() % (Parrot.size());
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient1 = *(Parrot[index]);//khodesh(server)
-                ui->You->setPixmap(ParrotClient1.Picture);
-                ui->You->setScaledContents(true);
+                QString image="border-image: url("+ParrotClient1.get_Picture()+");";
+                //QPixmap mypixmap(ParrotClient1.get_Picture());
+                ui->You->setStyleSheet(image);
+                //ui->You->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size());
             if (Parrot[index]->get_Reserved() != 1) {
                 ParrotClient2 = *(Parrot[index]);//on yeki(client)
-                ui->Opponent->setPixmap(ParrotClient2.Picture);
-                ui->Opponent->setScaledContents(true);
+                QString image="border-image: url("+ParrotClient2.get_Picture()+");";
+                ui->Opponent->setStyleSheet(image);
                 Parrot[index]->set_Reserved(true);
             }
             if(ParrotClient1.get_Number()>ParrotClient2.get_Number()){
@@ -355,13 +357,36 @@ void GameServer::Game()
                 qDebug()<<"server Turn";
             }
             ui->Turn->setText(Turn+"'s turn");
+            //timer->start(3000);
             QString card1="2^"+ParrotClient2.get_Name()+"^"+QString::number(ParrotClient2.get_Number());
             QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
-            sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn);
+            QString cards=CardsOfPlayerClient[0]->get_Name()+"*"+QString::number(CardsOfPlayerClient[0]->get_Number())+"||"+CardsOfPlayerClient[1]->get_Name()+"*"+QString::number(CardsOfPlayerClient[1]->get_Number());
+            sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn+"||"+cards);
+
         }
-        //QEventLoop loop;
-        //QTimer::singleShot(10000, &loop, &QEventLoop::quit);
+        //timer->start(3000);
         DisplayCards();
-    }
+}
+
 //}
+
+void GameServer::hideImage()
+{
+    ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+    ui->Opponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+}
+
+void GameServer::on_Ok_clicked()
+{
+    if(!ui->NumberOfPredict->text().isEmpty()){
+        NumberOfPredictServer=ui->NumberOfPredict->text().toInt(nullptr,10);
+        ui->NumberOfPredict->setVisible(false);
+        ui->Ok->setVisible(false);
+        ui->lablePredict->setVisible(false);
+    }
+    else{
+        ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
+    }
+
+}
 
