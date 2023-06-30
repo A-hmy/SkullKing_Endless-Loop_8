@@ -288,5 +288,22 @@ border-radius:10px;</string>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>Password</sender>
+   <signal>returnPressed()</signal>
+   <receiver>Login</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>226</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>223</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

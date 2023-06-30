@@ -66,6 +66,7 @@ private:
     int NumberOfPredictServer;
     QTimer *timerresume;
     int count;
+
     //Card PlayerCard_S;
     //Card PlayerCard_C;//Receiving from client
 };

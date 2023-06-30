@@ -241,21 +241,33 @@ void GameServer::readSocket()
           }
 
           if(part1=="5"){
-              QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
-              ui->LoadingStop->setMovie(LoadingG);
-              ui->LoadingStop->show();
-              ui->LoadingStop->setScaledContents(true);
-            //  ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
-             // ui->Loading->setStyleSheet("background-color: brown");
+
+                  QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
+                  ui->LoadingStop->setMovie(LoadingG);
+                  ui->LoadingStop->show();
+                  ui->LoadingStop->setScaledContents(true);
+                 // ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
+                 // ui->Loading->setStyleSheet("background-color: brown");
+                  LoadingG->start();
 
 
-              timerresume = new QTimer(this);
-              connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
-              timerresume->start(1000);
-              count = 20;
-              ui->Counter->show();
-              LoadingG->start();
+                  timerresume = new QTimer(this);
+                  connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
+                  timerresume->start(1000);
+                  count = 20;
+                  ui->Counter->show();
+                 // ui->StopResume.remo
+                  ui->StopResume->setText("Resume");
+                  ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
 
+
+
+          }
+          if (part1=="6"){
+              ui->StopResume->setText("Stop");
+              ui->LoadingStop->hide();
+              ui->Counter->hide();
+              ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
           }
    }
 
@@ -397,6 +409,7 @@ void GameServer::hideImage()
 
 void GameServer::on_Ok_clicked()
 {
+    //error if write wrong
     if(!ui->NumberOfPredict->text().isEmpty()){
         NumberOfPredictServer=ui->NumberOfPredict->text().toInt(nullptr,10);
         ui->NumberOfPredict->setVisible(false);
@@ -415,8 +428,8 @@ void GameServer::on_StopResume_clicked()
     //if background be a stop
     //if()
     //for another player stop
-
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif"); 
+    if(ui->StopResume->text()=="Stop"){
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
     ui->LoadingStop->setMovie(LoadingG);
     ui->LoadingStop->show();
     ui->LoadingStop->setScaledContents(true);
@@ -428,23 +441,40 @@ void GameServer::on_StopResume_clicked()
     timerresume = new QTimer(this);
     connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
     timerresume->start(1000);
-    count = 20; 
+    count = 20;
     ui->Counter->show();
-
-    sendMessage("5^Stop20Secounds");
+   // ui->StopResume.remo
+    ui->StopResume->setText("Resume");
+    ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
+    sendMessage("5^Stop");
+  }
+    else{
+        //ui->StopResume->clear();
+        ui->StopResume->setText("Stop");
+        ui->LoadingStop->hide();
+        ui->Counter->hide();
+        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
+        sendMessage("6^Resume");
+    }
 }
 
 void GameServer::countdown()
 {
-    count--;
-    ui->Counter->setText(QString::number(count));
 
-    if (count == 0) {
-        timer->stop();
-        //game page start again
-        //hide lable counter
-        ui->Counter->hide();
+    if (count > 0) {
+            count--;
+            ui->Counter->setText(QString::number(count));
+    }
+    else if(count==0){
+        timerresume->stop();
+        ui->StopResume->setText("Stop");
         ui->LoadingStop->hide();
+        ui->Counter->hide();
+        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
+    }
+
+    if (!timerresume->isActive()) {
+        timerresume->start(1000);
     }
 
 }

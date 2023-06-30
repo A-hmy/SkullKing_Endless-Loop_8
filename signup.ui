@@ -326,5 +326,22 @@ border-radius:10px;</string>
   <zorder>cancle</zorder>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>email</sender>
+   <signal>returnPressed()</signal>
+   <receiver>ok</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>212</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>232</x>
+     <y>445</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

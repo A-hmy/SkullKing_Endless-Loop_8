@@ -865,6 +865,14 @@ border-radius:10px;</string>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>1</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/Picture/Stop1.png);</string>
+    </property>
     <property name="text">
      <string>Stop</string>
     </property>
@@ -877,6 +885,14 @@ border-radius:10px;</string>
       <width>41</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>1</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/Picture/Exit.png);</string>
     </property>
     <property name="text">
      <string>Exit</string>

@@ -54,5 +54,8 @@
         <file>Picture/stop.png</file>
         <file>Picture/resume.png</file>
         <file>Picture/loadingstop.gif</file>
+        <file>Picture/Stop1.png</file>
+        <file>Picture/Resume1.png</file>
+        <file>Picture/Exit.png</file>
     </qresource>
 </RCC>
