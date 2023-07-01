@@ -673,4 +673,3 @@ void GameServer::Score(int a)
      }
     }
 
-
