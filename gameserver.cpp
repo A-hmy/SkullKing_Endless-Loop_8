@@ -97,7 +97,6 @@ void GameServer::DisplayCards()
         buttons[i]->setStyleSheet(image);
         QString text=x.get_Name()+"*"+QString::number(x.get_Number());
         buttons[i]->setText(text);
-        //buttons[i]->setStyleSheet("font: 1pt");
         i++;
     }
     for(;i<14;i++){
@@ -134,6 +133,7 @@ void GameServer::DisplayingACard_opponent(QString card)
     QString image="border-image: url("+SelectedCard_opponent.get_Picture()+");";
     ui->Opponent->setStyleSheet(image);
 }
+
 
 void GameServer::connectt()
 {
@@ -234,12 +234,24 @@ void GameServer::readSocket()
               //timer->start(3000);
               DisplayCards();
           }
+          //server to client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
           if(part1=="3"){
               DisplayingACard_opponent(message.split("^")[1]);
               Turn=message.split("^")[2];
               ui->Turn->setText(Turn+"'s turn");
           }
-
+          //client to server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+          if(part1=="4"){
+              DisplayingACard_opponent(message.split("^")[1]);
+              Turn=message.split("^")[2];
+              ui->Turn->setText(Turn+"'s turn");
+              if(SelectedCard_you.get_Name()==" "){
+              //moghayese kon
+              //dast o bede
+              //signal moghayeseh
+              }
+          }
+          //stop
           if(part1=="5"){
 
                   QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
@@ -259,10 +271,8 @@ void GameServer::readSocket()
                  // ui->StopResume.remo
                   ui->StopResume->setText("Resume");
                   ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
-
-
-
           }
+          //resume
           if (part1=="6"){
               ui->StopResume->setText("Stop");
               ui->LoadingStop->hide();
@@ -291,6 +301,8 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
 
 void GameServer::onButtonClicked()
 {
+    //server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    if(s_or_c==1){
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     QString NameButton=button->objectName();
     QPushButton *Pushbutton =findChild<QPushButton*>(NameButton);
@@ -302,10 +314,31 @@ void GameServer::onButtonClicked()
            sendMessage("3^"+card+"^"+Turn);
            ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
+           // card khodesh o mizare va moghayese mikone
         }
     }
     else{
          ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
+    }
+    }
+    //client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    if(s_or_c==0){
+        QPushButton *button = qobject_cast<QPushButton *>(sender());
+        QString NameButton=button->objectName();
+        QPushButton *Pushbutton =findChild<QPushButton*>(NameButton);
+        if(!ui->NumberOfPredict->isVisible()){
+            if(Turn==player->get_UserName()){
+               QString card=Pushbutton->text();
+               DisplayingACard_you(card);
+               Turn=NameOfOpponent;
+               sendMessage("4^"+card+"^"+Turn);
+               ui->Turn->setText(Turn+"'s turn");
+               Pushbutton->setVisible(false);
+            }
+        }
+        else{
+             ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
+        }
     }
 }
 
@@ -478,10 +511,90 @@ void GameServer::countdown()
     }
 
 }
+
 void GameServer::on_Exit_clicked()
 {
    Menu*m=new Menu;
    this->close();
    m->show();
 }
+
+void GameServer::Score()
+{
+    if(SelectedCard_you.get_Name()=="Flag"||SelectedCard_you.get_Name()=="Treasure"||SelectedCard_you.get_Name()=="Map"||SelectedCard_you.get_Name()=="Parrot"){
+         if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
+             if(SelectedCard_you.get_Number()>SelectedCard_opponent.get_Number()){
+             //dast baraye server
+              }
+             else if(SelectedCard_you.get_Number()<SelectedCard_opponent.get_Number()) {
+             //dast baraye client
+            }
+
+         }
+
+         else if(SelectedCard_opponent.get_Name()=="Queen"){
+           //dast baraye client
+         }
+         else if(SelectedCard_opponent.get_Name()=="King"){
+             //dast baraye client
+         }
+         else if(SelectedCard_opponent.get_Name()=="Pirate"){
+            //dast baraye client
+         }
+     }
+
+     ////////////Queen
+     if(SelectedCard_you.get_Name()=="Queen"){
+         if(SelectedCard_opponent.get_Name()=="Queen"){
+             //nafar aval
+         }
+         else if(SelectedCard_opponent.get_Name()=="King"){
+              //dast baraye server
+         }
+         else if(SelectedCard_opponent.get_Name()=="Pirate"){
+             //dast baraye client
+         }
+          if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
+              //dast baraye be server
+          }
+
+     }
+
+
+     ////////////King
+     if(SelectedCard_you.get_Name()=="King"){
+         if(SelectedCard_opponent.get_Name()=="Queen"){
+             //dast baraye be client
+         }
+         else if(SelectedCard_opponent.get_Name()=="King"){
+             //nafar aval
+         }
+         else if(SelectedCard_opponent.get_Name()=="Pirate"){
+             //dast baraye server
+         }
+         if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
+             //dast baraye server
+         }
+
+     }
+
+
+     ////////////Pirate
+     if(SelectedCard_you.get_Name()=="Pirate"){
+         if(SelectedCard_opponent.get_Name()=="Queen"){
+             ////dast baraye be server
+         }
+         else if(SelectedCard_opponent.get_Name()=="King"){
+             //dast baraye client
+         }
+         else if(SelectedCard_opponent.get_Name()=="Pirate"){
+            //nafar aval
+         }
+         if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
+             //dast baraye server
+         }
+
+     }
+    }
+
 

@@ -21,5 +21,6 @@ void Card::set_picture(QString _Picture)
 
 QString Card::get_Picture()
 {
-   return Picture;
+    return Picture;
 }
+

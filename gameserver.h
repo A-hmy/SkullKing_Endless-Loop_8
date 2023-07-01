@@ -48,12 +48,14 @@ private slots:
 
     void countdown();
 
+    void Score(int a);
+
 signals:
     void StArt();
 
 private:
     Ui::GameServer *ui;
-     QTimer *timer;
+    QTimer *timer;
     QTcpSocket* MyClientSocket;
     QString Ipserver;
     Card ParrotClient1;
@@ -64,11 +66,12 @@ private:
     QString Turn;
     int NumberOfPredictClient;
     int NumberOfPredictServer;
+    int OpponentScore;//emtiyaz akhar
+    int YouScore;//emtiyaz akhar
+    int ScoreSet_You;
+    int ScoreSet_Opponent;
     QTimer *timerresume;
     int count;
-
-    //Card PlayerCard_S;
-    //Card PlayerCard_C;//Receiving from client
 };
 
 #endif // GAMESERVER_H
