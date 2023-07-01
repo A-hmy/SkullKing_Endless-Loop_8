@@ -266,6 +266,11 @@ void GameServer::readSocket()
               }
               Turn=message.split("^")[2];
               ui->Turn->setText(Turn+"'s turn");
+              QString part2=message.split("^")[3];
+              QString ScoreO=part2.split("*")[0];
+              QString ScoreY=part2.split("*")[1];
+              ui->ScoreOpponent->setText(ScoreO);
+              ui->ScoreYou->setText(ScoreY);
           }
           //client to server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
           if(part1=="4"){
@@ -311,13 +316,13 @@ void GameServer::readSocket()
               ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
           }
           //client
-          if(part1=="7"){
+          /*if(part1=="7"){
               QString part2=message.split("^")[1];
               QString ScoreO=part2.split("*")[0];
               QString ScoreY=part2.split("*")[1];
               ui->ScoreOpponent->setText(ScoreO);
               ui->ScoreYou->setText(ScoreY);
-          }
+          }*/
    }
 
 //change QMessageBox
@@ -359,7 +364,8 @@ void GameServer::onButtonClicked()
            }
            DisplayingACard_you(card);
            Turn=NameOfOpponent;
-           sendMessage("3^"+card+"^"+Turn);
+           //sendMessage("7^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
+           sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
            ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
         }
@@ -694,7 +700,6 @@ void GameServer::Score(int a)
          SelectedCard_opponent.set_Name(" ");
          ui->ScoreYou->setText(QString::number(ScoreSet_You));
          ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
-         sendMessage("7^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
          if(!EndSet()){// set is finished
              if(ScoreSet_You>ScoreSet_Opponent){
                  Turn=player->get_UserName();
