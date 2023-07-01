@@ -22,6 +22,7 @@ public:
     void DisplayCards();
     void DisplayingACard_you(QString card);
     void DisplayingACard_opponent(QString card);
+    bool EndSet();
 private slots:
     void onButtonClicked();
 
@@ -64,6 +65,7 @@ private:
     Card SelectedCard_you;
     Card SelectedCard_opponent;
     QString Turn;
+    int NumberOfRound;
     int NumberOfPredictClient;
     int NumberOfPredictServer;
     int OpponentScore;//emtiyaz akhar
