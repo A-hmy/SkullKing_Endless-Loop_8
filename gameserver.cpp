@@ -666,6 +666,7 @@ void GameServer::Score(int a)
                  ScoreSet_Opponent++;
                  OpponentScore+=20;
              }
+<<<<<<< HEAD
          }
          if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
              //dast baraye server
@@ -679,4 +680,12 @@ void GameServer::Score(int a)
      ui->ScoreYou->setText(QString::number(ScoreSet_You));
      ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
 }
+=======
+
+}
+         SelectedCard_you.set_Name(" ");
+         SelectedCard_opponent.set_Name(" ");
+         ui->ScoreYou->setText(QString::number(ScoreSet_You));
+         ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
+>>>>>>> d0297c3791e068ae826871d2d268e3a43d916621
 
