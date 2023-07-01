@@ -51,6 +51,8 @@ private slots:
 
     void Score(int a);
 
+    void showPushButton();
+
 signals:
     void StArt();
     void ScOre(int a);

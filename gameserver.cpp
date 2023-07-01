@@ -312,8 +312,9 @@ void GameServer::readSocket()
           }
           //client
           if(part1=="7"){
-              QString ScoreO=message.split("*")[0];
-              QString ScoreY=message.split("*")[1];
+              QString part2=message.split("^")[1];
+              QString ScoreO=part2.split("*")[0];
+              QString ScoreY=part2.split("*")[1];
               ui->ScoreOpponent->setText(ScoreO);
               ui->ScoreYou->setText(ScoreY);
           }
@@ -436,7 +437,7 @@ void GameServer::sendMessage(QString message)
 //server
 void GameServer::Game()
 {
-
+    showPushButton();
     ScoreSet_You=0;
     ScoreSet_Opponent=0;
     SelectedCard_you.set_Name(" ");
@@ -672,7 +673,7 @@ void GameServer::Score(int a)
                  YouScore+=10;
              }
 
-
+}
 
              if(SelectedCard_you.get_Name()=="Flag"||SelectedCard_you.get_Name()=="Treasure"||SelectedCard_you.get_Name()=="Map"||SelectedCard_you.get_Name()=="Parrot"){
                  if(SelectedCard_opponent.get_Name()!="Queen"){
@@ -689,7 +690,6 @@ void GameServer::Score(int a)
                  }
              }
 
-}
          SelectedCard_you.set_Name(" ");
          SelectedCard_opponent.set_Name(" ");
          ui->ScoreYou->setText(QString::number(ScoreSet_You));
@@ -698,13 +698,35 @@ void GameServer::Score(int a)
          if(!EndSet()){// set is finished
              if(ScoreSet_You>ScoreSet_Opponent){
                  Turn=player->get_UserName();
-                 ScoreSet_You=0;
-                 ScoreSet_Opponent=0;
+                 NumberOfRound++;
+                 if(NumberOfRound!=7){
+                     //QMessageBox::information(this,"*","dsfd");
+                     emit StArt();
+                 }
              }
              else{
                  Turn=NameOfOpponent;
-                 ScoreSet_You=0;
-                 ScoreSet_Opponent=0;
+                 NumberOfRound++;
+                 if(NumberOfRound!=7){
+                     //QMessageBox::information(this,"*","dsfd");
+                     emit StArt();
+                 }
              }
          }
+}
+
+void GameServer::showPushButton()
+{
+    QPushButton *buttons[14];
+    for(int i=0;i<14;i++){
+        QString PushButton="card_"+QString::number(i+1);//name of PushButton
+        buttons[i]= findChild<QPushButton*>(PushButton);//find PushButton
+           buttons[i]->setVisible(true);
+    }
+    ScoreSet_You=0;
+    ScoreSet_Opponent=0;
+    ui->ScoreYou->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+    ui->ScoreOpponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+    ui->Opponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+    ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
 }
