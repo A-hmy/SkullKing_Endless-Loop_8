@@ -33,11 +33,14 @@ GameServer::GameServer(QWidget *parent) :
     connect(ui->card_12, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(ui->card_13, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(ui->card_14, &QPushButton::clicked, this, &GameServer::onButtonClicked);
+    connect(this,&GameServer::ScOre, this,&GameServer::Score);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
     ui->OKip->setVisible(false);
     ui->IpServer->setVisible(false);
     ui->YourIp->setVisible(false);
+    ui->Counter->setVisible(false);
+    ui->LoadingStop->setVisible(false);
     timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
     StartGame();
     setWindowFlags(Qt::FramelessWindowHint);
     MyClientSocket = new QTcpSocket;
@@ -182,6 +185,7 @@ void GameServer::readSocket()
               ui->UsernameYou->setText(player->get_UserName());
               emit StArt();//call function Game
           }
+          qDebug()<<s_or_c;
           //client // send parrot
           if(part1=="2"){
               QString p1=message.split("||")[0];//card1
@@ -482,6 +486,8 @@ void GameServer::on_Ok_clicked()
 
 void GameServer::on_StopResume_clicked()
 {
+    ui->LoadingStop->setVisible(true);
+    ui->Counter->setVisible(true);
     //if background be a stop
     //if()
     //for another player stop
