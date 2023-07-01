@@ -413,6 +413,8 @@ void GameServer::sendMessage(QString message)
 //server
 void GameServer::Game()
 {
+    ScoreSet_You=0;
+    ScoreSet_Opponent=0;
     int i=1;
     //for (int i=1;i<8;i++){
     Dealing(i);
@@ -643,6 +645,7 @@ void GameServer::Score(int a)
      }
      ////////////Pirate
      if(SelectedCard_you.get_Name()=="Pirate"){
+
          if(SelectedCard_opponent.get_Name()=="Queen"){
              ////dast baraye be server
              ScoreSet_You++;
@@ -671,5 +674,9 @@ void GameServer::Score(int a)
          }
 
      }
-    }
+     SelectedCard_you.get_Name()=" ";
+     SelectedCard_opponent.get_Name()=" ";
+     ui->ScoreYou->setText(QString::number(ScoreSet_You));
+     ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
+}
 
