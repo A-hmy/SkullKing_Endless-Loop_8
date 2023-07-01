@@ -441,9 +441,9 @@ void GameServer::Game()
     ScoreSet_Opponent=0;
     SelectedCard_you.set_Name(" ");
     SelectedCard_opponent.set_Name(" ");
-    Dealing(i);
+    Dealing(NumberOfRound);
        //first set*****************************
-        if (i==1){
+        if (NumberOfRound==1){
             for(int j=0;j<Parrot.size();j++){
                 Parrot[j]->set_Reserved(false);
             }
