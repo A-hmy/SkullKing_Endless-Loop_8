@@ -666,14 +666,11 @@ void GameServer::Score(int a)
                      OpponentScore+=10;
                  }
              }
-     SelectedCard_you.set_Name(" ");
-     SelectedCard_opponent.set_Name(" ");
-     //ui->ScoreYou->setText("2");
-     //ui->ScoreYou->setText(QString::number(ScoreSet_You));
-     ui->ScoreYou->setText("6");
-     ui->label->setText("5");
-     ui->label->setText("6");
-     ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
+
 }
+         SelectedCard_you.set_Name(" ");
+         SelectedCard_opponent.set_Name(" ");
+         ui->ScoreYou->setText(QString::number(ScoreSet_You));
+         ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
 
 }
