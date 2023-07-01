@@ -23,6 +23,7 @@ public:
     void DisplayingACard_you(QString card);
     void DisplayingACard_opponent(QString card);
     bool EndSet();
+    void SendCardsToClient();
 private slots:
     void onButtonClicked();
 

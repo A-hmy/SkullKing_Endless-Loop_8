@@ -42,7 +42,7 @@ GameServer::GameServer(QWidget *parent) :
     ui->LoadingStop->setVisible(false);
     timer = new QTimer(this);
     StartGame();
-    setWindowFlags(Qt::FramelessWindowHint);
+    //setWindowFlags(Qt::FramelessWindowHint);
     MyClientSocket = new QTcpSocket;
     connect(MyClientSocket, &QTcpSocket::readyRead, this, &GameServer::readSocket);
     connect(MyClientSocket, &QTcpSocket::disconnected, this, &GameServer::discardSocket);
@@ -153,6 +153,17 @@ bool GameServer::EndSet()
     return 0;//set tamom shade
 }
 
+void GameServer::SendCardsToClient()//ferestadan card ha baraye client**********
+{
+    int size=CardsOfPlayerClient.size();
+    QString cards="7^"+QString::number(size)+"^";
+    for(auto x:CardsOfPlayerClient){
+        cards+=x->get_Name()+"*"+QString::number(x->get_Number())+"||";
+    }
+    QTimer timer;
+    timer.setInterval(5000);
+    sendMessage(cards);
+}
 
 void GameServer::connectt()
 {
@@ -203,7 +214,7 @@ void GameServer::readSocket()
               emit StArt();//call function Game
           }
           qDebug()<<s_or_c;
-          //client // send parrot
+          //client // send parrot//set 1
           if(part1=="2"){
               QString p1=message.split("||")[0];//card1
               QString p2=message.split("||")[1];//card2
@@ -315,15 +326,26 @@ void GameServer::readSocket()
               ui->Counter->hide();
               ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
           }
-          //client
-          /*if(part1=="7"){
-              QString part2=message.split("^")[1];
-              QString ScoreO=part2.split("*")[0];
-              QString ScoreY=part2.split("*")[1];
-              ui->ScoreOpponent->setText(ScoreO);
-              ui->ScoreYou->setText(ScoreY);
-          }*/
-   }
+          //client//daryaft card&&&&&&&&&&&&&&&&&&&&&&&&
+          if(part1=="7"){
+              showPushButton();
+              player->clear_Cards();
+              int size=message.split("^")[1].toInt(nullptr,10);
+              QString card=message.split("^")[2];
+              for(int i=0;i<size;i++){
+                  QString c=card.split("||")[i];
+                  QString n=c.split("*")[0];
+                  int num=c.split("*")[1].toInt(nullptr,10);
+                  for(auto x:_cards){
+                      if(n==x->get_Name()&&num==x->get_Number()){
+                          player->set_Cards(*x);
+                          break;
+                      }
+                  }
+              }
+              DisplayCards();
+          }
+}
 
 //change QMessageBox
 void GameServer::displayError(QAbstractSocket::SocketError socketError)
@@ -364,7 +386,6 @@ void GameServer::onButtonClicked()
            }
            DisplayingACard_you(card);
            Turn=NameOfOpponent;
-           //sendMessage("7^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
            sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
            ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
@@ -443,11 +464,12 @@ void GameServer::sendMessage(QString message)
 //server
 void GameServer::Game()
 {
-    showPushButton();
     ScoreSet_You=0;
     ScoreSet_Opponent=0;
     SelectedCard_you.set_Name(" ");
     SelectedCard_opponent.set_Name(" ");
+    player->clear_Cards();
+    CardsOfPlayerClient.clear();
     Dealing(NumberOfRound);
        //first set*****************************
         if (NumberOfRound==1){
@@ -487,100 +509,15 @@ void GameServer::Game()
             QString card2="2^"+ParrotClient1.get_Name()+"^"+QString::number(ParrotClient1.get_Number());
             QString cards=CardsOfPlayerClient[0]->get_Name()+"*"+QString::number(CardsOfPlayerClient[0]->get_Number())+"||"+CardsOfPlayerClient[1]->get_Name()+"*"+QString::number(CardsOfPlayerClient[1]->get_Number());
             sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn+"||"+cards);
-
+            DisplayCards();
         }
         //timer->start(3000);
+        else{
+        SendCardsToClient();
         DisplayCards();
+        }
 }
 
-//}
-
-void GameServer::hideImage()
-{
-    ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
-    ui->Opponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
-}
-
-void GameServer::on_Ok_clicked()
-{
-    //error if write wrong
-    if(!ui->NumberOfPredict->text().isEmpty()){
-        NumberOfPredictServer=ui->NumberOfPredict->text().toInt(nullptr,10);
-        ui->NumberOfPredict->setVisible(false);
-        ui->Ok->setVisible(false);
-        ui->lablePredict->setVisible(false);
-    }
-    else{
-        ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
-    }
-
-}
-
-
-void GameServer::on_StopResume_clicked()
-{
-    ui->LoadingStop->setVisible(true);
-    ui->Counter->setVisible(true);
-    //if background be a stop
-    //if()
-    //for another player stop
-    if(ui->StopResume->text()=="Stop"){
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
-    ui->LoadingStop->setMovie(LoadingG);
-    ui->LoadingStop->show();
-    ui->LoadingStop->setScaledContents(true);
-   // ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
-   // ui->Loading->setStyleSheet("background-color: brown");
-    LoadingG->start();
-
-
-    timerresume = new QTimer(this);
-    connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
-    timerresume->start(1000);
-    count = 20;
-    ui->Counter->show();
-   // ui->StopResume.remo
-    ui->StopResume->setText("Resume");
-    ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
-    sendMessage("5^Stop");
-  }
-    else{
-        //ui->StopResume->clear();
-        ui->StopResume->setText("Stop");
-        ui->LoadingStop->hide();
-        ui->Counter->hide();
-        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
-        sendMessage("6^Resume");
-    }
-}
-
-void GameServer::countdown()
-{
-
-    if (count > 0) {
-            count--;
-            ui->Counter->setText(QString::number(count));
-    }
-    else if(count==0){
-        timerresume->stop();
-        ui->StopResume->setText("Stop");
-        ui->LoadingStop->hide();
-        ui->Counter->hide();
-        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
-    }
-
-    if (!timerresume->isActive()) {
-        timerresume->start(1000);
-    }
-
-}
-
-void GameServer::on_Exit_clicked()
-{
-   Menu*m=new Menu;
-   this->close();
-   m->show();
-}
 
 void GameServer::Score(int a)
 {
@@ -704,6 +641,7 @@ void GameServer::Score(int a)
              if(ScoreSet_You>ScoreSet_Opponent){
                  Turn=player->get_UserName();
                  NumberOfRound++;
+                 showPushButton();
                  if(NumberOfRound!=7){
                      //QMessageBox::information(this,"*","dsfd");
                      emit StArt();
@@ -720,7 +658,7 @@ void GameServer::Score(int a)
          }
 }
 
-void GameServer::showPushButton()
+void GameServer::showPushButton()//restart page
 {
     QPushButton *buttons[14];
     for(int i=0;i<14;i++){
@@ -730,8 +668,96 @@ void GameServer::showPushButton()
     }
     ScoreSet_You=0;
     ScoreSet_Opponent=0;
+    ui->NumberOfPredict->setVisible(true);
+    ui->Ok->setVisible(true);
+    ui->lablePredict->setVisible(true);
     ui->ScoreYou->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
     ui->ScoreOpponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
     ui->Opponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
     ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+}
+void GameServer::hideImage()
+{
+    ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+    ui->Opponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
+}
+
+void GameServer::on_Ok_clicked()
+{
+    //error if write wrong
+    if(!ui->NumberOfPredict->text().isEmpty()){
+        NumberOfPredictServer=ui->NumberOfPredict->text().toInt(nullptr,10);
+        ui->NumberOfPredict->setVisible(false);
+        ui->Ok->setVisible(false);
+        ui->lablePredict->setVisible(false);
+    }
+    else{
+        ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
+    }
+
+}
+
+void GameServer::on_StopResume_clicked()
+{
+    ui->LoadingStop->setVisible(true);
+    ui->Counter->setVisible(true);
+    //if background be a stop
+    //if()
+    //for another player stop
+    if(ui->StopResume->text()=="Stop"){
+    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
+    ui->LoadingStop->setMovie(LoadingG);
+    ui->LoadingStop->show();
+    ui->LoadingStop->setScaledContents(true);
+   // ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
+   // ui->Loading->setStyleSheet("background-color: brown");
+    LoadingG->start();
+
+
+    timerresume = new QTimer(this);
+    connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
+    timerresume->start(1000);
+    count = 20;
+    ui->Counter->show();
+   // ui->StopResume.remo
+    ui->StopResume->setText("Resume");
+    ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
+    sendMessage("5^Stop");
+  }
+    else{
+        //ui->StopResume->clear();
+        ui->StopResume->setText("Stop");
+        ui->LoadingStop->hide();
+        ui->Counter->hide();
+        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
+        sendMessage("6^Resume");
+    }
+}
+
+void GameServer::countdown()
+{
+
+    if (count > 0) {
+            count--;
+            ui->Counter->setText(QString::number(count));
+    }
+    else if(count==0){
+        timerresume->stop();
+        ui->StopResume->setText("Stop");
+        ui->LoadingStop->hide();
+        ui->Counter->hide();
+        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
+    }
+
+    if (!timerresume->isActive()) {
+        timerresume->start(1000);
+    }
+
+}
+
+void GameServer::on_Exit_clicked()
+{
+   Menu*m=new Menu;
+   this->close();
+   m->show();
 }
