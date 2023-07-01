@@ -10,6 +10,7 @@ Card::Card(QString _Name, int _Number, int _Value)
 }
 QString Card::get_Name(){return Name;}
 int Card::get_Number(){return Number;}
+int Card::get_value(){return Value;}
 bool Card::get_Reserved(){return Reserved;}
 void Card::set_Reserved(bool _Reserved){Reserved=_Reserved;}
 int Card::get_PushButton(){return PushButton;}
@@ -18,7 +19,7 @@ void Card::set_picture(QString _Picture)
 {
     Picture=_Picture;
 }
-
+void Card::set_Name(QString _name){Name=_name;}
 QString Card::get_Picture()
 {
     return Picture;

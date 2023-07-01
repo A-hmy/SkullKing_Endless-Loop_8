@@ -15,6 +15,8 @@ public:
     void set_PushButton(int);
     void set_picture(QString);
     QString get_Picture();
+    int get_value();
+    void set_Name(QString _name);
 private:
     QString Name;
     int Number;

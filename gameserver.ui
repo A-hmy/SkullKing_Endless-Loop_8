@@ -962,7 +962,7 @@ border-radius:10px;</string>
 border-radius:10px;</string>
     </property>
     <property name="text">
-     <string/>
+     <string>656</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -1007,6 +1007,19 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>140</y>
+      <width>63</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
    <zorder>background</zorder>
    <zorder>You</zorder>
    <zorder>Opponent</zorder>
@@ -1043,6 +1056,7 @@ border-radius:10px;</string>
    <zorder>ScoreYou</zorder>
    <zorder>label_2</zorder>
    <zorder>ScoreOpponent</zorder>
+   <zorder>label</zorder>
   </widget>
  </widget>
  <resources/>
