@@ -237,18 +237,28 @@ void GameServer::readSocket()
           //server to client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
           if(part1=="3"){
               DisplayingACard_opponent(message.split("^")[1]);
+              for(auto x:_cards){
+                  if(message.split("^")[1].split("*")[0]==x->get_Name()&&message.split("^")[1].split("*")[1]==QString::number(x->get_Number())){
+                      SelectedCard_opponent=*x;
+                      break;
+                   }
+              }
               Turn=message.split("^")[2];
               ui->Turn->setText(Turn+"'s turn");
           }
           //client to server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
           if(part1=="4"){
               DisplayingACard_opponent(message.split("^")[1]);
+              for(auto x:_cards){
+                  if(message.split("^")[1].split("*")[0]==x->get_Name()&&message.split("^")[1].split("*")[1]==QString::number(x->get_Number())){
+                      SelectedCard_opponent=*x;
+                      break;
+                   }
+              }
               Turn=message.split("^")[2];
               ui->Turn->setText(Turn+"'s turn");
               if(SelectedCard_you.get_Name()==" "){
-              //moghayese kon
-              //dast o bede
-              //signal moghayeseh
+                  emit ScOre(1);
               }
           }
           //stop
@@ -309,12 +319,20 @@ void GameServer::onButtonClicked()
     if(!ui->NumberOfPredict->isVisible()){
         if(Turn==player->get_UserName()){
            QString card=Pushbutton->text();
+           for(auto x:_cards){
+               if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
+                   SelectedCard_you=*x;
+                   break;
+                }
+           }
+           if(SelectedCard_opponent.get_Name()!=" "){
+               emit ScOre(0);
+           }
            DisplayingACard_you(card);
            Turn=NameOfOpponent;
            sendMessage("3^"+card+"^"+Turn);
            ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
-           // card khodesh o mizare va moghayese mikone
         }
     }
     else{
@@ -329,6 +347,12 @@ void GameServer::onButtonClicked()
         if(!ui->NumberOfPredict->isVisible()){
             if(Turn==player->get_UserName()){
                QString card=Pushbutton->text();
+               for(auto x:_cards){
+                   if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
+                       SelectedCard_you=*x;
+                       break;
+                    }
+               }
                DisplayingACard_you(card);
                Turn=NameOfOpponent;
                sendMessage("4^"+card+"^"+Turn);
@@ -519,79 +543,125 @@ void GameServer::on_Exit_clicked()
    m->show();
 }
 
-void GameServer::Score()
+void GameServer::Score(int a)
 {
     if(SelectedCard_you.get_Name()=="Flag"||SelectedCard_you.get_Name()=="Treasure"||SelectedCard_you.get_Name()=="Map"||SelectedCard_you.get_Name()=="Parrot"){
          if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
              if(SelectedCard_you.get_Number()>SelectedCard_opponent.get_Number()){
              //dast baraye server
+                 ScoreSet_You++;
               }
              else if(SelectedCard_you.get_Number()<SelectedCard_opponent.get_Number()) {
              //dast baraye client
+                 ScoreSet_Opponent++;
             }
 
          }
 
          else if(SelectedCard_opponent.get_Name()=="Queen"){
            //dast baraye client
+             ScoreSet_Opponent++;
+             OpponentScore+=20;
          }
          else if(SelectedCard_opponent.get_Name()=="King"){
              //dast baraye client
+             ScoreSet_Opponent++;
+             OpponentScore+=15;
          }
          else if(SelectedCard_opponent.get_Name()=="Pirate"){
             //dast baraye client
+             ScoreSet_Opponent++;
+             OpponentScore+=10;
          }
      }
 
      ////////////Queen
      if(SelectedCard_you.get_Name()=="Queen"){
          if(SelectedCard_opponent.get_Name()=="Queen"){
+             //first server
+             if(a==1){
+                 ScoreSet_You++;
+                 YouScore+=40;
+             }
+             else{
+                 ScoreSet_Opponent++;
+                 OpponentScore+=40;
+             }
              //nafar aval
          }
          else if(SelectedCard_opponent.get_Name()=="King"){
               //dast baraye server
+             ScoreSet_You++;
+             YouScore+=35;
          }
          else if(SelectedCard_opponent.get_Name()=="Pirate"){
              //dast baraye client
+             ScoreSet_Opponent++;
+             OpponentScore+=30;
          }
           if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
               //dast baraye be server
+              ScoreSet_You++;
+              YouScore+=20;
           }
-
-     }
-
-
+}
      ////////////King
      if(SelectedCard_you.get_Name()=="King"){
          if(SelectedCard_opponent.get_Name()=="Queen"){
              //dast baraye be client
+             ScoreSet_Opponent++;
+             OpponentScore+=35;
          }
          else if(SelectedCard_opponent.get_Name()=="King"){
              //nafar aval
+             if(a==1){
+                 ScoreSet_You++;
+                 YouScore+=30;
+             }
+             else{
+                 ScoreSet_Opponent++;
+                 OpponentScore+=30;
+             }
          }
          else if(SelectedCard_opponent.get_Name()=="Pirate"){
              //dast baraye server
+             ScoreSet_You++;
+             YouScore+=25;
          }
          if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
              //dast baraye server
+             ScoreSet_You++;
+             YouScore+=15;
          }
 
      }
-
-
      ////////////Pirate
      if(SelectedCard_you.get_Name()=="Pirate"){
          if(SelectedCard_opponent.get_Name()=="Queen"){
              ////dast baraye be server
+             ScoreSet_You++;
+             YouScore+=30;
          }
          else if(SelectedCard_opponent.get_Name()=="King"){
              //dast baraye client
+             ScoreSet_Opponent++;
+             OpponentScore+=30;
          }
          else if(SelectedCard_opponent.get_Name()=="Pirate"){
             //nafar aval
+             if(a==1){
+                 ScoreSet_You++;
+                 YouScore+=20;
+             }
+             else{
+                 ScoreSet_Opponent++;
+                 OpponentScore+=20;
+             }
          }
          if(SelectedCard_opponent.get_Name()=="Flag"||SelectedCard_opponent.get_Name()=="Treasure"||SelectedCard_opponent.get_Name()=="Map"||SelectedCard_opponent.get_Name()=="Parrot"){
              //dast baraye server
+             ScoreSet_You++;
+             YouScore+=10;
          }
 
      }

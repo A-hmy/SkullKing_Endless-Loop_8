@@ -52,7 +52,7 @@ private slots:
 
 signals:
     void StArt();
-
+    void ScOre(int a);
 private:
     Ui::GameServer *ui;
     QTimer *timer;
