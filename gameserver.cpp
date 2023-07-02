@@ -308,7 +308,7 @@ void GameServer::readSocket()
               Turn=message.split("^")[2];
               ui->Turn->setText(Turn+"'s turn");
               if(SelectedCard_you.get_Name()!=" "){
-                  emit ScOre(1);
+                  emit ScOre(1);//first server
               }
           }
           //stop
@@ -380,21 +380,21 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
     }*/
 }
 
-bool GameServer::CheckPushButton()
+bool GameServer::CheckPushButton(QString card)//name of the cards
 {
-    for (auto x:player->get_cards()){
-        if (x.get_Name()==SelectedCard_opponent.get_Name()||SelectedCard_opponent.get_Name()=="Pirate"||SelectedCard_opponent.get_Name()=="King"||SelectedCard_opponent.get_Name()=="King"){
-            return 1;
-        }
-    }
-    return 0;
+  for(auto x:player->get_cards()){
+      if(card==x.get_Name()){
+          return 1;
+      }
+  }
+  return 0;
 }
+
 
 void GameServer::onButtonClicked()
 {
     // check kardan kart roye zamin va handel kardan in ke ejaze dare biyad ya na
-    //server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-  if (SelectedCard_opponent.get_Name() == " " || CheckPushButton()) {
+    //server
     if(s_or_c==1){
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     QString NameButton=button->objectName();
@@ -402,29 +402,46 @@ void GameServer::onButtonClicked()
     if(!ui->NumberOfPredict->isVisible()){
         if(Turn==player->get_UserName()){
            QString card=Pushbutton->text();
+           if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"){
            for(auto x:_cards){
                if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                    SelectedCard_you=*x;
-                   //std::find(player->get_cards().begin(),player->get_cards().end(),x);
+                   player->get_cards().remove(*x);
                    break;
                 }
            }
-           DisplayingACard_you(card);//??????
+           DisplayingACard_you(card);
            Turn=NameOfOpponent;
            sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
            ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
            if(SelectedCard_opponent.get_Name()!=" "){
-               emit ScOre(0);
+               emit ScOre(0);//first client
            }
         }
-           //????????????????????
-           //sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
-          //ui->Turn->setText(Turn+"'s turn");
-        }
+       else if(!CheckPushButton(SelectedCard_opponent.get_Name())) {
+                  for(auto x:_cards){
+                      if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
+                          SelectedCard_you=*x;
+                          player->get_cards().remove(*x);
+                          break;
+                       }
+                  }
+                  DisplayingACard_you(card);
+                  Turn=NameOfOpponent;
+                  sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
+                  ui->Turn->setText(Turn+"'s turn");
+                  Pushbutton->setVisible(false);
+                  if(SelectedCard_opponent.get_Name()!=" "){
+                      emit ScOre(2);
+                  }
+              }
+       }
+    }
     else{
          ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
     }
+
     }
     //client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     if(s_or_c==0){
@@ -434,10 +451,11 @@ void GameServer::onButtonClicked()
         if(!ui->NumberOfPredict->isVisible()){
             if(Turn==player->get_UserName()){
                QString card=Pushbutton->text();
+                if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"){
                for(auto x:_cards){
                    if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                        SelectedCard_you=*x;
-                       //std::find(player->get_cards().begin(),player->get_cards().end(),x);
+                       player->get_cards().remove(*x);
                        break;
                     }
                }
@@ -446,23 +464,17 @@ void GameServer::onButtonClicked()
                Turn=NameOfOpponent;
                sendMessage("4^"+card+"^"+Turn);
                ui->Turn->setText(Turn+"'s turn");
-               //Pushbutton->setVisible(false);
             }
+        }
         }
         else{
              ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
         }
     }
-  }
-  else{
 
-      QMessageBox* message=new QMessageBox;
-     // message->setFont(Font);
-      message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
-      message->setText("Please complete all the lines 🙄");
   }
 
-}
+
 
 void GameServer::on_OKip_clicked()
 {
@@ -553,6 +565,7 @@ void GameServer::Game()
 
 void GameServer::Score(int a)
 {
+    if(a!=2){
     if (SelectedCard_you.get_Name() != "Queen" && SelectedCard_you.get_Name() != "King" && SelectedCard_you.get_Name() != "Pirate" && SelectedCard_opponent.get_Name() != "Queen" && SelectedCard_opponent.get_Name() != "King" && SelectedCard_opponent.get_Name() != "Pirate") {
 
            if (SelectedCard_you.get_value() > SelectedCard_opponent.get_value()) {
@@ -664,7 +677,7 @@ void GameServer::Score(int a)
                OpponentScore += 10;
            }
        }
-
+}
 
          SelectedCard_you.set_Name(" ");
          SelectedCard_opponent.set_Name(" ");

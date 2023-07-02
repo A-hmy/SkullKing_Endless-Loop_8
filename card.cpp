@@ -20,6 +20,11 @@ void Card::set_picture(QString _Picture)
     Picture=_Picture;
 }
 void Card::set_Name(QString _name){Name=_name;}
+
+bool Card::operator==(const Card &other) const
+{
+  return(other.Name==Name&&other.Number==Number&&other.Value==Value);
+}
 QString Card::get_Picture()
 {
     return Picture;

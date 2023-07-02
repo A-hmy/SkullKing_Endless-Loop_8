@@ -17,6 +17,7 @@ public:
     QString get_Picture();
     int get_value();
     void set_Name(QString _name);
+    bool operator==(const Card& other) const;
 private:
     QString Name;
     int Number;

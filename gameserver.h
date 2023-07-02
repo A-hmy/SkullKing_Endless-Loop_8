@@ -25,7 +25,8 @@ public:
     void DisplayingACard_opponent(QString card);
     bool EndSet();
     void SendCardsToClient();
-    bool CheckPushButton();
+    bool CheckPushButton(QString card);
+    void clickedServer(QString card);
 private slots:
     void onButtonClicked();
 
