@@ -387,15 +387,16 @@ void GameServer::onButtonClicked()
                    break;
                 }
            }
+           DisplayingACard_you(card);//??????
+           Turn=NameOfOpponent;
+           //sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
+           //ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
            if(SelectedCard_opponent.get_Name()!=" "){
                emit ScOre(0);
            }
-           DisplayingACard_you(card);
-           Turn=NameOfOpponent;
            sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
-           ui->Turn->setText(Turn+"'s turn");
-           //Pushbutton->setVisible(false);
+          ui->Turn->setText(Turn+"'s turn");
         }
     }
     else{
@@ -626,9 +627,6 @@ void GameServer::Score(int a)
                      OpponentScore+=10;
                  }
              }
-
-
-
 
          SelectedCard_you.set_Name(" ");
          SelectedCard_opponent.set_Name(" ");
