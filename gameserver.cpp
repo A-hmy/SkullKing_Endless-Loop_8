@@ -195,7 +195,6 @@ void GameServer::readSocket()
     QByteArray buffer;
     QDataStream socketStream(MyClientSocket);
     socketStream.setVersion(QDataStream::Qt_5_15);
-
    socketStream.startTransaction();
    socketStream >> buffer;
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
@@ -372,7 +371,7 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
 
 void GameServer::onButtonClicked()
 {
-    // check kardan kart roye zamin va handel kardan in ke ejaze
+    // check kardan kart roye zamin va handel kardan in ke ejaze dare biyad ya na
     //server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     if(s_or_c==1){
     QPushButton *button = qobject_cast<QPushButton *>(sender());
@@ -395,6 +394,7 @@ void GameServer::onButtonClicked()
            if(SelectedCard_opponent.get_Name()!=" "){
                emit ScOre(0);
            }
+           //????????????????????
            sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
           ui->Turn->setText(Turn+"'s turn");
         }
@@ -506,13 +506,16 @@ void GameServer::Game()
             QString cards=CardsOfPlayerClient[0]->get_Name()+"*"+QString::number(CardsOfPlayerClient[0]->get_Number())+"||"+CardsOfPlayerClient[1]->get_Name()+"*"+QString::number(CardsOfPlayerClient[1]->get_Number());
             sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn+"||"+cards);
             DisplayCards();
+            QEventLoop loop;
+            QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+            loop.exec();
+            hideImage();
         }
         else{
         SendCardsToClient();
         DisplayCards();
         }
 }
-
 
 void GameServer::Score(int a)
 {
@@ -632,6 +635,10 @@ void GameServer::Score(int a)
          SelectedCard_opponent.set_Name(" ");
          ui->ScoreYou->setText(QString::number(ScoreSet_You));
          ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
+         QEventLoop loop;
+         QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+         loop.exec();
+         hideImage();
          // set is finished
          if(!EndSet()){
              if(ScoreSet_You==NumberOfPredictServer&&NumberOfPredictServer!=0){
