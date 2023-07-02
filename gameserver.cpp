@@ -388,15 +388,15 @@ void GameServer::onButtonClicked()
            }
            DisplayingACard_you(card);//??????
            Turn=NameOfOpponent;
-           //sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
-           //ui->Turn->setText(Turn+"'s turn");
+           sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
+           ui->Turn->setText(Turn+"'s turn");
            Pushbutton->setVisible(false);
            if(SelectedCard_opponent.get_Name()!=" "){
                emit ScOre(0);
            }
            //????????????????????
-           sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
-          ui->Turn->setText(Turn+"'s turn");
+           //sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
+          //ui->Turn->setText(Turn+"'s turn");
         }
     }
     else{
@@ -462,6 +462,7 @@ void GameServer::sendMessage(QString message)
 //server
 void GameServer::Game()
 {
+    //sendMessage("3^"+(QString)"!"+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
     ScoreSet_You=0;
     ScoreSet_Opponent=0;
     SelectedCard_you.set_Name(" ");
@@ -674,6 +675,8 @@ void GameServer::Score(int a)
                }
                NumberOfRound++;
                showPushButton();
+               SelectedCard_you.set_Name(" ");
+               SelectedCard_opponent.set_Name(" ");
                emit StArt();
                }
             else{
