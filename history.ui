@@ -17,10 +17,10 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>240</y>
-      <width>481</width>
-      <height>341</height>
+      <x>70</x>
+      <y>160</y>
+      <width>521</width>
+      <height>361</height>
      </rect>
     </property>
     <property name="font">
@@ -35,142 +35,6 @@
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set1">
-    <property name="geometry">
-     <rect>
-      <x>82</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;
-</string>
-    </property>
-    <property name="text">
-     <string>set 1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set8">
-    <property name="geometry">
-     <rect>
-      <x>82</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;
-</string>
-    </property>
-    <property name="text">
-     <string>set 8</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set3">
-    <property name="geometry">
-     <rect>
-      <x>301</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;
-</string>
-    </property>
-    <property name="text">
-     <string>set 3</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set4">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;
-</string>
-    </property>
-    <property name="text">
-     <string>set 4</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set7">
-    <property name="geometry">
-     <rect>
-      <x>739</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 7</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set9">
-    <property name="geometry">
-     <rect>
-      <x>191</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 9</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -191,28 +55,6 @@ border-radius:10px;</string>
     </property>
     <property name="text">
      <string>Opponent  :</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set6">
-    <property name="geometry">
-     <rect>
-      <x>629</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 6</string>
     </property>
    </widget>
    <widget class="QLabel" name="YourScore">
@@ -258,28 +100,6 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="Set12">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 12</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
@@ -323,28 +143,6 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="Set14">
-    <property name="geometry">
-     <rect>
-      <x>739</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 14</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
@@ -365,116 +163,6 @@ border-radius:10px;</string>
      <string>Opponent score :</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Set10">
-    <property name="geometry">
-     <rect>
-      <x>301</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 10</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set11">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 11</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set2">
-    <property name="geometry">
-     <rect>
-      <x>191</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 2</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set13">
-    <property name="geometry">
-     <rect>
-      <x>629</x>
-      <y>192</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 13</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Set5">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>140</y>
-      <width>101</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe Script</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:0, stop:0.0673077 rgba(144, 115, 77, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:10px;</string>
-    </property>
-    <property name="text">
-     <string>set 5</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
@@ -493,26 +181,12 @@ border-radius:10px;</string>
    </widget>
    <zorder>label</zorder>
    <zorder>label_8</zorder>
-   <zorder>Set1</zorder>
-   <zorder>Set8</zorder>
-   <zorder>Set3</zorder>
-   <zorder>Set4</zorder>
-   <zorder>Set7</zorder>
-   <zorder>Set9</zorder>
    <zorder>label_5</zorder>
-   <zorder>Set6</zorder>
    <zorder>YourScore</zorder>
    <zorder>Opponent</zorder>
-   <zorder>Set12</zorder>
    <zorder>label_7</zorder>
    <zorder>OpponentScore</zorder>
-   <zorder>Set14</zorder>
    <zorder>label_9</zorder>
-   <zorder>Set10</zorder>
-   <zorder>Set11</zorder>
-   <zorder>Set2</zorder>
-   <zorder>Set13</zorder>
-   <zorder>Set5</zorder>
   </widget>
  </widget>
  <resources/>

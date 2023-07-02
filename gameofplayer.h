@@ -7,12 +7,13 @@
 class GameOfPlayer
 {
 public:
+    QPixmap Photo;
     GameOfPlayer();
     QString get_NameOpponent();
     int get_Score();
     int get_ScoreOpponent();
 private:
-   QPixmap Photo;
+
    QString NameOpponent;
    int Score;
    int ScoreOpponent;
