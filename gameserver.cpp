@@ -402,7 +402,7 @@ void GameServer::onButtonClicked()
     if(!ui->NumberOfPredict->isVisible()){
         if(Turn==player->get_UserName()){
            QString card=Pushbutton->text();
-           if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"){
+           if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"||SelectedCard_opponent.get_Name()=="Pirate"||SelectedCard_opponent.get_Name()=="King"||SelectedCard_opponent.get_Name()=="Queen"){
            for(auto x:_cards){
                if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                    SelectedCard_you=*x;
@@ -451,7 +451,7 @@ void GameServer::onButtonClicked()
         if(!ui->NumberOfPredict->isVisible()){
             if(Turn==player->get_UserName()){
                QString card=Pushbutton->text();
-                if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"){
+                if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"||SelectedCard_opponent.get_Name()=="Pirate"||SelectedCard_opponent.get_Name()=="King"||SelectedCard_opponent.get_Name()=="Queen"){
                for(auto x:_cards){
                    if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                        SelectedCard_you=*x;
@@ -678,6 +678,9 @@ void GameServer::Score(int a)
            }
        }
 }
+    else if(a==2){
+        ScoreSet_Opponent++;
+    }
 
          SelectedCard_you.set_Name(" ");
          SelectedCard_opponent.set_Name(" ");
@@ -780,7 +783,7 @@ void GameServer::hideImage()
 void GameServer::on_Ok_clicked()
 {
     //error if write wrong
-    if(ui->NumberOfPredict->text().toInt()>NumberOfRound){
+    if(ui->NumberOfPredict->text().toInt()>player->get_cards().size()){
         ui->NumberOfPredict->clear();
         ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗ Enter right input ❗❗❗❗❗");
     }
