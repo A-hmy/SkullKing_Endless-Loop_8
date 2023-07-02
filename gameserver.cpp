@@ -160,8 +160,9 @@ void GameServer::SendCardsToClient()//ferestadan card ha baraye client**********
     for(auto x:CardsOfPlayerClient){
         cards+=x->get_Name()+"*"+QString::number(x->get_Number())+"||";
     }
-    QTimer timer;
-    timer.setInterval(5000);
+//    QEventLoop loop;
+//    QTimer::singleShot(5000,&loop,&QEventLoop::quit);
+//    loop.exec();
     sendMessage(cards);
 }
 
@@ -367,6 +368,7 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
 
 void GameServer::onButtonClicked()
 {
+    // check kardan kart roye zamin va handel kardan in ke ejaze
     //server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     if(s_or_c==1){
     QPushButton *button = qobject_cast<QPushButton *>(sender());
@@ -439,21 +441,10 @@ void GameServer::sendMessage(QString message)
     {
         if(MyClientSocket->isOpen())
         {
-            //QString str = ui->lineEdit_message->text();
-
             QDataStream socketStream(MyClientSocket);
             socketStream.setVersion(QDataStream::Qt_5_15);
-
-            //QByteArray header;
-            //header.prepend(QString("fileType:message,fileName:null,fileSize:%1;").arg(str.size()).toUtf8());
-            //header.resize(128);
-
             QByteArray byteArray = message.toUtf8();
-            //byteArray.prepend(header);
-
             socketStream << byteArray;
-
-            //ui->lineEdit_message->clear();
         }
         else
             QMessageBox::critical(this,"QTCPClient","Socket doesn't seem to be opened");
@@ -471,19 +462,17 @@ void GameServer::Game()
     player->clear_Cards();
     CardsOfPlayerClient.clear();
     Dealing(NumberOfRound);
-       //first set*****************************
-        if (NumberOfRound==1){
-            for(int j=0;j<Parrot.size();j++){
-                Parrot[j]->set_Reserved(false);
-            }
-            srand(time(NULL));
-            int index = rand() % (Parrot.size());
-            if (Parrot[index]->get_Reserved() != 1) {
-                ParrotClient1 = *(Parrot[index]);//khodesh(server)
-                QString image="border-image: url("+ParrotClient1.get_Picture()+");";
-                //QPixmap mypixmap(ParrotClient1.get_Picture());
+    //first set*****************************
+    if (NumberOfRound==1){
+    for(int j=0;j<Parrot.size();j++){
+       Parrot[j]->set_Reserved(false);
+    }
+    srand(time(NULL));
+    int index = rand() % (Parrot.size());
+    if (Parrot[index]->get_Reserved() != 1) {
+        ParrotClient1 = *(Parrot[index]);//khodesh(server)
+         QString image="border-image: url("+ParrotClient1.get_Picture()+");";
                 ui->You->setStyleSheet(image);
-                //ui->You->setScaledContents(true);
                 Parrot[index]->set_Reserved(true);
             }
             index = rand() % (Parrot.size());
@@ -511,7 +500,6 @@ void GameServer::Game()
             sendMessage(card1+"||"+card2+"||"+player->get_UserName()+"||"+Turn+"||"+cards);
             DisplayCards();
         }
-        //timer->start(3000);
         else{
         SendCardsToClient();
         DisplayCards();
@@ -633,29 +621,54 @@ void GameServer::Score(int a)
                  }
              }
 
+
+
+
          SelectedCard_you.set_Name(" ");
          SelectedCard_opponent.set_Name(" ");
          ui->ScoreYou->setText(QString::number(ScoreSet_You));
          ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
-         if(!EndSet()){// set is finished
-             if(ScoreSet_You>ScoreSet_Opponent){
+         // set is finished
+         if(!EndSet()){
+             if(ScoreSet_You==NumberOfPredictServer&&NumberOfPredictServer!=0){
+                 YouScore+=ScoreSet_You*10;
+             }
+             else if(NumberOfPredictServer!=0){
+                 YouScore-=ScoreSet_You*10;
+             }
+             else if(NumberOfPredictServer==0&&ScoreSet_You>0){
+                 YouScore+=NumberOfRound*10;
+             }
+             else {
+                 YouScore-=NumberOfRound*10;//?????
+             }
+             if(ScoreSet_You==NumberOfPredictClient&&NumberOfPredictClient!=0){
+                 OpponentScore+=ScoreSet_You*10;
+             }
+             else if(NumberOfPredictClient!=0){
+                 OpponentScore-=ScoreSet_You*10;
+             }
+             else if(NumberOfPredictClient==0&&ScoreSet_You>0){
+                 OpponentScore+=NumberOfRound*10;
+             }
+             else {
+                 OpponentScore-=NumberOfRound*10;//???
+             }
+             if(NumberOfRound!=7){
+               if(ScoreSet_You>ScoreSet_Opponent){
                  Turn=player->get_UserName();
-                 NumberOfRound++;
-                 showPushButton();
-                 if(NumberOfRound!=7){
-                     //QMessageBox::information(this,"*","dsfd");
-                     emit StArt();
                  }
+               else{
+                   Turn=NameOfOpponent;
+               }
+               NumberOfRound++;
+               showPushButton();
+               emit StArt();
+               }
+            else{
+                //moghayese emtiyaz akhar va dadan seke ha
              }
-             else{
-                 Turn=NameOfOpponent;
-                 NumberOfRound++;
-                 if(NumberOfRound!=7){
-                     //QMessageBox::information(this,"*","dsfd");
-                     emit StArt();
-                 }
-             }
-         }
+        }
 }
 
 void GameServer::showPushButton()//restart page
@@ -676,6 +689,7 @@ void GameServer::showPushButton()//restart page
     ui->Opponent->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
     ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
 }
+
 void GameServer::hideImage()
 {
     ui->You->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(139, 121, 117, 255), stop:1 rgba(255, 255, 255, 255));border-radius:10px;");
