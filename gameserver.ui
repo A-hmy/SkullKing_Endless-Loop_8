@@ -994,6 +994,94 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="LoseWin">
+    <property name="geometry">
+     <rect>
+      <x>-8</x>
+      <y>0</y>
+      <width>1061</width>
+      <height>721</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(99, 59, 14, 255), stop:1 rgba(255, 255, 255, 255));</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>90</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(170, 255, 0);</string>
+    </property>
+    <property name="text">
+     <string>YOU</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>90</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+background-color: rgb(170, 255, 0);</string>
+    </property>
+    <property name="text">
+     <string>OPPONENT </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Syou">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>160</y>
+      <width>63</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Sopp">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>160</y>
+      <width>81</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Whowon">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>259</y>
+      <width>321</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
    <zorder>background</zorder>
    <zorder>You</zorder>
    <zorder>Opponent</zorder>
@@ -1029,6 +1117,12 @@ border-radius:10px;</string>
    <zorder>OKip</zorder>
    <zorder>ScoreYou</zorder>
    <zorder>ScoreOpponent</zorder>
+   <zorder>LoseWin</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>Syou</zorder>
+   <zorder>Sopp</zorder>
+   <zorder>Whowon</zorder>
   </widget>
  </widget>
  <resources/>

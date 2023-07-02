@@ -8,6 +8,7 @@
 #include<QMetaType>
 #include<QAbstractSocket>
 #include <QTimer>
+#include <algorithm>
 namespace Ui {
 class GameServer;
 }
@@ -24,6 +25,7 @@ public:
     void DisplayingACard_opponent(QString card);
     bool EndSet();
     void SendCardsToClient();
+    bool CheckPushButton();
 private slots:
     void onButtonClicked();
 
