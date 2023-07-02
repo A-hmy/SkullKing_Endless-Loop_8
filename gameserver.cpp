@@ -451,7 +451,7 @@ void GameServer::onButtonClicked()
         if(!ui->NumberOfPredict->isVisible()){
             if(Turn==player->get_UserName()){
                QString card=Pushbutton->text();
-                if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"||SelectedCard_opponent.get_Name()=="Pirate"||SelectedCard_opponent.get_Name()=="King"||SelectedCard_opponent.get_Name()=="Queen"){
+                if((!CheckPushButton(SelectedCard_opponent.get_Name())&&card.split("*")[0]=="Flag")||SelectedCard_opponent.get_Name()==" "||card.split("*")[0]==SelectedCard_opponent.get_Name()||card.split("*")[0]=="Pirate"||card.split("*")[0]=="King"||card.split("*")[0]=="Queen"||SelectedCard_opponent.get_Name()=="Pirate"||SelectedCard_opponent.get_Name()=="King"||SelectedCard_opponent.get_Name()=="Queen"||!CheckPushButton(SelectedCard_opponent.get_Name())){
                for(auto x:_cards){
                    if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                        SelectedCard_you=*x;
