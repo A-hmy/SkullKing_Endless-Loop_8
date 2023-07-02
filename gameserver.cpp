@@ -394,6 +394,7 @@ void GameServer::onButtonClicked()
 {
     // check kardan kart roye zamin va handel kardan in ke ejaze dare biyad ya na
     //server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  if (SelectedCard_opponent.get_Name() == " " || CheckPushButton()) {
     if(s_or_c==1){
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     QString NameButton=button->objectName();
@@ -452,6 +453,15 @@ void GameServer::onButtonClicked()
              ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
         }
     }
+  }
+  else{
+
+      QMessageBox* message=new QMessageBox;
+     // message->setFont(Font);
+      message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
+      message->setText("Please complete all the lines 🙄");
+  }
+
 }
 
 void GameServer::on_OKip_clicked()
@@ -818,8 +828,6 @@ void GameServer::countdown()
         ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
     }
 }
-
-
 
 void GameServer::on_Exit_clicked()
 {
