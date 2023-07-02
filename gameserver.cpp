@@ -14,6 +14,8 @@
 #include<QDebug>
 #include <QTimer>
 #include<thread>
+#include <Qvalidator>
+
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameServer)
@@ -35,6 +37,9 @@ GameServer::GameServer(QWidget *parent) :
     connect(ui->card_14, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(this,&GameServer::ScOre, this,&GameServer::Score);
     //connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
+    QIntValidator *validator=new QIntValidator();
+    ui->NumberOfPredict->setValidator(validator);
+
     ui->LoseWin->hide();
     ui->Sopp->hide();
     ui->Syou->hide();
@@ -752,12 +757,17 @@ void GameServer::hideImage()
 void GameServer::on_Ok_clicked()
 {
     //error if write wrong
-    if(!ui->NumberOfPredict->text().isEmpty()){
+    if(ui->NumberOfPredict->text().toInt()>NumberOfRound){
+        ui->NumberOfPredict->clear();
+        ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗ Enter right input ❗❗❗❗❗");
+    }
+    else if(!ui->NumberOfPredict->text().isEmpty()){
         NumberOfPredictServer=ui->NumberOfPredict->text().toInt(nullptr,10);
         ui->NumberOfPredict->setVisible(false);
         ui->Ok->setVisible(false);
         ui->lablePredict->setVisible(false);
     }
+
     else{
         ui->NumberOfPredict->setPlaceholderText("❗❗❗❗❗");
     }
@@ -768,32 +778,26 @@ void GameServer::on_StopResume_clicked()
 {
     ui->LoadingStop->setVisible(true);
     ui->Counter->setVisible(true);
-    //if background be a stop
-    //if()
-    //for another player stop
-    if(ui->StopResume->text()=="Stop"){
-    QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
-    ui->LoadingStop->setMovie(LoadingG);
-    ui->LoadingStop->show();
-    ui->LoadingStop->setScaledContents(true);
-   // ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
-   // ui->Loading->setStyleSheet("background-color: brown");
-    LoadingG->start();
 
+    if (ui->StopResume->text() == "Stop") {
+        QMovie *LoadingG = new QMovie(":/new/prefix1/Picture/loadingstop.gif");
+        ui->LoadingStop->setMovie(LoadingG);
+        ui->LoadingStop->show();
+        ui->LoadingStop->setScaledContents(true);
+        LoadingG->start();
 
-    timerresume = new QTimer(this);
-    connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
-    timerresume->start(1000);
-    count = 20;
-    ui->Counter->show();
-   // ui->StopResume.remo
-    ui->StopResume->setText("Resume");
-    ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
-    sendMessage("5^Stop");
-  }
-    else{
-        //ui->StopResume->clear();
+        timerresume = new QTimer(this);
+        connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
+        timerresume->start(1000); // Start the timer here
+
+        count = 20;
+        ui->Counter->show();
+        ui->StopResume->setText("Resume");
+        ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
+        sendMessage("5^Stop");
+    } else {
         ui->StopResume->setText("Stop");
+        delete timerresume;
         ui->LoadingStop->hide();
         ui->Counter->hide();
         ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
@@ -803,28 +807,24 @@ void GameServer::on_StopResume_clicked()
 
 void GameServer::countdown()
 {
-
     if (count > 0) {
-            count--;
-            ui->Counter->setText(QString::number(count));
-    }
-    else if(count==0){
+        count--;
+        ui->Counter->setText(QString::number(count));
+    } else if (count == 0) {
         timerresume->stop();
         ui->StopResume->setText("Stop");
         ui->LoadingStop->hide();
         ui->Counter->hide();
         ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
     }
-
-    if (!timerresume->isActive()) {
-        timerresume->start(1000);
-    }
-
 }
+
+
 
 void GameServer::on_Exit_clicked()
 {
+   NumberOfRound=0;
    Menu*m=new Menu;
-   this->close();
    m->show();
+   this->close();
 }

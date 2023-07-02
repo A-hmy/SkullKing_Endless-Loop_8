@@ -71,6 +71,8 @@ private:
     Card SelectedCard_opponent;
     QString Turn;
     int NumberOfRound;
+
+   bool isTimerRunning;
     int NumberOfPredictClient;
     int NumberOfPredictServer;
     int OpponentScore;//emtiyaz akhar
