@@ -1010,7 +1010,7 @@ border-radius:10px;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="lableyou">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -1026,7 +1026,7 @@ border-radius:10px;</string>
      <string>YOU</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="lableopponent">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -1118,8 +1118,8 @@ background-color: rgb(170, 255, 0);</string>
    <zorder>ScoreYou</zorder>
    <zorder>ScoreOpponent</zorder>
    <zorder>LoseWin</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
+   <zorder>lableyou</zorder>
+   <zorder>lableopponent</zorder>
    <zorder>Syou</zorder>
    <zorder>Sopp</zorder>
    <zorder>Whowon</zorder>

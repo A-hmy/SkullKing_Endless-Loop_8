@@ -39,6 +39,8 @@ GameServer::GameServer(QWidget *parent) :
     ui->Sopp->hide();
     ui->Syou->hide();
     ui->Whowon->hide();
+    ui->lableyou->hide();
+    ui->lableopponent->hide();
     ui->OKip->setVisible(false);
     ui->IpServer->setVisible(false);
     ui->YourIp->setVisible(false);
@@ -701,6 +703,8 @@ void GameServer::Score(int a)
                  ui->Sopp->show();
                  ui->Syou->show();
                  ui->Whowon->show();
+                 ui->lableyou->show();
+                 ui->lableopponent->show();
                  ui->Sopp->setText(QString::number(YouScore));
                  ui->Syou->setText(QString::number(OpponentScore));
                 if (OpponentScore<YouScore){
