@@ -115,12 +115,14 @@ void GameServer::DisplayingACard_you(QString card)
     QString num=card.split("*")[1];
     for(auto x:_cards){
         if(name==x->get_Name()&&num==QString::number(x->get_Number())){
-            SelectedCard_you=*x;
+            QString image="border-image: url("+(*x).get_Picture()+");";
+            ui->You->setStyleSheet(image);
             break;
         }
     }
-    QString image="border-image: url("+SelectedCard_you.get_Picture()+");";
-    ui->You->setStyleSheet(image);
+//    QString image="border-image: url("+SelectedCard_you.get_Picture()+");";
+//    ui->You->setStyleSheet(image);
+//    SelectedCard_you.set_Name(" ");
 }
 
 void GameServer::DisplayingACard_opponent(QString card)
@@ -129,12 +131,14 @@ void GameServer::DisplayingACard_opponent(QString card)
     QString num=card.split("*")[1];
     for(auto x:_cards){
         if(name==x->get_Name()&&num==QString::number(x->get_Number())){
-            SelectedCard_opponent=*x;
-            break;
+            QString image="border-image: url("+(*x).get_Picture()+");";
+            ui->Opponent->setStyleSheet(image);
+                break;
         }
     }
-    QString image="border-image: url("+SelectedCard_opponent.get_Picture()+");";
-    ui->Opponent->setStyleSheet(image);
+//    QString image="border-image: url("+SelectedCard_opponent.get_Picture()+");";
+//    ui->Opponent->setStyleSheet(image);
+//    SelectedCard_opponent.set_Name(" ");
 }
 
 bool GameServer::EndSet()
