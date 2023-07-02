@@ -679,6 +679,11 @@ void GameServer::Score(int a)
 
 void GameServer::showPushButton()//restart page
 {
+    ui->OKip->setVisible(false);
+    ui->IpServer->setVisible(false);
+    ui->YourIp->setVisible(false);
+    ui->Counter->setVisible(false);
+    ui->LoadingStop->setVisible(false);
     QPushButton *buttons[14];
     for(int i=0;i<14;i++){
         QString PushButton="card_"+QString::number(i+1);//name of PushButton
@@ -687,6 +692,8 @@ void GameServer::showPushButton()//restart page
     }
     ScoreSet_You=0;
     ScoreSet_Opponent=0;
+    SelectedCard_opponent.set_Name(" ");
+    SelectedCard_you.set_Name(" ");
     ui->NumberOfPredict->setVisible(true);
     ui->Ok->setVisible(true);
     ui->lablePredict->setVisible(true);
