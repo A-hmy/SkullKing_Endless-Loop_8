@@ -164,9 +164,7 @@ void GameServer::SendCardsToClient()//ferestadan card ha baraye client**********
     for(auto x:CardsOfPlayerClient){
         cards+=x->get_Name()+"*"+QString::number(x->get_Number())+"||";
     }
-//    QEventLoop loop;
-//    QTimer::singleShot(5000,&loop,&QEventLoop::quit);
-//    loop.exec();
+    cards+=Turn;
     sendMessage(cards);
 }
 
@@ -337,7 +335,8 @@ void GameServer::readSocket()
               player->clear_Cards();
               int size=message.split("^")[1].toInt(nullptr,10);
               QString card=message.split("^")[2];
-              for(int i=0;i<size;i++){
+              int i=0;
+              for(;i<size;i++){
                   QString c=card.split("||")[i];
                   QString n=c.split("*")[0];
                   int num=c.split("*")[1].toInt(nullptr,10);
@@ -348,6 +347,7 @@ void GameServer::readSocket()
                       }
                   }
               }
+              Turn=card.split("||")[i];
               DisplayCards();
           }
 }
@@ -387,6 +387,7 @@ void GameServer::onButtonClicked()
                    break;
                 }
            }
+           Pushbutton->setVisible(false);
            if(SelectedCard_opponent.get_Name()!=" "){
                emit ScOre(0);
            }
@@ -394,7 +395,7 @@ void GameServer::onButtonClicked()
            Turn=NameOfOpponent;
            sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
            ui->Turn->setText(Turn+"'s turn");
-           Pushbutton->setVisible(false);
+           //Pushbutton->setVisible(false);
         }
     }
     else{
@@ -415,11 +416,12 @@ void GameServer::onButtonClicked()
                        break;
                     }
                }
+               Pushbutton->setVisible(false);
                DisplayingACard_you(card);
                Turn=NameOfOpponent;
                sendMessage("4^"+card+"^"+Turn);
                ui->Turn->setText(Turn+"'s turn");
-               Pushbutton->setVisible(false);
+               //Pushbutton->setVisible(false);
             }
         }
         else{
