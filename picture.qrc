@@ -57,5 +57,6 @@
         <file>Picture/Stop1.png</file>
         <file>Picture/Resume1.png</file>
         <file>Picture/Exit.png</file>
+        <file>Picture/IconFirstPage.png</file>
     </qresource>
 </RCC>

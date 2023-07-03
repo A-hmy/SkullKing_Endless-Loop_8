@@ -9,6 +9,7 @@ extern QVector<Card*>_cards;//All cards
 extern Player* player;
 extern int numberOfclient;
 extern QVector<Card*>Parrot;
+extern QString path;
 class Global
 {
 public:

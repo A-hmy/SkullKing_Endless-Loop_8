@@ -14,7 +14,10 @@
 #include<QDebug>
 #include <QTimer>
 #include<thread>
-#include <Qvalidator>
+#include <QScreen>
+#include <QFileInfo>
+
+#include <QValidator>
 
 GameServer::GameServer(QWidget *parent) :
     QMainWindow(parent),
@@ -39,7 +42,8 @@ GameServer::GameServer(QWidget *parent) :
     //connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
     QIntValidator *validator=new QIntValidator();
     ui->NumberOfPredict->setValidator(validator);
-
+    ui->StopResume->hide();
+    ui->Exit->hide();
     ui->LoseWin->hide();
     ui->Sopp->hide();
     ui->Syou->hide();
@@ -187,6 +191,8 @@ void GameServer::connectt()
             ui->OKip->setVisible(false);
             ui->IpServer->setVisible(false);
             QString Username=player->get_UserName();
+            ui->StopResume->show();
+            ui->Exit->show();
             sendMessage("1^"+Username+"^"+"Client connected");
     }
     }
@@ -221,6 +227,8 @@ void GameServer::readSocket()
               NameOfOpponent=part2;
               ui->YourIp->hide();
               ui->Loading->hide();
+              ui->StopResume->show();
+              ui->Exit->show();
               ui->UsernameOpponent->setText(NameOfOpponent);
               ui->UsernameYou->setText(player->get_UserName());
               NumberOfRound=1;
@@ -369,12 +377,21 @@ void GameServer::readSocket()
           }
           //client
           if(part1=="9"){
+
               QEventLoop loop;
               QTimer::singleShot(2000,&loop,&QEventLoop::quit);
               loop.exec();
               hideImage();
               SelectedCard_opponent.set_Name(" ");
               SelectedCard_you.set_Name(" ");
+          }
+
+          if(part1=="10"){
+              //ezafe kardan coin ha be in yeki
+              NumberOfRound=0;
+              Menu*m=new Menu;
+              m->show();
+              this->close();
           }
 }
 
@@ -416,7 +433,6 @@ bool GameServer::CheckPushButton(QString card)//name of the cards
 //  }
 //  return 0;
 }
-
 
 void GameServer::onButtonClicked()
 {
@@ -501,8 +517,6 @@ void GameServer::onButtonClicked()
 
   }
 
-
-
 void GameServer::on_OKip_clicked()
 {
     if(!ui->IpServer->text().isEmpty()){
@@ -534,6 +548,8 @@ void GameServer::sendMessage(QString message)
 //server
 void GameServer::Game()
 {
+    ui->StopResume->show();
+    ui->Exit->show();
     //sendMessage("3^"+(QString)"!"+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
     ScoreSet_You=0;
     ScoreSet_Opponent=0;
@@ -784,6 +800,16 @@ void GameServer::Score(int a)
                   player->set_Lose();
                   //send message (Coin,WinorLose)
                 }
+                QScreen *screen = QGuiApplication::primaryScreen();
+
+                // Take a screenshot of the primary screen
+                QPixmap screenshot = screen->grabWindow(0);
+
+                QString filename="screenshot.png";
+                // Save the screenshot to a file
+                screenshot.save("screenshot.png");
+                QString path=QFileInfo(filename).absoluteFilePath();
+
              }
         }
          else{
@@ -849,6 +875,8 @@ void GameServer::on_StopResume_clicked()
     ui->Counter->setVisible(true);
 
     if (ui->StopResume->text() == "Stop") {
+        if(StopResumeRequest<2){
+         StopResumeRequest++;
         QMovie *LoadingG = new QMovie(":/new/prefix1/Picture/loadingstop.gif");
         ui->LoadingStop->setMovie(LoadingG);
         ui->LoadingStop->show();
@@ -864,7 +892,17 @@ void GameServer::on_StopResume_clicked()
         ui->StopResume->setText("Resume");
         ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
         sendMessage("5^Stop");
-    } else {
+        }
+        else {
+            QMessageBox* message=new QMessageBox;
+            QFont Font("Segoe Script",10);
+            message->setFont(Font);
+            message->setStyleSheet("background-color:rgb(112, 66, 33);;color:white");
+            message->setText("You can't Pause the game🙄");
+        }
+
+    }
+    else {
         ui->StopResume->setText("Stop");
         delete timerresume;
         ui->LoadingStop->hide();
@@ -890,6 +928,7 @@ void GameServer::countdown()
 
 void GameServer::on_Exit_clicked()
 {
+   sendMessage("10^ExitGame");
    NumberOfRound=0;
    Menu*m=new Menu;
    m->show();

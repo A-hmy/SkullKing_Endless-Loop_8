@@ -72,8 +72,7 @@ private:
     Card SelectedCard_opponent;
     QString Turn;
     int NumberOfRound;
-
-   bool isTimerRunning;
+    int StopResumeRequest;
     int NumberOfPredictClient;
     int NumberOfPredictServer;
     int OpponentScore;//emtiyaz akhar

@@ -6,6 +6,7 @@ QVector<Card*> CardsOfPlayerClient;
 int s_or_c;
 int numberOfclient=0;
 QVector<Card*>Parrot;
+QString path;
 Global::Global()
 {
 

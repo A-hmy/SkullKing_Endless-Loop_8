@@ -14,7 +14,8 @@ History::History(QWidget *parent) :
     ui->OpponentScore->setText(s);
     QString f = QString::number(player->get_GamePlayer().get_Score());
     ui->YourScore->setText(f);
-    ui->label_8->setPixmap(player->get_GamePlayer().Photo);
+    //ui->label_8->setPixmap(player->get_GamePlayer().Photo);
+    ui->label_8->setStyleSheet(QString("border-image: url(%1);").arg(path));
 }
 
 History::~History()
