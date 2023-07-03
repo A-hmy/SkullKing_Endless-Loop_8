@@ -8,6 +8,10 @@ PhoneNumber=_PhoneNumber;
 Email=_Email;
 Password=_Password;
 Coin=1000;
+GamePlayer.set_Score(0);
+GamePlayer.set_ScoreOpponent(0);
+GamePlayer.set_photo("");
+GamePlayer.set_NameOpponent("");
 }
 Player::Player()
 {
