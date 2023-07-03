@@ -464,7 +464,7 @@ void GameServer::on_accept_clicked()
     QString _card;
     QPushButton *buttons;
     while(1){
-        int index= rand()%15;
+        int index= rand()%14;
         QString PushButton="card_"+QString::number(index+1);//name of PushButton
         buttons= findChild<QPushButton*>(PushButton);//find PushButton
         if(buttons->isVisible()){
@@ -476,12 +476,20 @@ void GameServer::on_accept_clicked()
             break;
         }
     }
-    sendMessage("11^"+_card+"^"+ChangedCard.split("*")[2]);
+    ui->transparent->setVisible(false);
+    ui->change_lable->setVisible(false);
+    ui->accept->setVisible(false);
+    ui->reject->setVisible(false);
+    sendMessage("11^"+_card+"^"+ChangedCard.split("*")[1]);
 }
 
 void GameServer::on_reject_clicked()
 {
     sendMessage("12^");
+    ui->transparent->setVisible(false);
+    ui->change_lable->setVisible(false);
+    ui->accept->setVisible(false);
+    ui->reject->setVisible(false);
 }
 
 //change QMessageBox
