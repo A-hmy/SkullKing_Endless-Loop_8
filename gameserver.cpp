@@ -453,6 +453,10 @@ void GameServer::readSocket()
               QEventLoop loop;
               QTimer::singleShot(3000,&loop,&QEventLoop::quit);
               loop.exec();
+
+              this->close();
+              Menu *m=new Menu();
+              m->show();
           }
           if(part1=="14"){
               player->set_Lose();
@@ -475,6 +479,10 @@ void GameServer::readSocket()
                screenshot.save("screenshot.png");
                QString path=QFileInfo(filename).absoluteFilePath();
                player->get_GamePlayer().set_photo(path);
+
+               this->close();
+               Menu *m=new Menu();
+               m->show();
           }
 
 }
@@ -970,6 +978,7 @@ void GameServer::Score(int a)
                 }
                 else{
                   ui->Whowon->setText("GAME OVER");
+                  ui->Whowon->show();
                   player->set_Lose();
                   sendMessage ("13^"+QString::number(YouScore)+"^"+QString::number(OpponentScore));
                 }
@@ -989,6 +998,10 @@ void GameServer::Score(int a)
                 screenshot.save("screenshot.png");
                 QString path=QFileInfo(filename).absoluteFilePath();
                 player->get_GamePlayer().set_photo(path);
+
+                this->close();
+                Menu *m=new Menu();
+                m->show();
 
 
              }

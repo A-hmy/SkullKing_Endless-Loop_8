@@ -1071,6 +1071,11 @@ border-image: url(:/new/prefix1/Picture/back4.jpg);</string>
       <height>91</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius:10px;
 background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(155, 106, 45, 255), stop:1 rgba(255, 255, 255, 255));
@@ -1092,6 +1097,12 @@ background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(
       <height>91</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius:10px;
 background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(155, 106, 45, 255), stop:1 rgba(255, 255, 255, 255));
@@ -1112,6 +1123,12 @@ background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(
       <width>321</width>
       <height>111</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Script</family>
+      <pointsize>15</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:10px;
@@ -1207,12 +1224,6 @@ border-radius:10px;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <zorder>lableyou</zorder>
-   <zorder>lableopponent</zorder>
-   <zorder>Syou</zorder>
-   <zorder>Sopp</zorder>
-   <zorder>Whowon</zorder>
-   <zorder>LoseWin</zorder>
    <zorder>background</zorder>
    <zorder>You</zorder>
    <zorder>Opponent</zorder>
@@ -1253,6 +1264,12 @@ border-radius:10px;</string>
    <zorder>accept</zorder>
    <zorder>reject</zorder>
    <zorder>change_lable</zorder>
+   <zorder>LoseWin</zorder>
+   <zorder>Sopp</zorder>
+   <zorder>Syou</zorder>
+   <zorder>Whowon</zorder>
+   <zorder>lableyou</zorder>
+   <zorder>lableopponent</zorder>
   </widget>
  </widget>
  <resources/>
