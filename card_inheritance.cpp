@@ -8,7 +8,11 @@ void Card_Inheritance::set_Cards(Card _card){Cards.push_back(_card);}
 
 void Card_Inheritance::delete_card(Card x)
 {
-   Cards.remove(x);
+   for(std::list<Card>::iterator it= Cards.begin();it!=Cards.end();it++){
+       if(*it==x){
+           Cards.erase(it);
+       }
+   }
 }
 
 std::list<Card> Card_Inheritance::get_cards()
