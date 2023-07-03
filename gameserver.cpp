@@ -398,12 +398,23 @@ void GameServer::displayError(QAbstractSocket::SocketError socketError)
 
 bool GameServer::CheckPushButton(QString card)//name of the cards
 {
-  for(auto x:player->get_cards()){
-      if(card==x.get_Name()){
-          return 1;
-      }
-  }
-  return 0;
+    QPushButton *buttons[14];
+    for(int i=0;i<14;i++){
+        QString PushButton="card_"+QString::number(i+1);//name of PushButton
+        buttons[i]= findChild<QPushButton*>(PushButton);//find PushButton
+           if(buttons[i]->isVisible()){
+               if(buttons[i]->text().split("*")[0]==card){
+                   return 1;
+               }
+           }
+    }
+    return 0;
+//  for(auto x:player->get_cards()){
+//      if(card==x.get_Name()){
+//          return 1;
+//      }
+//  }
+//  return 0;
 }
 
 
