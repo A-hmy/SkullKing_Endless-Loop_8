@@ -72,21 +72,17 @@ void Dealing(int NumberOfRound)
         }
         //send CardsOfPlayerClient to client
 }
-
 void File_WriteOnly(QString FileName, Player player)
 {
   QFile file(FileName);
   if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
       QTextStream out(&file);
       out<<player.get_Name()<<"&"<<player.get_UserName()<<"&"<<player.get_Password()<<"&"<<player.get_Email()<<"&"<<player.get_PhoneNumber()<<"&"<<player.get_Coin()<<"&"<<player.get_Lose()<<"&"<<player.get_Win()<<"&";
-      //for(auto it=player.get_GamePlayer().begin();it!=player.get_GamePlayer().begin();++it){
-       //   out<<it->get_NameOpponent()<<"||"<<it->get_ScoreOpponent()<<"||"<<it->get_Score();
-      //}
+      out<<player.get_GamePlayer().get_NameOpponent()<<"||"<<QString::number(player.get_GamePlayer().get_ScoreOpponent())+"||"+QString::number(player.get_GamePlayer().get_Score())+"||"+player.get_GamePlayer().get_Photo();
       out<<"\n";
   }
   file.close();
 }
-
 void File_Read(QString FileName)
 {
     QFile file(FileName);
@@ -104,16 +100,16 @@ void File_Read(QString FileName)
               QString coin=fields[5];
               QString lose=fields[6];
               QString win=fields[7];
-              //QStringList Game=fields[8].split("||");
-             // QString NameOpponent=Game[0];
-             // QString ScoreOpponent=Game[1];
-             // QString Score=Game[2];
+              QStringList Game=fields[8].split("||");
+              QString NameOpponent=Game[0];
+              QString ScoreOpponent=Game[1];
+              QString Score=Game[2];
+              QString photo=Game[3];
+              GameOfPlayer gameofplayer(photo,NameOpponent,Score.toInt(),ScoreOpponent.toInt());
               Player * p=new Player(name, username, phonenumber, email, password);
               Players.push_back(p);
           }
      }
      file.close();
 }
-
-
 

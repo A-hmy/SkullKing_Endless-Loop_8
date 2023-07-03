@@ -58,6 +58,11 @@ void Player::set_Lose()
 {
     Lose++;
 }
+
+void Player::set_GamePlayer(GameOfPlayer g)
+{
+  GamePlayer=g;
+}
 GameOfPlayer Player::get_GamePlayer(){
     return GamePlayer;
 }

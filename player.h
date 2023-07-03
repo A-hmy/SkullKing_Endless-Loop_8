@@ -21,12 +21,13 @@ public:
     //QVector<GameOfPlayer>get_GamePlayer();
     //std::list<Card>get_cards();
     GameOfPlayer get_GamePlayer();
-    void set_GamePlayer(QVector<GameOfPlayer>);
+    //void set_GamePlayer(QVector<GameOfPlayer>);
     //void set_Cards(Card);
     void set_Password(QString);
     void set_Coin(int _Coin);
     void set_Win();
     void set_Lose();
+    void set_GamePlayer(GameOfPlayer g);
     //void clear_Cards();
 
 private:

@@ -390,7 +390,8 @@ void GameServer::readSocket()
               SelectedCard_you.set_Name(" ");
           }
           if(part1=="10"){
-              //ezafe kardan coin ha be in yeki
+              player->set_Coin(player->get_Coin()+100);
+              player->set_Win();
               NumberOfRound=0;
               Menu*m=new Menu;
               m->show();
@@ -431,6 +432,14 @@ void GameServer::readSocket()
           if(part1=="12"){
               ChangedCard="";
               QMessageBox::information(this,"**","reject");
+          }
+          //client//win
+          if(part1=="13"){
+              player->set_Win();
+              player->set_Coin(player->get_Coin()+100);
+          }
+          if(part1=="14"){
+              player->set_Lose();
           }
 }
 
@@ -887,15 +896,15 @@ void GameServer::Score(int a)
                  ui->Sopp->setText(QString::number(YouScore));
                  ui->Syou->setText(QString::number(OpponentScore));
                 if (OpponentScore<YouScore){
-                    /////7888888888888888888888888888888888888888888888
-                    ui->Whowon->setText(" YOU WON");
+                    ui->Whowon->setText("YOU WON");
                     player->set_Coin(player->get_Coin()+100);
                     player->set_Win();
+                    sendMessage("14^");
                 }
                 else{
-                  ui->Whowon->setText(" GAME OVER");
+                  ui->Whowon->setText("GAME OVER");
                   player->set_Lose();
-                  //send message (Coin,WinorLose)
+                  sendMessage ("13^");
                 }
                 QScreen *screen = QGuiApplication::primaryScreen();
 
@@ -1028,6 +1037,7 @@ void GameServer::on_Exit_clicked()
 {
    sendMessage("10^ExitGame");
    NumberOfRound=0;
+   player->set_Lose();
    Menu*m=new Menu;
    m->show();
    this->close();
