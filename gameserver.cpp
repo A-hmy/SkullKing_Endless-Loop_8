@@ -398,6 +398,7 @@ void GameServer::readSocket()
           }
           // on ke darkhast nakardeh
           if(part1=="8"){
+              ChangedCard="";
               ui->transparent->setVisible(true);
               ui->change_lable->setVisible(true);
               ui->accept->setVisible(true);
@@ -406,6 +407,7 @@ void GameServer::readSocket()
           }
           // on ke darkhast karde
           if(part1=="11"){
+              ChangedCard="";
               QMessageBox::information(this,"**","accept");
               QPushButton *buttons;
               ChangedCard=message.split("^")[1];
@@ -417,7 +419,7 @@ void GameServer::readSocket()
                      break;
                   }
               }
-              QString PushButton="card_"+QString::number(index);//name of PushButton
+              QString PushButton="card_"+QString::number(index+1);//name of PushButton
               buttons= findChild<QPushButton*>(PushButton);//find PushButton
               QString _card;
               _card=buttons->text();
@@ -427,6 +429,7 @@ void GameServer::readSocket()
               buttons->setText(text);
           }
           if(part1=="12"){
+              ChangedCard="";
               QMessageBox::information(this,"**","reject");
           }
 }
@@ -434,6 +437,7 @@ void GameServer::readSocket()
 
 void GameServer::on_ChangeCard_clicked()
 {
+    ChangedCard="";
     srand(time(NULL));
     QString _card;
     QPushButton *buttons;
@@ -447,12 +451,13 @@ void GameServer::on_ChangeCard_clicked()
             break;
         }
     }
-    sendMessage("8^"+_card+"^"+QString::number(index));
+    sendMessage("8^"+_card+"*"+QString::number(index));
 
 }
 
 void GameServer::on_accept_clicked()
 {
+    //ChangedCard="";
     Card c;
     for(auto x:_cards){
         if(x->get_Name()==ChangedCard.split("*")[0]&&QString::number(x->get_Number())==ChangedCard.split("*")[1]){
@@ -480,11 +485,12 @@ void GameServer::on_accept_clicked()
     ui->change_lable->setVisible(false);
     ui->accept->setVisible(false);
     ui->reject->setVisible(false);
-    sendMessage("11^"+_card+"^"+ChangedCard.split("*")[1]);
+    sendMessage("11^"+_card+"^"+ChangedCard.split("*")[2]);
 }
 
 void GameServer::on_reject_clicked()
 {
+    ChangedCard="";
     sendMessage("12^");
     ui->transparent->setVisible(false);
     ui->change_lable->setVisible(false);
