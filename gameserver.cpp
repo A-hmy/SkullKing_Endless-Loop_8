@@ -313,7 +313,7 @@ void GameServer::readSocket()
               QString ScoreY=part2.split("*")[1];
               ui->ScoreOpponent->setText(ScoreO);
               ui->ScoreYou->setText(ScoreY);
-              SelectedCard_opponent.set_Name(" ");
+              //SelectedCard_opponent.set_Name(" ");
           }
           //client to server
           if(part1=="4"){
@@ -401,6 +401,7 @@ void GameServer::readSocket()
               ui->transparent->setVisible(true);
               ui->change_lable->setVisible(true);
               ui->accept->setVisible(true);
+              ui->reject->setVisible(true);
               ChangedCard=message.split("^")[1];
           }
           // on ke darkhast karde
@@ -438,7 +439,7 @@ void GameServer::on_ChangeCard_clicked()
     QPushButton *buttons;
     int index;
     while(1){
-        index= rand()%15;
+        index= rand()%14;
         QString PushButton="card_"+QString::number(index+1);//name of PushButton
         buttons= findChild<QPushButton*>(PushButton);//find PushButton
         if(buttons->isVisible()){
@@ -446,7 +447,7 @@ void GameServer::on_ChangeCard_clicked()
             break;
         }
     }
-    sendMessage("8^"+_card+QString::number(index));
+    sendMessage("8^"+_card+"^"+QString::number(index));
 
 }
 
@@ -579,7 +580,7 @@ void GameServer::onButtonClicked()
                for(auto x:_cards){
                    if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                        SelectedCard_you=*x;
-                       player->delete_card(*x);
+                       //player->delete_card(*x);
                        break;
                     }
                }
@@ -588,7 +589,7 @@ void GameServer::onButtonClicked()
                Turn=NameOfOpponent;
                sendMessage("4^"+card+"^"+Turn);
                ui->Turn->setText(Turn+"'s turn");
-               SelectedCard_you.set_Name(" ");
+               //SelectedCard_you.set_Name(" ");
             }
         }
         }
