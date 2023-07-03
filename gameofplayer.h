@@ -14,6 +14,10 @@ public:
     int get_Score();
     int get_ScoreOpponent();
     QString get_Photo();
+    void set_Score(int);
+    void set_ScoreOpponent(int);
+    void set_NameOpponent(QString);
+    void set_photo(QString);
 private:
    QString Photo;
    QString NameOpponent;

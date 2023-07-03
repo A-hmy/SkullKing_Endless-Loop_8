@@ -437,10 +437,33 @@ void GameServer::readSocket()
           if(part1=="13"){
               player->set_Win();
               player->set_Coin(player->get_Coin()+100);
+              QString part2=message.split("^")[1];
+              QString part3=message.split("^")[2];
+              player->get_GamePlayer().set_NameOpponent(NameOfOpponent);
+              player->get_GamePlayer().set_Score(part2.toInt());
+              player->get_GamePlayer().set_ScoreOpponent(part3.toInt());
+              ui->Whowon->setText("YOU WON");
           }
           if(part1=="14"){
               player->set_Lose();
+              QString part2=message.split("^")[1];
+              QString part3=message.split("^")[2];
+              player->get_GamePlayer().set_NameOpponent(NameOfOpponent);
+              player->get_GamePlayer().set_Score(part2.toInt());
+              player->get_GamePlayer().set_ScoreOpponent(part3.toInt());
+              ui->Whowon->setText("GAME OVER");
+              QScreen *screen = QGuiApplication::primaryScreen();
+
+                              // Take a screenshot of the primary screen
+               QPixmap screenshot = screen->grabWindow(0);
+
+               QString filename="screenshot.png";
+                              // Save the screenshot to a file
+               screenshot.save("screenshot.png");
+               QString path=QFileInfo(filename).absoluteFilePath();
+               player->get_GamePlayer().set_photo(path);
           }
+
 }
 
 
@@ -899,13 +922,16 @@ void GameServer::Score(int a)
                     ui->Whowon->setText("YOU WON");
                     player->set_Coin(player->get_Coin()+100);
                     player->set_Win();
-                    sendMessage("14^");
+                    sendMessage("14^"+QString::number(YouScore)+"^"+QString::number(OpponentScore));
                 }
                 else{
                   ui->Whowon->setText("GAME OVER");
                   player->set_Lose();
-                  sendMessage ("13^");
+                  sendMessage ("13^"+QString::number(YouScore)+"^"+QString::number(OpponentScore));
                 }
+                player->get_GamePlayer().set_NameOpponent(NameOfOpponent);
+                player->get_GamePlayer().set_Score(YouScore);
+                player->get_GamePlayer().set_ScoreOpponent(OpponentScore);
                 QScreen *screen = QGuiApplication::primaryScreen();
 
                 // Take a screenshot of the primary screen
@@ -915,6 +941,8 @@ void GameServer::Score(int a)
                 // Save the screenshot to a file
                 screenshot.save("screenshot.png");
                 QString path=QFileInfo(filename).absoluteFilePath();
+                player->get_GamePlayer().set_photo(path);
+
 
              }
         }
