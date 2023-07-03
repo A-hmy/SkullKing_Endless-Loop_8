@@ -278,6 +278,8 @@ void GameServer::readSocket()
               ui->UsernameOpponent->setText(p3);
               //timer->start(3000);
               DisplayCards();
+              SelectedCard_opponent.set_Name(" ");
+              SelectedCard_you.set_Name(" ");
           }
           //server to client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
           if(part1=="3"){
@@ -360,6 +362,14 @@ void GameServer::readSocket()
               Turn=card.split("||")[i];
               DisplayCards();
           }
+          //client
+          if(part1=="9"){
+              SelectedCard_opponent.set_Name(" ");
+              SelectedCard_you.set_Name(" ");
+              QEventLoop loop;
+              QTimer::singleShot(2000,&loop,&QEventLoop::quit);
+              loop.exec();
+          }
 }
 
 //change QMessageBox
@@ -423,7 +433,7 @@ void GameServer::onButtonClicked()
                   for(auto x:_cards){
                       if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                           SelectedCard_you=*x;
-                          player->get_cards().remove(*x);
+                          player->delete_card(*x);
                           break;
                        }
                   }
@@ -443,7 +453,7 @@ void GameServer::onButtonClicked()
     }
 
     }
-    //client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    //client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     if(s_or_c==0){
         QPushButton *button = qobject_cast<QPushButton *>(sender());
         QString NameButton=button->objectName();
@@ -455,7 +465,7 @@ void GameServer::onButtonClicked()
                for(auto x:_cards){
                    if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                        SelectedCard_you=*x;
-                       player->get_cards().remove(*x);
+                       player->delete_card(*x);
                        break;
                     }
                }
@@ -464,6 +474,7 @@ void GameServer::onButtonClicked()
                Turn=NameOfOpponent;
                sendMessage("4^"+card+"^"+Turn);
                ui->Turn->setText(Turn+"'s turn");
+
             }
         }
         }
@@ -681,17 +692,15 @@ void GameServer::Score(int a)
     else if(a==2){
         ScoreSet_Opponent++;
     }
-
-         SelectedCard_you.set_Name(" ");
-         SelectedCard_opponent.set_Name(" ");
          ui->ScoreYou->setText(QString::number(ScoreSet_You));
          ui->ScoreOpponent->setText(QString::number(ScoreSet_Opponent));
          QEventLoop loop;
-         QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+         QTimer::singleShot(2000,&loop,&QEventLoop::quit);
          loop.exec();
          hideImage();
          // set is finished
          if(!EndSet()){
+
              if(ScoreSet_You==NumberOfPredictServer&&NumberOfPredictServer!=0){
                  YouScore+=ScoreSet_You*10;
              }
@@ -746,6 +755,9 @@ void GameServer::Score(int a)
                   ui->Whowon->setText(" GAME OVER");
              }
         }
+         else sendMessage("9^");
+         SelectedCard_you.set_Name(" ");
+         SelectedCard_opponent.set_Name(" ");
 }
 
 void GameServer::showPushButton()//restart page
