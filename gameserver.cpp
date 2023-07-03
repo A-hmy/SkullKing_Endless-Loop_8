@@ -417,7 +417,7 @@ void GameServer::readSocket()
                      break;
                   }
               }
-              QString PushButton="card_"+QString::number(index+1);//name of PushButton
+              QString PushButton="card_"+QString::number(index);//name of PushButton
               buttons= findChild<QPushButton*>(PushButton);//find PushButton
               QString _card;
               _card=buttons->text();
