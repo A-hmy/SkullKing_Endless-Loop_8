@@ -332,31 +332,35 @@ void GameServer::readSocket()
           }
           //stop
           if(part1=="5"){
+                  ui->LoadingStop->setVisible(true);
+                  ui->Counter->setVisible(true);
+               StopResumeRequest++;
+              QMovie *LoadingG = new QMovie(":/new/prefix1/Picture/loadingstop.gif");
+              ui->LoadingStop->setMovie(LoadingG);
+              ui->LoadingStop->show();
+              ui->LoadingStop->setScaledContents(true);
+              LoadingG->start();
 
-                  QMovie *LoadingG=new QMovie(":/new/prefix1/Picture/loadingstop.gif");
-                  ui->LoadingStop->setMovie(LoadingG);
-                  ui->LoadingStop->show();
-                  ui->LoadingStop->setScaledContents(true);
-                 // ui->LoadingStop->setAttribute(Qt::WA_StyledBackground, true);
-                 // ui->Loading->setStyleSheet("background-color: brown");
-                  LoadingG->start();
+              timerresume = new QTimer(this);
+              connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
+              timerresume->start(1000); // Start the timer here
+
+              count = 20;
+              ui->Counter->show();
+              ui->StopResume->setText("Resume");
+              ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
 
 
-                  timerresume = new QTimer(this);
-                  connect(timerresume, SIGNAL(timeout()), this, SLOT(countdown()));
-                  timerresume->start(1000);
-                  count = 20;
-                  ui->Counter->show();
-                 // ui->StopResume.remo
-                  ui->StopResume->setText("Resume");
-                  ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Resume1.png)");
+
           }
           //resume
           if (part1=="6"){
               ui->StopResume->setText("Stop");
+              delete timerresume;
               ui->LoadingStop->hide();
               ui->Counter->hide();
               ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
+
           }
           //client//daryaft card
           if(part1=="7"){
@@ -1070,6 +1074,7 @@ void GameServer::on_Exit_clicked()
    m->show();
    this->close();
 }
+
 
 
 
