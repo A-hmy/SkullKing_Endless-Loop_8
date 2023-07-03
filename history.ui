@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="picture.qrc">
+    <normaloff>:/new/prefix1/Picture/skull emblem.png</normaloff>:/new/prefix1/Picture/skull emblem.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_8">
     <property name="geometry">
@@ -206,6 +210,8 @@
    <zorder>pushButton</zorder>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="picture.qrc"/>
+ </resources>
  <connections/>
 </ui>

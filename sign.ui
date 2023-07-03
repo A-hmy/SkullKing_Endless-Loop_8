@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Welcome</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="picture.qrc">
+    <normaloff>:/new/prefix1/Picture/skull emblem.png</normaloff>:/new/prefix1/Picture/skull emblem.png</iconset>
+  </property>
   <widget class="QLabel" name="background">
    <property name="geometry">
     <rect>
@@ -303,7 +307,9 @@ border-radius:10px;</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="picture.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>Password</sender>

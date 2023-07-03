@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="picture.qrc">
+    <normaloff>:/new/prefix1/Picture/skull emblem.png</normaloff>:/new/prefix1/Picture/skull emblem.png</iconset>
+  </property>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
@@ -446,6 +450,8 @@ border-radius:10px;</string>
   <zorder>cancle</zorder>
   <zorder>phonenumber</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="picture.qrc"/>
+ </resources>
  <connections/>
 </ui>

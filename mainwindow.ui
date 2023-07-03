@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="picture.qrc">
+    <normaloff>:/new/prefix1/Picture/skull emblem.png</normaloff>:/new/prefix1/Picture/skull emblem.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_2">
     <property name="geometry">
@@ -72,6 +76,8 @@ background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(
    <zorder>progressBar</zorder>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="picture.qrc"/>
+ </resources>
  <connections/>
 </ui>

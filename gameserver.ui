@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Skull King</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="picture.qrc">
+    <normaloff>:/new/prefix1/Picture/skull emblem.png</normaloff>:/new/prefix1/Picture/skull emblem.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -1272,6 +1276,8 @@ border-radius:10px;</string>
    <zorder>lableopponent</zorder>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="picture.qrc"/>
+ </resources>
  <connections/>
 </ui>
