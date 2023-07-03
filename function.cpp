@@ -107,7 +107,7 @@ void File_Read(QString FileName)
               QString NameOpponent=fields[0];
               QString ScoreOpponent=fields[1];
               QString Score=fields[2];
-              QString photo=fields[3];
+            QString photo=fields[3];
               GameOfPlayer gameofplayer(photo,NameOpponent,Score.toInt(),ScoreOpponent.toInt());
               Player * p=new Player(name, username, phonenumber, email, password);
               Players.push_back(p);

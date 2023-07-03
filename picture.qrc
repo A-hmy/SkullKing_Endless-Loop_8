@@ -58,5 +58,7 @@
         <file>Picture/Resume1.png</file>
         <file>Picture/Exit.png</file>
         <file>Picture/IconFirstPage.png</file>
+        <file>Picture/Home.png</file>
+        <file>Picture/Card.png</file>
     </qresource>
 </RCC>

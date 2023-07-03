@@ -14,6 +14,9 @@ public:
     explicit History(QWidget *parent = nullptr);
     ~History();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::History *ui;
 };

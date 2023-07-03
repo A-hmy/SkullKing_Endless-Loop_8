@@ -3,6 +3,7 @@
 #include "player.h"
 #include "mainwindow.h"
 #include "global.h"
+#include "menu.h"
 History::History(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::History)
@@ -21,5 +22,13 @@ History::History(QWidget *parent) :
 History::~History()
 {
     delete ui;
+}
+
+
+void History::on_pushButton_clicked()
+{
+    this->close();
+    Menu *m=new Menu;
+    m->show();
 }
 

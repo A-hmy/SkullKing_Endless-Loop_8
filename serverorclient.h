@@ -33,6 +33,8 @@ private slots:
     //void on_client_clicked();
     void on_client_clicked();
 
+    void on_pushButton_clicked();
+
 signals:
     void send_error(QByteArray error);
 

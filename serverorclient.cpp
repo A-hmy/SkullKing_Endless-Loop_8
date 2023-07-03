@@ -8,6 +8,7 @@
 #include"gameserver.h"
 #include<QDebug>
 #include"global.h"
+#include "menu.h"
 ServerOrClient::ServerOrClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ServerOrClient)
@@ -153,5 +154,13 @@ void ServerOrClient::on_client_clicked()
     GameServer * Game=new GameServer;
     Game->show();
     this->hide();
+}
+
+
+void ServerOrClient::on_pushButton_clicked()
+{
+    this->close();
+       Menu *m=new Menu;
+       m->show();
 }
 

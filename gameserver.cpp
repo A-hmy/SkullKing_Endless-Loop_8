@@ -24,6 +24,7 @@ GameServer::GameServer(QWidget *parent) :
     ui(new Ui::GameServer)
 {
     ui->setupUi(this);
+    StopResumeRequest=0;
     connect(ui->card_1, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(ui->card_2, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(ui->card_3, &QPushButton::clicked, this, &GameServer::onButtonClicked);
@@ -43,6 +44,8 @@ GameServer::GameServer(QWidget *parent) :
     //connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
     QIntValidator *validator=new QIntValidator();
     ui->NumberOfPredict->setValidator(validator);
+    ui->ScoreOpponent->hide();
+    ui->ScoreYou->hide();
     ui->StopResume->hide();
     ui->Exit->hide();
     ui->LoseWin->hide();

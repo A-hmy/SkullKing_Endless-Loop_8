@@ -179,6 +179,22 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>518</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/Picture/Home.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>label_8</zorder>
    <zorder>label_5</zorder>
@@ -187,6 +203,7 @@
    <zorder>label_7</zorder>
    <zorder>OpponentScore</zorder>
    <zorder>label_9</zorder>
+   <zorder>pushButton</zorder>
   </widget>
  </widget>
  <resources/>

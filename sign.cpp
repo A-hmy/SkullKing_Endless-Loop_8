@@ -97,3 +97,9 @@ void Sign::on_Username_returnPressed()
     ui->Password->setFocus();
 }
 
+
+void Sign::on_pushButton_clicked()
+{
+    this->close();
+}
+

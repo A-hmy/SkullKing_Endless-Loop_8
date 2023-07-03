@@ -1124,11 +1124,14 @@ background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(
    <widget class="QPushButton" name="ChangeCard">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>120</y>
+      <x>20</x>
+      <y>110</y>
       <width>41</width>
-      <height>29</height>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/Picture/Card.png);</string>
     </property>
     <property name="text">
      <string/>
@@ -1137,9 +1140,9 @@ background-color: qconicalgradient(cx:0, cy:1, angle:311.9, stop:0.0673077 rgba(
    <widget class="QLabel" name="transparent">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>0</y>
-      <width>1051</width>
+      <width>1131</width>
       <height>701</height>
      </rect>
     </property>

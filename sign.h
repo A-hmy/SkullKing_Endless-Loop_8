@@ -24,6 +24,8 @@ private slots:
 
     void on_Username_returnPressed();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Sign *ui;
 };
