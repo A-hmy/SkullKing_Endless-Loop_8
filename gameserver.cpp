@@ -296,7 +296,7 @@ void GameServer::readSocket()
               SelectedCard_opponent.set_Name(" ");
               SelectedCard_you.set_Name(" ");
               QEventLoop loop;
-              QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+              QTimer::singleShot(2000,&loop,&QEventLoop::quit);
               loop.exec();
               hideImage();
           }
@@ -450,6 +450,9 @@ void GameServer::readSocket()
               player->get_GamePlayer().set_Score(part2.toInt());
               player->get_GamePlayer().set_ScoreOpponent(part3.toInt());
               ui->Whowon->setText("YOU WON");
+              QEventLoop loop;
+              QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+              loop.exec();
           }
           if(part1=="14"){
               player->set_Lose();
@@ -459,6 +462,9 @@ void GameServer::readSocket()
               player->get_GamePlayer().set_Score(part2.toInt());
               player->get_GamePlayer().set_ScoreOpponent(part3.toInt());
               ui->Whowon->setText("GAME OVER");
+              QEventLoop loop;
+              QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+              loop.exec();
               QScreen *screen = QGuiApplication::primaryScreen();
 
                               // Take a screenshot of the primary screen
@@ -970,6 +976,9 @@ void GameServer::Score(int a)
                 player->get_GamePlayer().set_NameOpponent(NameOfOpponent);
                 player->get_GamePlayer().set_Score(YouScore);
                 player->get_GamePlayer().set_ScoreOpponent(OpponentScore);
+                QEventLoop loop;
+                QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+                loop.exec();
                 QScreen *screen = QGuiApplication::primaryScreen();
 
                 // Take a screenshot of the primary screen
