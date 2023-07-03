@@ -57,6 +57,12 @@ private slots:
 
     void showPushButton();
 
+    void on_ChangeCard_clicked();
+
+    void on_accept_clicked();
+
+    void on_reject_clicked();
+
 signals:
     void StArt();
     void ScOre(int a);
@@ -71,6 +77,7 @@ private:
     Card SelectedCard_you;
     Card SelectedCard_opponent;
     QString Turn;
+    QString ChangedCard;
     int NumberOfRound;
     int StopResumeRequest;
     int NumberOfPredictClient;

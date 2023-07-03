@@ -16,7 +16,7 @@
 #include<thread>
 #include <QScreen>
 #include <QFileInfo>
-
+#include"card.h"
 #include <QValidator>
 
 GameServer::GameServer(QWidget *parent) :
@@ -39,6 +39,7 @@ GameServer::GameServer(QWidget *parent) :
     connect(ui->card_13, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(ui->card_14, &QPushButton::clicked, this, &GameServer::onButtonClicked);
     connect(this,&GameServer::ScOre, this,&GameServer::Score);
+    ui->transparent->setVisible(false);
     //connect(timer, SIGNAL(timeout()), this, SLOT(hideImage()));
     QIntValidator *validator=new QIntValidator();
     ui->NumberOfPredict->setValidator(validator);
@@ -55,6 +56,9 @@ GameServer::GameServer(QWidget *parent) :
     ui->YourIp->setVisible(false);
     ui->Counter->setVisible(false);
     ui->LoadingStop->setVisible(false);
+    ui->change_lable->setVisible(false);
+    ui->accept->setVisible(false);
+    ui->reject->setVisible(false);
     //ui->ScoreOpponent->hide();
     //ui->ScoreYou->hide();
     timer = new QTimer(this);
@@ -212,8 +216,8 @@ void GameServer::readSocket()
     QByteArray buffer;
     QDataStream socketStream(MyClientSocket);
     socketStream.setVersion(QDataStream::Qt_5_15);
-   socketStream.startTransaction();
-   socketStream >> buffer;
+    socketStream.startTransaction();
+    socketStream >> buffer;
           QString message = QString("%1").arg(QString::fromStdString(buffer.toStdString()));
           QString part1=message.split("^")[0];
           //server // client 2 omade
@@ -293,7 +297,7 @@ void GameServer::readSocket()
               loop.exec();
               hideImage();
           }
-          //server to client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+          //server to client
           if(part1=="3"){
               DisplayingACard_opponent(message.split("^")[1]);
               for(auto x:_cards){
@@ -311,7 +315,7 @@ void GameServer::readSocket()
               ui->ScoreYou->setText(ScoreY);
               SelectedCard_opponent.set_Name(" ");
           }
-          //client to server&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+          //client to server
           if(part1=="4"){
               DisplayingACard_opponent(message.split("^")[1]);
               for(auto x:_cards){
@@ -354,7 +358,7 @@ void GameServer::readSocket()
               ui->Counter->hide();
               ui->StopResume->setStyleSheet("border-image: url(:/new/prefix1/Picture/Stop1.png)");
           }
-          //client//daryaft card&&&&&&&&&&&&&&&&&&&&&&&&
+          //client//daryaft card
           if(part1=="7"){
               showPushButton();
               player->clear_Cards();
@@ -385,7 +389,6 @@ void GameServer::readSocket()
               SelectedCard_opponent.set_Name(" ");
               SelectedCard_you.set_Name(" ");
           }
-
           if(part1=="10"){
               //ezafe kardan coin ha be in yeki
               NumberOfRound=0;
@@ -393,6 +396,91 @@ void GameServer::readSocket()
               m->show();
               this->close();
           }
+          // on ke darkhast nakardeh
+          if(part1=="8"){
+              ui->transparent->setVisible(true);
+              ui->change_lable->setVisible(true);
+              ui->accept->setVisible(true);
+              ChangedCard=message.split("^")[1];
+          }
+          // on ke darkhast karde
+          if(part1=="11"){
+              QMessageBox::information(this,"**","accept");
+              QPushButton *buttons;
+              ChangedCard=message.split("^")[1];
+              int index= message.split("^")[2].toInt();
+              Card c;
+              for(auto x:_cards){
+                  if(x->get_Name()==ChangedCard.split("*")[0]&&QString::number(x->get_Number())==ChangedCard.split("*")[1]){
+                     c=*x;
+                     break;
+                  }
+              }
+              QString PushButton="card_"+QString::number(index+1);//name of PushButton
+              buttons= findChild<QPushButton*>(PushButton);//find PushButton
+              QString _card;
+              _card=buttons->text();
+              QString image="border-image: url("+c.get_Picture()+");"+"font: 1pt";
+              buttons->setStyleSheet(image);
+              QString text=c.get_Name()+"*"+QString::number(c.get_Number());
+              buttons->setText(text);
+          }
+          if(part1=="12"){
+              QMessageBox::information(this,"**","reject");
+          }
+}
+
+
+void GameServer::on_ChangeCard_clicked()
+{
+    srand(time(NULL));
+    QString _card;
+    QPushButton *buttons;
+    int index;
+    while(1){
+        index= rand()%15;
+        QString PushButton="card_"+QString::number(index+1);//name of PushButton
+        buttons= findChild<QPushButton*>(PushButton);//find PushButton
+        if(buttons->isVisible()){
+            _card=buttons->text();
+            break;
+        }
+    }
+    sendMessage("8^"+_card+QString::number(index));
+
+}
+
+void GameServer::on_accept_clicked()
+{
+    Card c;
+    for(auto x:_cards){
+        if(x->get_Name()==ChangedCard.split("*")[0]&&QString::number(x->get_Number())==ChangedCard.split("*")[1]){
+           c=*x;
+           break;
+        }
+    }
+    srand(time(NULL));
+    QString _card;
+    QPushButton *buttons;
+    while(1){
+        int index= rand()%15;
+        QString PushButton="card_"+QString::number(index+1);//name of PushButton
+        buttons= findChild<QPushButton*>(PushButton);//find PushButton
+        if(buttons->isVisible()){
+            _card=buttons->text();
+            QString image="border-image: url("+c.get_Picture()+");"+"font: 1pt";
+            buttons->setStyleSheet(image);
+            QString text=c.get_Name()+"*"+QString::number(c.get_Number());
+            buttons->setText(text);
+            break;
+        }
+    }
+    sendMessage("11^"+_card+"^"+ChangedCard.split("*")[2]);
+}
+
+void GameServer::on_reject_clicked()
+{
+    sendMessage("12^");
 }
 
 //change QMessageBox
@@ -426,12 +514,6 @@ bool GameServer::CheckPushButton(QString card)//name of the cards
            }
     }
     return 0;
-//  for(auto x:player->get_cards()){
-//      if(card==x.get_Name()){
-//          return 1;
-//      }
-//  }
-//  return 0;
 }
 
 void GameServer::onButtonClicked()
@@ -871,11 +953,12 @@ void GameServer::on_Ok_clicked()
 
 void GameServer::on_StopResume_clicked()
 {
-    ui->LoadingStop->setVisible(true);
-    ui->Counter->setVisible(true);
+
 
     if (ui->StopResume->text() == "Stop") {
         if(StopResumeRequest<2){
+            ui->LoadingStop->setVisible(true);
+            ui->Counter->setVisible(true);
          StopResumeRequest++;
         QMovie *LoadingG = new QMovie(":/new/prefix1/Picture/loadingstop.gif");
         ui->LoadingStop->setMovie(LoadingG);
@@ -934,3 +1017,6 @@ void GameServer::on_Exit_clicked()
    m->show();
    this->close();
 }
+
+
+
