@@ -432,7 +432,7 @@ void GameServer::onButtonClicked()
            for(auto x:_cards){
                if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                    SelectedCard_you=*x;
-                   player->get_cards().remove(*x);
+                   //player->get_cards().remove(*x);
                    break;
                 }
            }
@@ -449,7 +449,7 @@ void GameServer::onButtonClicked()
                   for(auto x:_cards){
                       if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
                           SelectedCard_you=*x;
-                          player->delete_card(*x);
+                          //player->delete_card(*x);
                           break;
                        }
                   }
