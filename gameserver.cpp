@@ -614,6 +614,23 @@ void GameServer::onButtonClicked()
                       emit ScOre(2);
                   }
               }
+           else{//==============================
+               for(auto x:_cards){
+                   if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
+                       SelectedCard_you=*x;
+                       //player->get_cards().remove(*x);
+                       break;
+                    }
+               }
+               DisplayingACard_you(card);
+               Turn=NameOfOpponent;
+               sendMessage("3^"+card+"^"+Turn+"^"+QString::number(ScoreSet_You)+"*"+QString::number(ScoreSet_Opponent));
+               ui->Turn->setText(Turn+"'s turn");
+               Pushbutton->setVisible(false);
+               if(SelectedCard_opponent.get_Name()!=" "){
+                   emit ScOre(0);//first client
+               }
+           }
        }
     }
     else{
@@ -644,6 +661,20 @@ void GameServer::onButtonClicked()
                ui->Turn->setText(Turn+"'s turn");
                //SelectedCard_you.set_Name(" ");
             }
+                else{//========
+                    for(auto x:_cards){
+                        if(card.split("*")[0]==x->get_Name()&&card.split("*")[1]==QString::number(x->get_Number())){
+                            SelectedCard_you=*x;
+                            //player->delete_card(*x);
+                            break;
+                         }
+                    }
+                    Pushbutton->setVisible(false);
+                    DisplayingACard_you(card);
+                    Turn=NameOfOpponent;
+                    sendMessage("4^"+card+"^"+Turn);
+                    ui->Turn->setText(Turn+"'s turn");
+                }
         }
         }
         else{
