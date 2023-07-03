@@ -5,6 +5,7 @@
 #include"gameserver.h"
 #include"serverorclient.h"
 #include "history.h"
+#include"global.h"
 Menu::Menu(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Menu)
@@ -36,9 +37,14 @@ void Menu::on_Logout_2_clicked()
 
 void Menu::on_Start_2_clicked()
 {
+    if(player->get_Coin()<50){
+        //error
+    }
+    else{
+    player->set_Coin(player->get_Coin()-50);
     ServerOrClient * s=new ServerOrClient;
     this->close();
-    s->show();
+    s->show();}
 }
 
 

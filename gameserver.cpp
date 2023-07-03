@@ -280,6 +280,10 @@ void GameServer::readSocket()
               DisplayCards();
               SelectedCard_opponent.set_Name(" ");
               SelectedCard_you.set_Name(" ");
+              QEventLoop loop;
+              QTimer::singleShot(3000,&loop,&QEventLoop::quit);
+              loop.exec();
+              hideImage();
           }
           //server to client&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
           if(part1=="3"){
@@ -369,6 +373,7 @@ void GameServer::readSocket()
               QEventLoop loop;
               QTimer::singleShot(2000,&loop,&QEventLoop::quit);
               loop.exec();
+              hideImage();
           }
 }
 
@@ -403,7 +408,6 @@ bool GameServer::CheckPushButton(QString card)//name of the cards
 
 void GameServer::onButtonClicked()
 {
-    // check kardan kart roye zamin va handel kardan in ke ejaze dare biyad ya na
     //server
     if(s_or_c==1){
     QPushButton *button = qobject_cast<QPushButton *>(sender());
@@ -698,33 +702,43 @@ void GameServer::Score(int a)
          QTimer::singleShot(2000,&loop,&QEventLoop::quit);
          loop.exec();
          hideImage();
+         SelectedCard_you.set_Name(" ");
+         SelectedCard_opponent.set_Name(" ");
          // set is finished
          if(!EndSet()){
-
              if(ScoreSet_You==NumberOfPredictServer&&NumberOfPredictServer!=0){
-                 YouScore+=ScoreSet_You*10;
-             }
-             else if(NumberOfPredictServer!=0){
-                 YouScore-=ScoreSet_You*10;
-             }
-             else if(NumberOfPredictServer==0&&ScoreSet_You>0){
-                 YouScore+=NumberOfRound*10;
-             }
-             else {
-                 YouScore-=NumberOfRound*10;//?????
-             }
-             if(ScoreSet_You==NumberOfPredictClient&&NumberOfPredictClient!=0){
-                 OpponentScore+=ScoreSet_You*10;
-             }
-             else if(NumberOfPredictClient!=0){
-                 OpponentScore-=ScoreSet_You*10;
-             }
-             else if(NumberOfPredictClient==0&&ScoreSet_You>0){
-                 OpponentScore+=NumberOfRound*10;
-             }
-             else {
-                 OpponentScore-=NumberOfRound*10;//???
-             }
+                      YouScore+=ScoreSet_You*10;
+                  }
+                  else if(NumberOfPredictServer!=0){
+                      int n=NumberOfPredictServer-ScoreSet_You;
+                      if(n>0)
+                          YouScore-=n*10;
+                      else
+                          YouScore-=(-n)*10;
+                  }
+                  else if(NumberOfPredictServer==0&&ScoreSet_You==0){
+                      YouScore+=NumberOfRound*10;
+                  }
+                  else if(ScoreSet_You!=0){
+                      YouScore-=NumberOfRound*10;
+                  }
+                  //Opponent
+                  if(ScoreSet_Opponent==NumberOfPredictClient&&NumberOfPredictClient!=0){
+                      OpponentScore+=ScoreSet_Opponent*10;
+                  }
+                  else if(NumberOfPredictClient!=0){
+                      int n=NumberOfPredictClient-ScoreSet_Opponent;
+                      if(n>0)
+                          YouScore-=n*10;
+                      else
+                          YouScore-=(-n)*10;
+                  }
+                  else if(NumberOfPredictClient==0&&ScoreSet_Opponent==0){
+                      OpponentScore+=NumberOfRound*10;
+                  }
+                  else {
+                      OpponentScore-=NumberOfRound*10;
+                  }
              if(NumberOfRound!=7){
                if(ScoreSet_You>ScoreSet_Opponent){
                  Turn=player->get_UserName();
@@ -750,14 +764,19 @@ void GameServer::Score(int a)
                 if (OpponentScore<YouScore){
                     /////7888888888888888888888888888888888888888888888
                     ui->Whowon->setText(" YOU WON");
+                    player->set_Coin(player->get_Coin()+100);
+                    player->set_Win();
                 }
-                else
+                else{
                   ui->Whowon->setText(" GAME OVER");
+                  player->set_Lose();
+                  //send message (Coin,WinorLose)
+                }
              }
         }
-         else sendMessage("9^");
-         SelectedCard_you.set_Name(" ");
-         SelectedCard_opponent.set_Name(" ");
+         else{
+             sendMessage("9^");
+         }
 }
 
 void GameServer::showPushButton()//restart page

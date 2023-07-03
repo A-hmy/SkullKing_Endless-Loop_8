@@ -43,6 +43,21 @@ int Player::get_Lose(){return Lose;}
 void Player::set_Password(QString _Password){
     Password=_Password;
 }
+
+void Player::set_Coin(int _Coin)
+{
+    Coin=_Coin;
+}
+
+void Player::set_Win()
+{
+    Win++;
+}
+
+void Player::set_Lose()
+{
+    Lose++;
+}
 GameOfPlayer Player::get_GamePlayer(){
     return GamePlayer;
 }
